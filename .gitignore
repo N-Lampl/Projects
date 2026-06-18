@@ -1,0 +1,53 @@
+# --- Datasets & model weights: NEVER commit (download/produce via code instead) ---
+# Ignore ALL contents of any data/ or models/ dir, but keep the folder's README.
+**/data/**
+!**/data/README.md
+**/models/**
+!**/models/README.md
+# Extra safety by extension (covers weights saved outside a models/ dir):
+*.pt
+*.pth
+*.h5
+*.onnx
+*.pkl
+*.pickle
+*.safetensors
+*.gguf
+*.bin
+# archives
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.gz
+*.7z
+
+# --- Secrets / local config ---
+.env
+.env.*
+!.env.example
+.secrets.baseline.local
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+*.egg-info/
+.eggs/
+build/
+dist/
+.ipynb_checkpoints/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# --- OS / editor ---
+.DS_Store
+.idea/
+.vscode/
+
+# --- Allow small committed evidence (figures + metrics) ---
+!**/results/figures/*.png
+!**/results/**/metrics.json

@@ -1,0 +1,35 @@
+name: ci
+
+# Lint + FAST smoke tests only. Heavy work (training, attacks, dataset downloads)
+# is marked @pytest.mark.slow and excluded here — CI must never train a model.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  lint-and-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+
+      - name: Set up Python
+        run: uv python install 3.10
+
+      - name: Install dev + light deps
+        run: uv pip install --system ruff pytest numpy torch --extra-index-url https://download.pytorch.org/whl/cpu
+
+      - name: Lint
+        run: ruff check .
+
+      - name: Format check
+        run: ruff format --check .
+
+      - name: Smoke tests (not slow)
+        run: python -m pytest -m "not slow" -q
