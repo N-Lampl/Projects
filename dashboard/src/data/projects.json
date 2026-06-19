@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-19 03:40 UTC",
+  "generatedAt": "2026-06-19 14:45 UTC",
   "repoUrl": "https://github.com/N-Lampl/Cyber-Projects",
   "totals": {
     "projects": 38,
@@ -3773,32 +3773,32 @@
       "slug": "p8-refusal-direction-interp",
       "name": "Refusal direction (mechanistic interp of \"abliteration\")",
       "shortName": "p8-refusal-direction-interp",
-      "summary": "Synthetic-activation simulation of the refusal-direction (abliteration) method: difference-in-means recovers a planted refusal axis (|cos|=0.98); inference-time directional ablation drops the refusal rate from 100% to 0% while capability stays at 62% (vs 62%). Analysis only; no modified weights are produced.",
+      "summary": "Real abliteration of Qwen2.5-0.5B-Instruct: ablating one refusal direction cut harmful-prompt refusal 100% -> 0% while benign perplexity rose modestly 11.6->13.3 (capability largely retained).",
       "kind": "project",
       "metrics": [
         {
-          "k": "n_harmful",
-          "v": "128"
+          "k": "model_id",
+          "v": "Qwen/Qwen2.5-0.5B-Instruct"
         },
         {
-          "k": "n_harmless",
-          "v": "128"
+          "k": "n_layers",
+          "v": "24"
         },
         {
-          "k": "threshold",
-          "v": "0.5"
+          "k": "layer",
+          "v": "14"
         },
         {
-          "k": "direction_recovery_cosine",
-          "v": "98%"
+          "k": "n_extract_per_class",
+          "v": "12"
         },
         {
-          "k": "refusal_rate_before",
-          "v": "100%"
+          "k": "n_eval_harmful",
+          "v": "8"
         },
         {
-          "k": "refusal_rate_after",
-          "v": "0%"
+          "k": "n_eval_harmless",
+          "v": "8"
         }
       ],
       "figures": [
@@ -3813,23 +3813,26 @@
       ],
       "raw": {
         "project": "p8-refusal-direction-interp",
-        "summary": "Synthetic-activation simulation of the refusal-direction (abliteration) method: difference-in-means recovers a planted refusal axis (|cos|=0.98); inference-time directional ablation drops the refusal rate from 100% to 0% while capability stays at 62% (vs 62%). Analysis only; no modified weights are produced.",
-        "method": "difference-in-means refusal direction + orthogonal-projection ablation",
-        "path": "synthetic-offline",
-        "seed": 42,
-        "n_harmful": 128,
-        "n_harmless": 128,
-        "threshold": 0.5,
-        "direction_recovery_cosine": 0.985,
-        "refusal_rate_before": 1.0,
-        "refusal_rate_after": 0.0,
-        "capability_before": 0.6245,
-        "capability_after": 0.6213,
-        "capability_retention": 0.9948,
+        "summary": "Real abliteration of Qwen2.5-0.5B-Instruct: ablating one refusal direction cut harmful-prompt refusal 100% -> 0% while benign perplexity rose modestly 11.6->13.3 (capability largely retained).",
+        "path": "real-model",
+        "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+        "n_layers": 24,
+        "layer": 14,
+        "n_extract_per_class": 12,
+        "n_eval_harmful": 8,
+        "n_eval_harmless": 8,
+        "refusal_rate_harmful_before": 1.0,
+        "refusal_rate_harmful_after": 0.0,
+        "refusal_rate_harmless_before": 0.0,
+        "refusal_rate_harmless_after": 0.0,
+        "perplexity_before": 11.5804,
+        "perplexity_after": 13.2861,
+        "capability_retention": 0.8716,
         "figures": [
           "results/figures/refusal_vs_capability.png",
           "results/figures/projection_histograms.png"
-        ]
+        ],
+        "note": "Analysis only; no modified weights produced or stored. See ../../ETHICS.md."
       },
       "repoPath": "04-llm-security/p8-refusal-direction-interp"
     },
@@ -3937,12 +3940,12 @@
       "blurb": "Constrained adversarial flows, then adversarial training."
     },
     {
-      "title": "Refusal lives on one axis (abliteration)",
+      "title": "Abliteration: refusal lives on one axis",
       "before": "100%",
       "after": "0%",
       "label": "refusal rate",
       "project": "04-llm-security__p8-refusal-direction-interp",
-      "blurb": "Ablating one direction removes refusals; capability retained 99%."
+      "blurb": "Ablating one direction removes refusals on Qwen2.5-0.5B-Instruct; capability retained 87%."
     }
   ],
   "roadmap": [

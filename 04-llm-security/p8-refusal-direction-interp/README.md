@@ -53,39 +53,54 @@ separate "content/capability" subspace) plus noise. The experiment is honest, no
 
 ```bash
 # from this folder; uses uv if installed, else system python3
-make run     # synthetic extract -> ablate -> measure -> figures + metrics.json (CPU, seconds)
-make test    # fast smoke tests
-make run ARGS=                 # (defaults to 128 harmful + 128 harmless prompts)
-python3 scripts/run_analysis.py --n-harmful 256 --n-harmless 256
+make abliterate   # REAL: abliterate Qwen2.5-0.5B-Instruct on CPU (downloads ~1GB the first time)
+make run          # offline synthetic extract -> ablate -> measure (no download; for CI/quick demo)
+make test         # fast smoke tests
 ```
 
-Outputs land in [results/](results/):
-- `figures/refusal_vs_capability.png` — the **money plot**: refusal rate collapses, capability held.
-- `figures/projection_histograms.png` — activations on the refusal axis, before/after ablation.
-- `metrics.json` — recovery cosine + refusal/capability before & after (committed as evidence).
+The **committed `results/` come from `make abliterate`** (the real run). `make abliterate` needs the
+optional extras: `pip install transformers accelerate`.
 
-## Real-model path (optional, GPU-preferred)
+Outputs in [results/](results/):
+- `figures/refusal_vs_capability.png` — the **money plot**: harmful-prompt refusal collapses, benign
+  behaviour + perplexity barely move.
+- `figures/projection_histograms.png` — harmful vs harmless activations on the recovered axis.
+- `metrics.json` — refusal/capability before & after; `refusal_direction.json` — the extracted vector.
 
-[src/refusal_interp/real_model.py](src/refusal_interp/real_model.py) implements the same pipeline on a
-real open-weight instruct model via `transformers` (imported lazily, so the package still imports
-without it). Provide AdvBench-style + Alpaca-style prompt sets (see [data/README.md](data/README.md)),
-collect last-token residuals per layer, then reuse `extract_refusal_direction` /
-`make_ablation_hook` from the core module.
+## Real-model result (verified on CPU)
 
-- **CPU path:** works with a tiny model (e.g. `Qwen/Qwen2.5-0.5B-Instruct`) on ~64 prompts/class;
-  slow but functional.
-- **Colab/GPU path:** `pip install -r requirements.txt` with the `real` extras uncommented, pick a
-  1–3B instruct model, sweep the layer index, and choose the layer whose `r̂` best separates the sets.
+`make abliterate` ([scripts/run_real_abliteration.py](scripts/run_real_abliteration.py)) ran the full
+pipeline on **`Qwen/Qwen2.5-0.5B-Instruct`** (24 layers, direction at layer 14), CPU-only:
 
-It still only produces **analysis** — never a saved modified model.
+| metric | before | after |
+|---|---|---|
+| refusal on harmful prompts | **100%** | **0%** |
+| refusal on harmless prompts | 0% | 0% |
+| benign perplexity | 11.6 | 13.3 |
+
+Ablating **one** direction removed every refusal on held-out cyber-harmful prompts while leaving normal
+behaviour intact and capability **~87% retained** (perplexity rose modestly). The harmful/harmless
+activations separate cleanly on that single axis (mean projection 5.2 vs 0.6).
+
+Responsible-execution details: cyber-themed stimuli; we generate only a short prefix and classify
+*refuse vs comply* — the model's completions for harmful prompts are **never stored or printed**; no
+modified weights are written. Larger models (`--model Qwen/Qwen2.5-1.5B-Instruct`) work too but are
+slower on CPU; a GPU (free Colab/Kaggle) handles 1–3B comfortably.
+
+### Why the synthetic path also exists
+
+`make run` ([synthetic.py](src/refusal_interp/synthetic.py)) plants a **known** refusal axis `r_true`
+in a toy model's residual stream, so difference-in-means must *recover* it from data alone
+(`|cos(r̂, r_true)| ≈ 1.0`). It validates the extractor against ground truth and runs offline in CI
+with zero downloads. (Running `make run` overwrites `results/` with the synthetic numbers; re-run
+`make abliterate` to restore the real ones.)
 
 ## What the result shows
 
-Difference-in-means recovers the planted refusal axis almost perfectly (`|cos| ≈ 1.0`). A single
-rank-1 ablation drives the refusal rate from ~100% to ~0% on held-out harmful prompts while the
-capability proxy on harmless prompts barely moves — the empirical signature behind real abliteration.
-The security takeaway: **safety alignment that lives in one linear direction is brittle**, which is
-exactly why refusal-direction analysis matters for building more robust guardrails.
+Refusal in an aligned model concentrates on a single linear feature: project it out and refusals
+vanish while general capability is largely preserved. The security takeaway — **safety alignment that
+lives in one direction is brittle to weight/activation edits** — is the core argument for caution
+around open-weight release and for building guardrails that don't depend on a single fragile feature.
 
 ## Interview story (3 sentences)
 
@@ -100,12 +115,13 @@ exactly why refusal-direction analysis matters for building more robust guardrai
 ## Layout
 
 ```
-src/refusal_interp/  utils.py (seeds) · synthetic.py (toy model + planted axis)
-                     direction.py (extract/ablate/measure + hook) · real_model.py (optional)
-scripts/             run_analysis.py  (synthetic pipeline -> figures + metrics.json)
+src/refusal_interp/  direction.py (extract/ablate/measure + hook, model-agnostic)
+                     real_model.py (load model + capture residuals) · eval.py (generate + refusal classifier)
+                     prompts.py (harmful/harmless sets) · synthetic.py (toy model + planted axis) · utils.py
+scripts/             run_real_abliteration.py (REAL run -> committed results) · run_analysis.py (synthetic)
 tests/               test_smoke.py    (fast invariants + one @slow end-to-end)
-results/             figures/*.png + metrics.json  (committed)
-data/ models/        git-ignored (synthetic by default; optional real model not committed)
+results/             figures/*.png + metrics.json + refusal_direction.json  (committed; from the real run)
+data/ models/        git-ignored (model weights downloaded to HF cache, never committed)
 ```
 
 ## References

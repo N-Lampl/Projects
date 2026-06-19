@@ -166,14 +166,20 @@ def build_highlights(by_id: dict) -> list[dict]:
                   "label": "evasion rate", "project": "01-detection-engineering__CAPSTONE-adversarial-ids",
                   "blurb": "Constrained adversarial flows, then adversarial training."})
 
-    ref_b = g("04-llm-security__p8-refusal-direction-interp", "refusal_rate_before")
-    ref_a = g("04-llm-security__p8-refusal-direction-interp", "refusal_rate_after")
-    cap = g("04-llm-security__p8-refusal-direction-interp", "capability_retention")
+    p8 = "04-llm-security__p8-refusal-direction-interp"
+    ref_b = g(p8, "refusal_rate_harmful_before")
+    ref_a = g(p8, "refusal_rate_harmful_after")
+    if ref_b is None:  # fall back to the synthetic-path key names
+        ref_b, ref_a = g(p8, "refusal_rate_before"), g(p8, "refusal_rate_after")
+    cap = g(p8, "capability_retention")
+    model = g(p8, "model_id")
     if ref_b is not None and ref_a is not None:
-        H.append({"title": "Refusal lives on one axis (abliteration)",
+        tail = f" on {model.split('/')[-1]}" if isinstance(model, str) else ""
+        H.append({"title": "Abliteration: refusal lives on one axis",
                   "before": pct(ref_b), "after": pct(ref_a),
-                  "label": "refusal rate", "project": "04-llm-security__p8-refusal-direction-interp",
-                  "blurb": f"Ablating one direction removes refusals; capability retained {pct(cap) if cap else 'n/a'}."})
+                  "label": "refusal rate", "project": p8,
+                  "blurb": f"Ablating one direction removes refusals{tail}; "
+                           f"capability retained {pct(cap) if cap else 'n/a'}."})
 
     return H
 

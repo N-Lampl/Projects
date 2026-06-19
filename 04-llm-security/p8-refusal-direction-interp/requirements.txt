@@ -8,7 +8,8 @@ scikit-learn>=1.3
 # dev
 pytest>=8
 ruff>=0.5
-# --- OPTIONAL enhanced path: extract from a real open-weight instruct model ---
-# (downloads weights; GPU-preferred. Not needed for the default run.)
-# transformers>=4.44
-# accelerate>=0.30
+# --- REAL path (`make abliterate`): extract from a real open-weight instruct model ---
+# (downloads ~1GB weights; runs on CPU. Not needed for the offline `make run`.)
+transformers>=4.44,<4.49
+accelerate>=0.30
+huggingface_hub>=0.24
