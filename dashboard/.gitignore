@@ -1,0 +1,9 @@
+node_modules/
+dist/
+*.local
+.DS_Store
+# NOTE: public/figures/ and src/data/projects.json ARE committed (regenerate with
+# `npm run data`) so the dashboard works on a fresh clone with just `npm install`.
+# The repo-root .gitignore blocks **/data/**; force-include the generated data file:
+!src/data/
+!src/data/projects.json

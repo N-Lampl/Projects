@@ -8,6 +8,10 @@
 ⚠️ **Authorized use only.** Every technique here runs against models, data, and apps I own or am
 licensed to test. See **[ETHICS.md](ETHICS.md)**.
 
+📊 **Interactive results dashboard** (React/Vite) in [`dashboard/`](dashboard/) — headline
+before/after results, every project's metrics + figures, and a build-on-this roadmap. Deploys to
+GitHub Pages (`npm install && npm run dev` to run locally).
+
 ---
 
 ## Why this repo exists
