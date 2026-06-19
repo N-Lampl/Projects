@@ -1,0 +1,46 @@
+{
+  "project": "CAPSTONE-adversarial-ids",
+  "source": "synthetic",
+  "attack_engine": "fgsm",
+  "epsilon": 2.0,
+  "steps": 10,
+  "defense": "adversarial training (constrained-FGSM augmentation)",
+  "seed": 42,
+  "summary": {
+    "clean_accuracy": 0.9256666666666666,
+    "asr_before": 0.8319039451114922,
+    "asr_after": 0.0,
+    "asr_reduction": 0.8319039451114922
+  },
+  "clean": {
+    "accuracy_before": 0.9256666666666666,
+    "accuracy_after": 0.924,
+    "roc_auc_before": 0.9677985185185185,
+    "roc_auc_after": 0.9663413333333332,
+    "recall_before": 0.796,
+    "recall_after": 0.7813333333333333
+  },
+  "attack_before": {
+    "n_attack_flows": 750,
+    "n_detected_before": 583,
+    "n_evaded": 485,
+    "attack_success_rate": 0.8319039451114922,
+    "fraction_feasible": 1.0,
+    "immutable_preserved_rate": 1.0,
+    "consistency_rate": 1.0
+  },
+  "attack_after": {
+    "n_attack_flows": 750,
+    "n_detected_before": 565,
+    "n_evaded": 0,
+    "attack_success_rate": 0.0,
+    "fraction_feasible": 1.0,
+    "immutable_preserved_rate": 1.0,
+    "consistency_rate": 1.0
+  },
+  "figures": [
+    "results/figures/report_card.png",
+    "results/figures/perturbation_by_feature.png",
+    "results/report_card.md"
+  ]
+}

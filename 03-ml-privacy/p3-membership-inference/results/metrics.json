@@ -1,0 +1,20 @@
+{
+  "project": "p3-membership-inference",
+  "summary": "Online LiRA with 16 warm-started shadows on a self-trained synthetic MLP: AUC=0.870, TPR@1%FPR=0.112 (baseline AUC=0.705).",
+  "dataset": "synthetic",
+  "seed": 42,
+  "n_shadows": 16,
+  "n_query": 500,
+  "warm_start": true,
+  "target_train_acc": 1.0,
+  "target_test_acc": 0.5964,
+  "generalization_gap": 0.4036,
+  "lira_auc": 0.87,
+  "lira_tpr_at_1pct_fpr": 0.112,
+  "baseline_auc": 0.7052,
+  "baseline_tpr_at_1pct_fpr": 0.028,
+  "figures": [
+    "results/figures/lira_roc.png",
+    "results/figures/lira_score_hist.png"
+  ]
+}

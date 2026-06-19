@@ -1,0 +1,26 @@
+[project]
+name = "netlabs"
+version = "0.1.0"
+description = "TCP/IP, HTTP, DNS, TLS hands-on labs over a self-generated synthetic pcap (offline)."
+requires-python = ">=3.10"
+dependencies = [
+    "matplotlib>=3.7",
+]
+
+[project.optional-dependencies]
+# Enhanced (optional) path — craft/parse with scapy instead of the pure-python engine.
+scapy = ["scapy>=2.5"]
+dev = ["pytest>=8", "ruff>=0.5"]
+
+[tool.pytest.ini_options]
+markers = [
+    "slow: end-to-end generate+parse pass; excluded from CI via -m 'not slow'",
+]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

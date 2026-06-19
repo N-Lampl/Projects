@@ -1,0 +1,97 @@
+# LLM AppSec CI red-team gate.
+#
+# This is the FLAGSHIP deliverable of the track-04 capstone: a CI workflow that
+# red-teams the vulnerable RAG on every PR and BLOCKS THE MERGE if the
+# attack-success rate (ASR) exceeds a threshold.
+#
+# It reuses the OFFLINE harnesses from ../p2-garak-scan + ../p3-promptfoo-redteam
+# against ../p4-vulnerable-rag -- no network, no model downloads, no API keys, so
+# it runs fast and deterministically in CI.
+#
+# To enable repo-wide, copy this file to the repository root .github/workflows/.
+# It is committed HERE (inside the project) as the auditable capstone artifact.
+#
+# Authorized-use-only: the target is a self-built, deliberately vulnerable lab
+# app over synthetic data. See ../../ETHICS.md.
+
+name: ci-redteam
+
+on:
+  # FAST smoke red-team on every PR / push -> gate the merge.
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  # FULL suite on a schedule (nightly) -> trend ASR per OWASP category.
+  schedule:
+    - cron: "0 6 * * *"  # 06:00 UTC daily
+
+defaults:
+  run:
+    working-directory: 04-llm-security/CAPSTONE-appsec-ci
+
+jobs:
+  # --------------------------------------------------------------------------- #
+  # PR / push gate: fast smoke red-team. FAILS the build if ASR > threshold.
+  # --------------------------------------------------------------------------- #
+  redteam-gate:
+    if: github.event_name != 'schedule'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install offline deps (numpy + matplotlib only)
+        run: python -m pip install -r requirements.txt
+
+      - name: Lint
+        run: ruff check . || true  # advisory in the gate job; see repo-wide ci.yml
+
+      - name: Smoke tests (gate invariants)
+        run: python -m pytest -m "not slow" -q
+
+      - name: Red-team gate (FAILS build if ASR > 0%)
+        run: python scripts/run_pipeline.py --enforce --threshold 0.0
+
+      - name: Upload red-team artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: redteam-smoke-results
+          path: |
+            04-llm-security/CAPSTONE-appsec-ci/results/metrics.json
+            04-llm-security/CAPSTONE-appsec-ci/results/threat_model_report.md
+            04-llm-security/CAPSTONE-appsec-ci/results/figures/*.png
+
+  # --------------------------------------------------------------------------- #
+  # Scheduled full suite: p2 garak + p3 promptfoo, trend ASR, publish report.
+  # Non-blocking (it reports/trends); the PR gate is the blocking control.
+  # --------------------------------------------------------------------------- #
+  redteam-full-suite:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install offline deps
+        run: python -m pip install -r requirements.txt
+
+      - name: Full-suite red-team + dashboard + threat-model report
+        run: python scripts/run_pipeline.py --full
+
+      - name: Upload full-suite artifacts (figures + report + metrics)
+        uses: actions/upload-artifact@v4
+        with:
+          name: redteam-full-suite-results
+          path: |
+            04-llm-security/CAPSTONE-appsec-ci/results/metrics.json
+            04-llm-security/CAPSTONE-appsec-ci/results/threat_model_report.md
+            04-llm-security/CAPSTONE-appsec-ci/results/history.jsonl
+            04-llm-security/CAPSTONE-appsec-ci/results/figures/*.png

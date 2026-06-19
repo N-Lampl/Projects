@@ -1,0 +1,24 @@
+[project]
+name = "certpath"
+version = "0.1.0"
+description = "Security+ SY0-701 study plan: map exam domains to repo artifacts + a coverage metric."
+requires-python = ">=3.10"
+dependencies = [
+    "matplotlib>=3.7",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.5"]
+
+[tool.pytest.ini_options]
+markers = [
+    "slow: runs the full coverage script end-to-end; excluded from CI via -m 'not slow'",
+]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

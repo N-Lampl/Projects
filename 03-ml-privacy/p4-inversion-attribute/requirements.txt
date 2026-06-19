@@ -1,0 +1,15 @@
+# Fallback if you're not using uv/pyproject. Install with:
+#   python3 -m pip install -r requirements.txt
+torch>=2.2,<2.5
+torchvision>=0.17,<0.20
+scikit-learn>=1.3
+numpy>=1.24
+matplotlib>=3.7
+# dev
+pytest>=8
+ruff>=0.5
+
+# --- OPTIONAL enhanced path (NOT needed for the default offline run) ---
+# Real MNIST instead of synthetic data is fetched by torchvision (already pinned
+# above) when you pass `--mnist`; no extra package required. Imported lazily so
+# the project still runs fully offline on synthetic data by default.

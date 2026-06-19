@@ -1,0 +1,30 @@
+[project]
+name = "rand-smoothing"
+version = "0.1.0"
+description = "Certified L2 robustness via randomized smoothing (Cohen et al., 2019)."
+requires-python = ">=3.10"
+dependencies = [
+    "torch>=2.2,<2.5",
+    "numpy>=1.24",
+    "matplotlib>=3.7",
+]
+
+[project.optional-dependencies]
+# scipy gives exact Beta/Normal quantiles; a pure-numpy fallback ships if absent.
+scipy = ["scipy>=1.10"]
+# real MNIST instead of the default synthetic data
+mnist = ["torchvision>=0.17,<0.20"]
+dev = ["pytest>=8", "ruff>=0.5"]
+
+[tool.pytest.ini_options]
+markers = [
+    "slow: trains a model / certifies many points; excluded from CI via -m 'not slow'",
+]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

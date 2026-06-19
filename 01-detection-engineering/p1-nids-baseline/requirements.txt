@@ -1,0 +1,10 @@
+# Pinned fallback deps for the DEFAULT offline path (scikit-learn only).
+scikit-learn==1.5.1
+numpy==1.26.4
+pandas==2.2.2
+matplotlib==3.9.0
+
+# --- OPTIONAL enhanced path (not needed for `make detect`) ---
+# Gradient-boosted classifier instead of RandomForest (run with --classifier xgb):
+# xgboost==2.1.0
+# Real NSL-KDD benchmark needs only the CSVs (see data/README.md) — no extra libs.

@@ -1,0 +1,13 @@
+# Fallback if you're not using uv/pyproject. Install with:
+#   python3 -m pip install -r requirements.txt
+numpy>=1.24
+matplotlib>=3.7
+# dev
+pytest>=8
+ruff>=0.5
+#
+# OPTIONAL enhanced "eval-as-code" path is a NODE tool (no pip package):
+#   promptfoo  -> run with `npx promptfoo@latest redteam run`  (needs node>=18 + npx)
+# Verified 2026 versions for the surrounding LLM-security toolset (also Node/other):
+#   promptfoo (Node CLI, use npx promptfoo@latest)
+#   garak==0.15.x   PyRIT==0.14.x   (only needed if you swap in those harnesses)

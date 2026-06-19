@@ -1,0 +1,59 @@
+{
+  "project": "p6-threat-informed",
+  "summary": "6/6 Sigma rules valid, covering 6/17 ATT&CK techniques (35.3%) across 5/12 tactics",
+  "seed": 42,
+  "n_rules": 6,
+  "n_valid_rules": 6,
+  "n_invalid_rules": 0,
+  "techniques_covered": [
+    "T1003.001",
+    "T1047",
+    "T1053.005",
+    "T1059.001",
+    "T1059.004",
+    "T1547.001"
+  ],
+  "n_techniques_covered": 6,
+  "n_techniques_total": 17,
+  "technique_coverage_pct": 35.3,
+  "tactics_covered": [
+    "Credential Access",
+    "Execution",
+    "Lateral Movement",
+    "Persistence",
+    "Privilege Escalation"
+  ],
+  "n_tactics_covered": 5,
+  "n_tactics_total": 12,
+  "tactic_coverage_pct": 41.7,
+  "coverage_by_technique": {
+    "T1003.001": {
+      "name": "LSASS Memory",
+      "n_rules": 1
+    },
+    "T1047": {
+      "name": "Windows Management Instrumentation",
+      "n_rules": 1
+    },
+    "T1053.005": {
+      "name": "Scheduled Task",
+      "n_rules": 1
+    },
+    "T1059.001": {
+      "name": "PowerShell",
+      "n_rules": 1
+    },
+    "T1059.004": {
+      "name": "Unix Shell",
+      "n_rules": 1
+    },
+    "T1547.001": {
+      "name": "Registry Run Keys / Startup Folder",
+      "n_rules": 1
+    }
+  },
+  "figures": [
+    "results/figures/attack_coverage_heatmap.png",
+    "results/figures/tactic_coverage_bar.png"
+  ]
+}

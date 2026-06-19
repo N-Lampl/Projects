@@ -1,0 +1,24 @@
+# OWASP Juice Shop — LOCALHOST ONLY.
+#
+# Authorized-use note: this stands up a DELIBERATELY VULNERABLE app on YOUR machine for YOUR
+# learning. The port is bound to 127.0.0.1 so it is NOT reachable from your network. Do not
+# expose it to the internet. See ../../ETHICS.md.
+#
+#   docker compose up -d        # start (first run pulls the image, ~ a few hundred MB)
+#   open http://localhost:3000  # the shop
+#   docker compose down         # stop + remove
+#
+# Then run the exploits against it:  make lab ARGS=--live
+services:
+  juice-shop:
+    image: bkimminich/juice-shop:v17.1.1   # pin a version for reproducibility
+    container_name: juice-shop-lab
+    ports:
+      - "127.0.0.1:3000:3000"   # bind to loopback only — not exposed on the LAN
+    environment:
+      - NODE_ENV=unsafe         # enables the full set of intentionally-vulnerable challenges
+    restart: "no"
+    # The image runs as a non-root user by default; keep it sandboxed.
+    read_only: false
+    security_opt:
+      - no-new-privileges:true

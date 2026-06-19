@@ -1,0 +1,30 @@
+[project]
+name = "drift-monitoring"
+version = "0.1.0"
+description = "Concept-drift / model monitoring as a security control: PSI + KS drift alerts on a tabular stream."
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.24",
+    "scikit-learn>=1.3",
+    "pandas>=2.0",
+    "matplotlib>=3.7",
+]
+
+[project.optional-dependencies]
+# scipy gives the exact KS p-value; the module falls back to an asymptotic form
+# without it. dev = test + lint tooling.
+enhanced = ["scipy>=1.10"]
+dev = ["pytest>=8", "ruff>=0.5"]
+
+[tool.pytest.ini_options]
+markers = [
+    "slow: builds the full stream + runs the monitor end-to-end; excluded from CI via -m 'not slow'",
+]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

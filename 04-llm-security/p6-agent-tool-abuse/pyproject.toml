@@ -1,0 +1,27 @@
+[project]
+name = "agent-tool-abuse"
+version = "0.1.0"
+description = "Confused-deputy / tool-abuse attacks on a tool-using LLM agent, and a guardrail that stops them."
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.24",
+    "matplotlib>=3.7",
+]
+
+[project.optional-dependencies]
+# OPTIONAL real-LLM path (default path is fully offline with the mock provider)
+real = ["anthropic>=0.40"]
+dev = ["pytest>=8", "ruff>=0.5"]
+
+[tool.pytest.ini_options]
+markers = [
+    "slow: runs the full evaluation suite; excluded from CI via -m 'not slow'",
+]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

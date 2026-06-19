@@ -1,0 +1,41 @@
+{
+  "project": "shared/ids_pipeline",
+  "summary": "RandomForest IDS on synthetic flows: F1=0.843, ROC-AUC=0.968, recall=0.796 at threshold 0.5.",
+  "source": "synthetic",
+  "classifier": "rf",
+  "seed": 42,
+  "n_train": 9000,
+  "n_features": 13,
+  "n_test": 3000,
+  "n_attack_test": 750,
+  "threshold": 0.5,
+  "precision": 0.8950524737631185,
+  "recall": 0.796,
+  "f1": 0.8426252646436133,
+  "roc_auc": 0.9677985185185185,
+  "precision_at_k": {
+    "p@50": 1.0,
+    "p@100": 0.99,
+    "p@200": 0.99
+  },
+  "confusion_matrix": [
+    [
+      2180,
+      70
+    ],
+    [
+      153,
+      597
+    ]
+  ],
+  "confusion_matrix_labelled": {
+    "true_negative": 2180,
+    "false_positive": 70,
+    "false_negative": 153,
+    "true_positive": 597
+  },
+  "figures": [
+    "results/figures/confusion_matrix.png",
+    "results/figures/roc_curve.png"
+  ]
+}

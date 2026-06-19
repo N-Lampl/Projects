@@ -1,0 +1,13 @@
+# Default path (installed across the portfolio) — stdlib + these:
+numpy==1.26.4
+matplotlib==3.8.4
+
+# Enhanced path (OPTIONAL): real AES-GCM / RSA-OAEP / RSA-PSS via the
+# `cryptography` library, plus Pillow for image I/O. Imported lazily, so the
+# package + default run path work without them.
+cryptography==44.0.3
+pillow==10.4.0
+
+# Dev / CI
+pytest==8.2.0
+ruff==0.5.0

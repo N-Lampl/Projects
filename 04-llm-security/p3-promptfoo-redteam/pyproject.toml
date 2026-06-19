@@ -1,0 +1,28 @@
+[project]
+name = "promptfoo-redteam"
+version = "0.1.0"
+description = "promptfoo-style OWASP-LLM red team (offline pure-python harness) vs the p4 vulnerable RAG."
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.24",
+    "matplotlib>=3.7",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.5"]
+# Optional enhanced eval-as-code path (needs Node + npx, not pip):
+#   npx promptfoo@latest redteam run
+# promptfoo is a Node CLI; there is no pip package. See promptfoo/README notes.
+
+[tool.pytest.ini_options]
+markers = [
+    "slow: runs the full harness end-to-end against the p4 target; excluded from CI via -m 'not slow'",
+]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

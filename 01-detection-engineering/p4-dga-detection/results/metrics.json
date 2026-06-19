@@ -1,0 +1,55 @@
+{
+  "project": "p4-dga-detection",
+  "summary": "LogReg on char n-grams + entropy/length stats detects synthetic DGA domains at ROC-AUC 1.000 (recall 0.999, FPR 0.000); the naive entropy baseline reaches only ROC-AUC 0.958 and misses the dictionary-DGA family.",
+  "seed": 42,
+  "n_train": 5941,
+  "n_test": 2059,
+  "model": {
+    "roc_auc": 1.0,
+    "pr_auc": 1.0,
+    "accuracy": 0.9995143273433705,
+    "precision_dga": 1.0,
+    "recall_dga": 0.9990592662276576,
+    "f1_dga": 0.9995294117647059,
+    "false_positive_rate": 0.0,
+    "confusion_matrix": {
+      "tn": 996,
+      "fp": 0,
+      "fn": 1,
+      "tp": 1062
+    }
+  },
+  "entropy_baseline": {
+    "roc_auc": 0.9577840997102237,
+    "pr_auc": 0.9648378924147433,
+    "accuracy": 0.8921806702282662,
+    "precision_dga": 0.8970727101038716,
+    "recall_dga": 0.8936970837253058,
+    "f1_dga": 0.8953817153628653,
+    "false_positive_rate": 0.10943775100401607,
+    "confusion_matrix": {
+      "tn": 887,
+      "fp": 109,
+      "fn": 113,
+      "tp": 950
+    }
+  },
+  "per_family_recall": {
+    "model": {
+      "dict": 0.9973190348525469,
+      "hexish": 1.0,
+      "random": 1.0
+    },
+    "baseline": {
+      "dict": 0.7238605898123325,
+      "hexish": 0.98005698005698,
+      "random": 0.9911504424778761
+    }
+  },
+  "lstm": null,
+  "figures": [
+    "results/figures/roc_curve.png",
+    "results/figures/pr_curve.png",
+    "results/figures/entropy_distribution.png"
+  ]
+}

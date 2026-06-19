@@ -1,0 +1,230 @@
+{
+  "project": "p7-drift-monitoring",
+  "summary": "PSI+KS monitor over 24 windows; drift injected at window 12; first alert at window 12 (latency 0 windows, 0 false alarms).",
+  "seed": 42,
+  "n_windows": 24,
+  "window_size": 500,
+  "drift_start_window": 12,
+  "thresholds": {
+    "psi": 0.25,
+    "ks": 0.15,
+    "ks_pvalue": 0.01
+  },
+  "first_alert_window": 12,
+  "detection_latency_windows": 0,
+  "false_alarm_windows": 0,
+  "n_alert_windows": 12,
+  "final_window_psi": {
+    "request_rate": 6.888878839796009,
+    "payload_size": 5.5925613439859365,
+    "inter_arrival": 0.919251551774138,
+    "entropy": 6.125605331322139,
+    "session_len": 0.01904377934226861
+  },
+  "per_window": [
+    {
+      "window": 0,
+      "alert": false,
+      "alerting_features": [],
+      "max_psi": 0.08468569135901752
+    },
+    {
+      "window": 1,
+      "alert": false,
+      "alerting_features": [],
+      "max_psi": 0.08802331217802586
+    },
+    {
+      "window": 2,
+      "alert": false,
+      "alerting_features": [],
+      "max_psi": 0.07796679968777649
+    },
+    {
+      "window": 3,
+      "alert": false,
+      "alerting_features": [],
+      "max_psi": 0.054602450361637356
+    },
+    {
+      "window": 4,
+      "alert": false,
+      "alerting_features": [],
+      "max_psi": 0.056956735966220015
+    },
+    {
+      "window": 5,
+      "alert": false,
+      "alerting_features": [],
+      "max_psi": 0.10877748035719784
+    },
+    {
+      "window": 6,
+      "alert": false,
+      "alerting_features": [],
+      "max_psi": 0.09880733885839675
+    },
+    {
+      "window": 7,
+      "alert": false,
+      "alerting_features": [],
+      "max_psi": 0.07933676096005592
+    },
+    {
+      "window": 8,
+      "alert": false,
+      "alerting_features": [],
+      "max_psi": 0.06778931529645985
+    },
+    {
+      "window": 9,
+      "alert": false,
+      "alerting_features": [],
+      "max_psi": 0.09127393956465166
+    },
+    {
+      "window": 10,
+      "alert": false,
+      "alerting_features": [],
+      "max_psi": 0.07113114699934442
+    },
+    {
+      "window": 11,
+      "alert": false,
+      "alerting_features": [],
+      "max_psi": 0.06229067613811475
+    },
+    {
+      "window": 12,
+      "alert": true,
+      "alerting_features": [
+        "request_rate",
+        "payload_size"
+      ],
+      "max_psi": 0.3959665109679029
+    },
+    {
+      "window": 13,
+      "alert": true,
+      "alerting_features": [
+        "request_rate",
+        "payload_size",
+        "entropy"
+      ],
+      "max_psi": 1.2132109344080286
+    },
+    {
+      "window": 14,
+      "alert": true,
+      "alerting_features": [
+        "request_rate",
+        "payload_size",
+        "entropy"
+      ],
+      "max_psi": 2.441890269255353
+    },
+    {
+      "window": 15,
+      "alert": true,
+      "alerting_features": [
+        "request_rate",
+        "payload_size",
+        "inter_arrival",
+        "entropy"
+      ],
+      "max_psi": 4.418915209699716
+    },
+    {
+      "window": 16,
+      "alert": true,
+      "alerting_features": [
+        "request_rate",
+        "payload_size",
+        "inter_arrival",
+        "entropy"
+      ],
+      "max_psi": 5.311460860717442
+    },
+    {
+      "window": 17,
+      "alert": true,
+      "alerting_features": [
+        "request_rate",
+        "payload_size",
+        "inter_arrival",
+        "entropy"
+      ],
+      "max_psi": 8.734067303130987
+    },
+    {
+      "window": 18,
+      "alert": true,
+      "alerting_features": [
+        "request_rate",
+        "payload_size",
+        "inter_arrival",
+        "entropy"
+      ],
+      "max_psi": 8.565643157212095
+    },
+    {
+      "window": 19,
+      "alert": true,
+      "alerting_features": [
+        "request_rate",
+        "payload_size",
+        "inter_arrival",
+        "entropy"
+      ],
+      "max_psi": 7.701778911398986
+    },
+    {
+      "window": 20,
+      "alert": true,
+      "alerting_features": [
+        "request_rate",
+        "payload_size",
+        "inter_arrival",
+        "entropy"
+      ],
+      "max_psi": 8.424071921167176
+    },
+    {
+      "window": 21,
+      "alert": true,
+      "alerting_features": [
+        "request_rate",
+        "payload_size",
+        "inter_arrival",
+        "entropy"
+      ],
+      "max_psi": 9.284984658417992
+    },
+    {
+      "window": 22,
+      "alert": true,
+      "alerting_features": [
+        "request_rate",
+        "payload_size",
+        "inter_arrival",
+        "entropy"
+      ],
+      "max_psi": 7.704557317107777
+    },
+    {
+      "window": 23,
+      "alert": true,
+      "alerting_features": [
+        "request_rate",
+        "payload_size",
+        "inter_arrival",
+        "entropy"
+      ],
+      "max_psi": 6.888878839796009
+    }
+  ],
+  "figures": [
+    "results/figures/drift_over_time.png",
+    "results/figures/psi_heatmap.png"
+  ]
+}

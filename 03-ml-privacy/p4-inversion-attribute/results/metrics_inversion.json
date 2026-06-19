@@ -1,0 +1,27 @@
+{
+  "project": "p4-inversion-attribute",
+  "task": "model-inversion",
+  "summary": "Gradient-ascent model inversion recovers all 10 class signatures from a 100%-accurate classifier (top-1 prototype match 100%).",
+  "seed": 42,
+  "data": "synthetic",
+  "target_test_accuracy": 1.0,
+  "inversion_steps": 300,
+  "mean_recovery_confidence": 0.9996171176433564,
+  "per_class_confidence": {
+    "0": 0.9997320771217346,
+    "1": 0.9994286894798279,
+    "2": 0.9997794032096863,
+    "3": 0.9995003938674927,
+    "4": 0.999749481678009,
+    "5": 0.9995625615119934,
+    "6": 0.9993923902511597,
+    "7": 0.9996802806854248,
+    "8": 0.9996533393859863,
+    "9": 0.9996925592422485
+  },
+  "mean_own_class_correlation": 0.5669125318527222,
+  "top1_match_rate": 1.0,
+  "figures": [
+    "results/figures/inversion_reconstructions.png"
+  ]
+}

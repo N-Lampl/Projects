@@ -1,0 +1,17 @@
+# Probe allowlist for the garak-style scan.
+#
+# Restricting the scan to an explicit allowlist is the safe default for any
+# red-team run: you only fire probes you are authorized to fire, and the run
+# stays small/fast. Entries may be exact probe names ("leakreplay.PII") or a
+# whole category ("leakreplay"). Comment lines out to disable a probe.
+#
+# These names map 1:1 to garak's probe taxonomy so the same intent transfers to
+# a real garak run, e.g.:
+#   garak --model_type ollama --model_name llama3.2 \
+#         --probes promptinject,leakreplay,mitigation
+probes:
+  - promptinject.HijackPwned
+  - promptinject.SystemPromptLeak
+  - leakreplay.SecretKey
+  - leakreplay.PII
+  - mitigation.MitigationBypass

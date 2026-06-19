@@ -1,0 +1,40 @@
+{
+  "project": "p2-attack-zoo",
+  "summary": "Hand-rolled PGD (L-inf), C&W-L2 and DeepFool evasion attacks compared on a SmallCNN (synthetic data, clean acc 100.0%). Reports success rate, mean L2/L-inf and runtime.",
+  "source": "synthetic",
+  "seed": 42,
+  "clean_accuracy": 1.0,
+  "n_eval_images": 200,
+  "pgd_epsilon": 0.1,
+  "attacks": {
+    "PGD": {
+      "success_rate": 0.975,
+      "mean_l2": 5.309831296480619,
+      "mean_linf": 0.10000002873249543,
+      "runtime_s": 2.4293013979913667,
+      "n_correct": 200,
+      "n_success": 195
+    },
+    "C&W-L2": {
+      "success_rate": 1.0,
+      "mean_l2": 3.870689296722412,
+      "mean_linf": 0.24821921229362487,
+      "runtime_s": 10.627503821044229,
+      "n_correct": 200,
+      "n_success": 200
+    },
+    "DeepFool": {
+      "success_rate": 0.815,
+      "mean_l2": 4.109465312372687,
+      "mean_linf": 0.37691897556094306,
+      "runtime_s": 7.6931905740639195,
+      "n_correct": 200,
+      "n_success": 163
+    }
+  },
+  "figures": [
+    "results/figures/attack_comparison.png",
+    "results/figures/perturbation_sizes.png",
+    "results/figures/clean_vs_attacks.png"
+  ]
+}

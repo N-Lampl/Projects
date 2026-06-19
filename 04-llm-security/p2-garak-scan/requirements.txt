@@ -1,0 +1,13 @@
+# Default OFFLINE path needs only these (already in the portfolio base env):
+#   python3 -m pip install -r requirements.txt
+numpy>=1.24
+matplotlib>=3.7
+# dev
+pytest>=8
+ruff>=0.5
+
+# --- OPTIONAL real-garak path (NOT needed for `make scan`) ---------------------
+# Install separately to run a REAL scan against YOUR OWN Ollama / API model, then
+# parse the resulting report.jsonl with `make parse REPORT=...`.
+#   pip install "garak>=0.15,<0.16"
+# garak>=0.15,<0.16

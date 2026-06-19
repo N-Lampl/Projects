@@ -1,0 +1,10 @@
+# Pinned fallback deps for the DEFAULT offline path (synthetic data, no download).
+torch==2.2.2
+numpy==1.26.4
+scikit-learn==1.4.2
+matplotlib==3.9.0
+pytest==8.2.0
+ruff==0.5.0
+
+# OPTIONAL enhanced path (real Fashion-MNIST images): uncomment + install.
+# torchvision==0.17.2

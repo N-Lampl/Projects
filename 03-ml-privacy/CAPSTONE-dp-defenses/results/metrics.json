@@ -1,0 +1,63 @@
+{
+  "project": "CAPSTONE-dp-defenses",
+  "summary": "DP-SGD trades test accuracy for privacy: as epsilon shrinks, the train-test gap, membership-inference AUC, and extraction fidelity all fall toward their no-information baselines.",
+  "track": "03-ml-privacy",
+  "default_backend": "manual DP-SGD (torch); Opacus optional",
+  "accountant": "subsampled-Gaussian RDP -> (eps, delta)",
+  "delta": 1e-05,
+  "max_grad_norm": 1.0,
+  "n_shadows": 12,
+  "n_pool": 2400,
+  "epsilons": [
+    "inf",
+    "3",
+    "1"
+  ],
+  "by_epsilon": {
+    "inf": {
+      "requested_epsilon": null,
+      "accounted_epsilon": null,
+      "noise_multiplier": 0.0,
+      "train_acc": 0.8433,
+      "test_acc": 0.638,
+      "train_test_gap": 0.2053,
+      "mia_auc": 0.6326,
+      "mia_tpr_at_1pct_fpr": 0.015,
+      "extraction_acc": 0.372,
+      "extraction_fidelity": 0.45
+    },
+    "3": {
+      "requested_epsilon": 3.0,
+      "accounted_epsilon": 2.9997,
+      "noise_multiplier": 4.3462,
+      "train_acc": 0.465,
+      "test_acc": 0.428,
+      "train_test_gap": 0.037,
+      "mia_auc": 0.5112,
+      "mia_tpr_at_1pct_fpr": 0.015,
+      "extraction_acc": 0.322,
+      "extraction_fidelity": 0.664
+    },
+    "1": {
+      "requested_epsilon": 1.0,
+      "accounted_epsilon": 1.0,
+      "noise_multiplier": 12.2569,
+      "train_acc": 0.3383,
+      "test_acc": 0.338,
+      "train_test_gap": 0.0003,
+      "mia_auc": 0.523,
+      "mia_tpr_at_1pct_fpr": 0.01,
+      "extraction_acc": 0.33,
+      "extraction_fidelity": 0.53
+    }
+  },
+  "headline": {
+    "non_private_mia_auc": 0.6326,
+    "non_private_test_acc": 0.638,
+    "private_min_eps": 1.0
+  },
+  "figures": [
+    "results/figures/privacy_utility_tradeoff.png",
+    "results/figures/mia_roc_by_epsilon.png"
+  ]
+}

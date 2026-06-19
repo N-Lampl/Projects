@@ -1,0 +1,12 @@
+# Fallback if you're not using uv/pyproject. Install with:
+#   python3 -m pip install -r requirements.txt
+# --- DEFAULT (offline, synthetic-data) path needs only these ---
+torch>=2.2,<2.6
+scikit-learn>=1.3
+numpy>=1.24
+matplotlib>=3.7
+# dev
+pytest>=8
+ruff>=0.5
+# --- OPTIONAL: real-MNIST path (`--dataset mnist`), downloads ~11 MB ---
+torchvision>=0.17

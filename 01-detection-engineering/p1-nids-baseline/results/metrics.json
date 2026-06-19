@@ -1,0 +1,60 @@
+{
+  "project": "p1-nids-baseline",
+  "summary": "RandomForest NIDS on synthetic flows via shared ids_pipeline: ROC-AUC=0.968; at a 10% alert budget it detects 39% of attacks at 97% alert precision.",
+  "source": "synthetic",
+  "classifier": "rf",
+  "seed": 42,
+  "n_train": 9000,
+  "n_features": 13,
+  "alert_budget": 0.1,
+  "operating_threshold": 0.8424672746113535,
+  "roc_auc": 0.9677985185185185,
+  "detection_rate": 0.3893333333333333,
+  "alert_precision": 0.9733333333333334,
+  "miss_rate": 0.6106666666666667,
+  "false_positive_rate": 0.0035555555555555557,
+  "alerts_per_day_est": 100000,
+  "false_alerts_per_day_est": 2667,
+  "confusion": {
+    "tp": 292,
+    "fp": 8,
+    "fn": 458,
+    "tn": 2242
+  },
+  "precision_at_k": {
+    "p@50": 1.0,
+    "p@100": 0.99,
+    "p@200": 0.99
+  },
+  "alert_budget_sweep": [
+    {
+      "alert_budget": 0.01,
+      "threshold": 0.9735774148824147,
+      "detection_rate": 0.04,
+      "alert_precision": 1.0
+    },
+    {
+      "alert_budget": 0.05,
+      "threshold": 0.9215806958209917,
+      "detection_rate": 0.19866666666666666,
+      "alert_precision": 0.9933333333333333
+    },
+    {
+      "alert_budget": 0.1,
+      "threshold": 0.8424672746113535,
+      "detection_rate": 0.3893333333333333,
+      "alert_precision": 0.9733333333333334
+    },
+    {
+      "alert_budget": 0.25,
+      "threshold": 0.42112201922497017,
+      "detection_rate": 0.852,
+      "alert_precision": 0.852
+    }
+  ],
+  "figures": [
+    "results/figures/roc_curve.png",
+    "results/figures/confusion_matrix.png",
+    "results/figures/alert_budget_tradeoff.png"
+  ]
+}

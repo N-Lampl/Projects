@@ -11,6 +11,14 @@ attack-and-defend flagships, finish the most market-aligned work (LLM security) 
 | **3 — LLM security** | 15–22 | API-first (cheap model), Ollama fallback. Build the vulnerable RAG target BEFORE attacking it. Add agent/tool-abuse + injection→tool-call→exfiltration. Land defend-the-RAG + CI-gated AppSec capstone. | End-to-end LLM AppSec story: threat-model → scan → build target → attack → defend (quantified ASR drop) → CI gate + dashboard + threat report. |
 | **4 — Supply-chain + privacy** | 22–30 | Promote the supply-chain capstone (high MLSecOps hireability). Then privacy as depth; CPU-heavy LiRA/DP-SGD last as overnight batch. | Supply-chain capstone is a headline artifact; privacy rounds out depth. Security+ exam sat. |
 
+## Final deliverable — showcase dashboard (build LAST)
+
+After the projects exist, build an **interactive portfolio dashboard** as a **React/Vite SPA**,
+deployed free on **GitHub Pages**. It should auto-discover each project (status from the track
+READMEs, results from each `results/metrics.json` + `results/figures/*.png`) so it renders the
+money plots and key metrics per project and maps them to MITRE ATLAS / OWASP LLM Top 10. This is
+the capstone showcase / "click this link" interview artifact — intentionally built at the end, not now.
+
 ## Scope discipline (deliberately deferred)
 
 - **No standalone foundations or poisoning track.** Foundations is consolidated in `00-foundations`;

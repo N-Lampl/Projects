@@ -1,0 +1,10 @@
+ATLAS tactic coverage across the portfolio (count of mappings)
+
+Exfiltration      | ############################## 4
+Defense Evasion   | ###################### 3
+Initial Access    | ###################### 3
+ML Attack Staging | ###################### 3
+ML Model Access   | ###################### 3
+Execution         | ############### 2
+Impact            | ######## 1
+Persistence       | ######## 1

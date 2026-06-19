@@ -1,0 +1,20 @@
+{
+  "project": "p8-refusal-direction-interp",
+  "summary": "Synthetic-activation simulation of the refusal-direction (abliteration) method: difference-in-means recovers a planted refusal axis (|cos|=0.98); inference-time directional ablation drops the refusal rate from 100% to 0% while capability stays at 62% (vs 62%). Analysis only; no modified weights are produced.",
+  "method": "difference-in-means refusal direction + orthogonal-projection ablation",
+  "path": "synthetic-offline",
+  "seed": 42,
+  "n_harmful": 128,
+  "n_harmless": 128,
+  "threshold": 0.5,
+  "direction_recovery_cosine": 0.985,
+  "refusal_rate_before": 1.0,
+  "refusal_rate_after": 0.0,
+  "capability_before": 0.6245,
+  "capability_after": 0.6213,
+  "capability_retention": 0.9948,
+  "figures": [
+    "results/figures/refusal_vs_capability.png",
+    "results/figures/projection_histograms.png"
+  ]
+}

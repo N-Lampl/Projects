@@ -1,0 +1,55 @@
+{
+  "project": "secure-ml-pipeline",
+  "summary": "Trained a TinyMLP, shipped it as safetensors (round-trip OK). The opcode scanner flagged the pickle PoC as MALICIOUS (2 dangerous opcodes) while the safetensors artifact scanned clean. The sign/verify gate is correct: genuine PASS, tampered+unsigned BLOCKED.",
+  "seed": 42,
+  "train": {
+    "train_accuracy": 0.9929999709129333,
+    "roundtrip_ok": true,
+    "sha256": "b6d27ac4b3d1dcfe8f09ca22d90cb71e67939be2e75eb2b078935f7442bb6b84"
+  },
+  "scan": {
+    "pickle_poc": {
+      "verdict": "MALICIOUS",
+      "malicious": true,
+      "dangerous_opcodes": 2,
+      "globals_seen": [
+        "secure_ml_pipeline.poc._run_marker"
+      ]
+    },
+    "safetensors": {
+      "verdict": "clean",
+      "malicious": false,
+      "dangerous_opcodes": 0
+    },
+    "modelscan": {
+      "poc": {
+        "available": false,
+        "skipped": true,
+        "tool": "modelscan"
+      },
+      "safetensors": {
+        "available": false,
+        "skipped": true,
+        "tool": "modelscan"
+      }
+    }
+  },
+  "integrity_gate": {
+    "signing_backend": "local-hmac-demo",
+    "cosign_available": false,
+    "clean_verify_pass": true,
+    "tampered_verify_pass": false,
+    "unsigned_verify_pass": false,
+    "gate_correct": true,
+    "artifact_sha256": "b6d27ac4b3d1dcfe8f09ca22d90cb71e67939be2e75eb2b078935f7442bb6b84"
+  },
+  "tools_present": {
+    "docker": true,
+    "modelscan": false,
+    "cosign": false
+  },
+  "figures": [
+    "results/figures/scanner_verdicts.png",
+    "results/figures/integrity_gate.png"
+  ]
+}

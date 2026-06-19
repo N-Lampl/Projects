@@ -1,0 +1,19 @@
+{
+  "project": "p4-inversion-attribute",
+  "summary": "Two ML-privacy attacks from scratch: (1) gradient-ascent model inversion reconstructs class-representative inputs from a trained image classifier; (2) MAP attribute inference recovers a sensitive tabular attribute from a released model.",
+  "inversion": {
+    "target_test_accuracy": 1.0,
+    "mean_recovery_confidence": 0.9996171176433564,
+    "top1_match_rate": 1.0,
+    "mean_own_class_correlation": 0.5669125318527222
+  },
+  "attribute_inference": {
+    "max_attack_accuracy": 1.0,
+    "max_lift_over_baseline": 0.5,
+    "target_model": "logreg"
+  },
+  "figures": [
+    "results/figures/inversion_reconstructions.png",
+    "results/figures/attribute_inference_sweep.png"
+  ]
+}

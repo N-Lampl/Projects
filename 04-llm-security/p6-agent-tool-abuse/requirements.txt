@@ -1,0 +1,9 @@
+# Default offline path needs only these (already in the portfolio base env):
+numpy>=1.24
+matplotlib>=3.7
+pytest>=8
+ruff>=0.5
+
+# OPTIONAL enhanced path: run the same harness against a real LLM (needs a key).
+# Imported lazily; the default mock path does NOT require this.
+# anthropic>=0.40

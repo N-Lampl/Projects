@@ -1,0 +1,28 @@
+{
+  "project": "module-2-stride-ml",
+  "summary": "STRIDE threat model of an ML inference service: 18 threats across 6 categories (2 High).",
+  "seed": 42,
+  "system": "ML Inference Service",
+  "n_elements": 7,
+  "n_data_flows": 9,
+  "n_trust_boundaries": 3,
+  "total_threats": 18,
+  "threats_by_category": {
+    "Spoofing": 1,
+    "Tampering": 2,
+    "Repudiation": 3,
+    "Information Disclosure": 7,
+    "Denial of Service": 3,
+    "Elevation of Privilege": 2
+  },
+  "threats_by_severity": {
+    "High": 2,
+    "Medium": 13,
+    "Low": 3
+  },
+  "pytm_used": false,
+  "doc": "docs/threat-model.md",
+  "figures": [
+    "results/figures/stride_counts.png"
+  ]
+}

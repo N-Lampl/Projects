@@ -1,0 +1,22 @@
+# Fallback if you're not using uv/pyproject. Install with:
+#   python3 -m pip install -r requirements.txt
+#
+# DEFAULT (offline) path needs only these:
+torch>=2.2,<2.6
+numpy>=1.24
+scikit-learn>=1.3
+matplotlib>=3.7
+# dev
+pytest>=8
+ruff>=0.5
+
+# --- OPTIONAL enhanced path (the default run does NOT require these) ---
+# safetensors gives a real (de)serializer; without it a pure-python fallback
+# writing the identical file layout is used.
+safetensors>=0.4
+# protectai/modelscan: static scanner for model files (verified 0.x line).
+# modelscan>=0.7
+#
+# Not pip-installable (install separately if you want the full enhanced demo):
+#   * Sigstore cosign  -> https://docs.sigstore.dev/cosign/installation/  (Go binary)
+#   * Docker           -> required only for `make detonate` (sandboxed PoC run)

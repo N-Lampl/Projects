@@ -1,0 +1,77 @@
+# Supply-chain gate for ML model artifacts. FAILS CLOSED on:
+#   * any pickle-based model file containing dangerous opcodes (REDUCE/GLOBAL/...)
+#   * a safetensors artifact whose signature is missing or does not verify
+#
+# The opcode scan + sign/verify run with ZERO extra tooling (stdlib only), so the
+# gate works on any runner. modelscan and cosign are wired in as optional
+# best-effort steps that upgrade the gate when available.
+name: model-supply-chain-gate
+
+on:
+  push:
+    paths:
+      - "05-ml-supply-chain/secure-ml-pipeline/**"
+  pull_request:
+    paths:
+      - "05-ml-supply-chain/secure-ml-pipeline/**"
+  workflow_dispatch:
+
+defaults:
+  run:
+    working-directory: 05-ml-supply-chain/secure-ml-pipeline
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: pip install -r requirements.txt
+
+      - name: Unit tests (fast)
+        run: python -m pytest -m "not slow" -q
+
+      # --- HARD GATE 1: no committed pickle model may contain exec opcodes ---
+      - name: Block pickled models with dangerous opcodes
+        run: |
+          python scripts/ci_gate.py --scan-pickles . --fail-on-malicious
+
+      # --- Produce + sign the safetensors artifact, then verify ---
+      - name: Build secure pipeline (train -> safetensors -> sign)
+        run: python scripts/secure_pipeline.py --epochs 50
+
+      # --- HARD GATE 2: signature must verify (fails closed if tampered/unsigned) ---
+      - name: Verify artifact signature (fail closed)
+        run: |
+          python scripts/ci_gate.py \
+            --verify models/model.safetensors \
+            --signature models/model.safetensors.sig
+
+      # --- Optional best-effort upgrades (do not fail the build if absent) ---
+      - name: Optional modelscan
+        continue-on-error: true
+        run: |
+          pip install modelscan==0.* || exit 0
+          modelscan -p models/model.safetensors || true
+
+      - name: Optional cosign verify (keyless)
+        continue-on-error: true
+        run: |
+          if command -v cosign >/dev/null 2>&1; then
+            echo "cosign present - run keyless verify here in a real deployment"
+          else
+            echo "cosign absent - skipping (local HMAC gate already enforced above)"
+          fi
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: secure-pipeline-results
+          path: |
+            05-ml-supply-chain/secure-ml-pipeline/results/metrics.json
+            05-ml-supply-chain/secure-ml-pipeline/results/figures/*.png

@@ -1,0 +1,12 @@
+# Fallback if you're not using uv/pyproject. Install with:
+#   python3 -m pip install -r requirements.txt
+numpy>=1.24
+scikit-learn>=1.3
+pandas>=2.0
+matplotlib>=3.7
+# enhanced (optional): exact KS p-value via scipy.stats.ks_2samp.
+# Without it the monitor uses an asymptotic KS p-value approximation.
+scipy>=1.10
+# dev
+pytest>=8
+ruff>=0.5

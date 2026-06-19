@@ -1,0 +1,25 @@
+title: PowerShell Encoded Command Execution
+id: 8a1b2c3d-0002-4a00-9000-000000000002
+status: experimental
+description: Detects PowerShell launched with an encoded command, often used to obfuscate payloads.
+author: portfolio
+references:
+  - https://attack.mitre.org/techniques/T1059/001/
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_img:
+    Image|endswith: '\powershell.exe'
+  selection_cli:
+    CommandLine|contains:
+      - ' -enc '
+      - ' -EncodedCommand '
+      - ' -e '
+  condition: selection_img and selection_cli
+falsepositives:
+  - Some management tooling uses encoded commands legitimately.
+level: medium
+tags:
+  - attack.execution
+  - attack.t1059.001
