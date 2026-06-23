@@ -1,0 +1,28 @@
+[project]
+name = "aml-typologies"
+version = "0.1.0"
+description = "AML typology detection (structuring + layering) on a synthetic transaction graph."
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.24",
+    "pandas>=2.0",
+    "scikit-learn>=1.3",
+    "matplotlib>=3.7",
+]
+
+[project.optional-dependencies]
+graph = ["networkx>=3.0"]
+dev = ["pytest>=8", "ruff>=0.5"]
+
+[tool.pytest.ini_options]
+markers = [
+    "slow: fits detectors on the full graph; excluded from CI via -m 'not slow'",
+]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

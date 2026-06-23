@@ -1,0 +1,9 @@
+# data + models are produced at runtime; never commit them
+data/*
+!data/README.md
+models/*
+!models/README.md
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/

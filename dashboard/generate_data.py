@@ -32,6 +32,8 @@ TRACKS = [
      "Prompt injection, RAG/agent attacks, guardrails, CI red-team, alignment-robustness interpretability."),
     ("05-ml-supply-chain", "ML Supply Chain",
      "Securing the model supply chain: pickle-RCE, safetensors, scanning, Sigstore signing, CI gates."),
+    ("06-financial-ml", "Financial Crime & Risk",
+     "ML for financial crime and risk: fraud, anomaly detection, AML typologies, credit risk, market manipulation."),
 ]
 
 FLAGSHIPS = {
@@ -180,6 +182,15 @@ def build_highlights(by_id: dict) -> list[dict]:
                   "label": "refusal rate", "project": p8,
                   "blurb": f"Ablating one direction removes refusals{tail}; "
                            f"capability retained {pct(cap) if cap else 'n/a'}."})
+
+    fr = "06-financial-ml__CAPSTONE-adversarial-fraud"
+    fr_b = g(fr, "attack", "asr_before")
+    fr_a = g(fr, "attack", "asr_after")
+    if fr_b is not None and fr_a is not None:
+        H.append({"title": "Harden a fraud model vs evasion",
+                  "before": pct(fr_b), "after": pct(fr_a),
+                  "label": "evasion rate", "project": fr,
+                  "blurb": "Feasibility-constrained adversarial transactions, then adversarial training."})
 
     return H
 

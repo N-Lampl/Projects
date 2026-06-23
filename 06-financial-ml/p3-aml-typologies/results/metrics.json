@@ -1,0 +1,93 @@
+{
+  "project": "p3-aml-typologies",
+  "summary": "Rules+RF detects AML typologies on a synthetic transaction graph: PR-AUC=0.936, ROC-AUC=0.989; at a 1% false-positive budget it catches 59% of laundering accounts at 93% alert precision. Unsupervised IsolationForest baseline PR-AUC=0.533.",
+  "source": "synthetic",
+  "networkx_available": true,
+  "seed": 42,
+  "n_accounts": 1500,
+  "n_transfers": 9273,
+  "n_suspicious": 261,
+  "n_layering_rings": 5,
+  "prevalence": 0.174,
+  "fpr_budget": 0.01,
+  "pr_auc": 0.9364947891673333,
+  "roc_auc": 0.9885165703400655,
+  "ks_statistic": 0.9421019917805423,
+  "operating_threshold": 0.529607843137255,
+  "recall_at_budget": 0.5862068965517241,
+  "precision_at_budget": 0.9272727272727272,
+  "achieved_fpr": 0.009685230024213076,
+  "precision_at_k": {
+    "p@50": 1.0,
+    "p@100": 0.95,
+    "p@200": 0.915
+  },
+  "confusion_at_budget": {
+    "tp": 153,
+    "fp": 12,
+    "fn": 108,
+    "tn": 1227
+  },
+  "detectors": {
+    "rules_rf": {
+      "n_accounts": 1500,
+      "n_suspicious": 261,
+      "prevalence": 0.174,
+      "pr_auc": 0.9364947891673333,
+      "roc_auc": 0.9885165703400655,
+      "fpr_budget": 0.01,
+      "operating_threshold": 0.529607843137255,
+      "recall_at_budget": 0.5862068965517241,
+      "precision_at_budget": 0.9272727272727272,
+      "achieved_fpr": 0.009685230024213076,
+      "ks_statistic": 0.9421019917805423,
+      "precision_at_k": {
+        "p@50": 1.0,
+        "p@100": 0.95,
+        "p@200": 0.915
+      },
+      "confusion_at_budget": {
+        "tp": 153,
+        "fp": 12,
+        "fn": 108,
+        "tn": 1227
+      }
+    },
+    "isolation_forest": {
+      "n_accounts": 1500,
+      "n_suspicious": 261,
+      "prevalence": 0.174,
+      "pr_auc": 0.532685421478026,
+      "roc_auc": 0.8234270005164218,
+      "fpr_budget": 0.01,
+      "operating_threshold": 0.5238288164256725,
+      "recall_at_budget": 0.1685823754789272,
+      "precision_at_budget": 0.7857142857142857,
+      "achieved_fpr": 0.009685230024213076,
+      "ks_statistic": 0.4896514615976919,
+      "precision_at_k": {
+        "p@50": 0.78,
+        "p@100": 0.69,
+        "p@200": 0.495
+      },
+      "confusion_at_budget": {
+        "tp": 44,
+        "fp": 12,
+        "fn": 217,
+        "tn": 1227
+      }
+    }
+  },
+  "top_features": {
+    "amount_out": 0.6005,
+    "passthrough_ratio": 0.1347,
+    "amount_in": 0.1083,
+    "in_out_balance": 0.0645,
+    "rapid_passthrough": 0.025
+  },
+  "figures": [
+    "results/figures/pr_curves.png",
+    "results/figures/feature_importances.png",
+    "results/figures/laundering_ring.png"
+  ]
+}

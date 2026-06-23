@@ -1,0 +1,54 @@
+{
+  "project": "p5-market-manipulation",
+  "summary": "IsolationForest on 1500 synthetic OHLCV bars (60 manipulated, prevalence 4.0%): bar PR-AUC=0.862, ROC-AUC=0.993; at a 5% alert budget it catches 11/14 injected events (event recall 79%) with median lead-time +4 bars before the worst bar.",
+  "source": "synthetic",
+  "detector": "isolation_forest",
+  "baseline_detector": "rolling_zscore",
+  "seed": 42,
+  "n_bars": 1500,
+  "window": 20,
+  "alert_budget": 0.05,
+  "n_manipulated_bars": 60,
+  "prevalence": 0.04,
+  "pr_auc": 0.8618166106410718,
+  "roc_auc": 0.9929050925925926,
+  "precision_at_k": {
+    "p@25": 0.88,
+    "p@50": 0.86,
+    "p@100": 0.56
+  },
+  "baseline_pr_auc": 0.8870692999648302,
+  "baseline_roc_auc": 0.9903125,
+  "operating_threshold": 0.5418708417070298,
+  "bar_recall": 0.8666666666666667,
+  "bar_precision": 0.6933333333333334,
+  "false_positive_rate": 0.01597222222222222,
+  "confusion": {
+    "tp": 52,
+    "fp": 23,
+    "fn": 8,
+    "tn": 1417
+  },
+  "event_recall": 0.7857142857142857,
+  "n_events": 14,
+  "n_detected": 11,
+  "median_lead_time_bars": 4.0,
+  "mean_lead_time_bars": 2.6363636363636362,
+  "event_recall_by_kind": {
+    "pump_dump": {
+      "detected": 6,
+      "total": 6,
+      "recall": 1.0
+    },
+    "spoof": {
+      "detected": 5,
+      "total": 8,
+      "recall": 0.625
+    }
+  },
+  "figures": [
+    "results/figures/price_volume_flagged.png",
+    "results/figures/anomaly_score_timeline.png",
+    "results/figures/pr_curve.png"
+  ]
+}

@@ -25,7 +25,7 @@ for LLMs).
 
 ## Project index
 
-**38 projects across 6 tracks — all built, every one passing its fast test suite.** Each runs
+**44 projects across 7 tracks — all built, every one passing its fast test suite.** Each runs
 **offline & deterministically** out of the box (synthetic data / mock LLM fallbacks); real datasets,
 LLM API keys, or a GPU *enhance* specific projects but are never required to see them work.
 
@@ -41,6 +41,8 @@ Legend: ✅ built & tested · ★ flagship (interview pieces)
 | **04 llm-security** | owasp-lab, garak-scan, promptfoo, vulnerable-rag, attack-rag-pyrit, agent-tool-abuse, p8-refusal-interp | Prompt injection, jailbreaks, RAG/agent attacks, alignment-robustness interp | OWASP LLM Top 10 | ✅ |
 | **04 llm-security** | ★ p7-defend-rag, ★ CAPSTONE-appsec-ci | Guardrails + ML injection detector; CI-gated red-team with ASR thresholds | OWASP LLM01/02 | ✅ |
 | **05 supply-chain** | ★ secure-ml-pipeline | pickle-RCE PoC → safetensors → ModelScan → Sigstore signing → CI gate | ATLAS AML.T0010 | ✅ |
+| **06 financial** | fraud-detection, transaction-anomaly, aml-typologies, credit-risk-scoring, market-manipulation | Financial-crime & risk ML: imbalanced fraud, anomaly detection, AML graphs, calibration | fraud · AML · risk | ✅ |
+| **06 financial** | ★ CAPSTONE-adversarial-fraud | Evade my **own** fraud model under feature-mutability constraints → harden → re-measure | ATLAS AML.T0015 | ✅ |
 
 The full rationale, 30-week learning roadmap, and scope decisions live in
 [`docs/ROADMAP.md`](docs/ROADMAP.md). The interactive showcase **dashboard** (React/Vite) is the planned

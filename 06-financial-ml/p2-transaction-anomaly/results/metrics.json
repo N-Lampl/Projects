@@ -1,0 +1,71 @@
+{
+  "project": "p2-transaction-anomaly",
+  "summary": "Label-free IsolationForest on a 12070-txn synthetic stream (179 injected anomalies, base rate 1.483%): PR-AUC=0.5888, ROC-AUC=0.9653; a top-179 analyst queue catches 63% of anomalies at a 1% FP budget.",
+  "source": "synthetic",
+  "seed": 42,
+  "n_transactions": 12070,
+  "n_anomalies": 179,
+  "base_rate": 0.01483,
+  "contamination": 0.012,
+  "default_detector": "iforest",
+  "autoencoder_backend": "torch",
+  "pr_auc": 0.5888,
+  "roc_auc": 0.9653,
+  "recall_at_fpr_budget": 0.6369,
+  "fpr_budget": 0.01,
+  "operating_threshold": 0.6370642068511766,
+  "precision_at_k": {
+    "p@50": 0.78,
+    "p@100": 0.7,
+    "p@200": 0.505
+  },
+  "recall_at_k": {
+    "r@50": 0.2179,
+    "r@100": 0.3911,
+    "r@200": 0.5642
+  },
+  "confusion_at_threshold": {
+    "tp": 114,
+    "fp": 119,
+    "fn": 65,
+    "tn": 11772
+  },
+  "recall_by_anomaly_type": {
+    "velocity": 0.1807,
+    "off_hours": 0.9583,
+    "amount_spike": 0.75
+  },
+  "detectors": {
+    "iforest": {
+      "pr_auc": 0.5888,
+      "roc_auc": 0.9653,
+      "n_anomalies": 179,
+      "base_rate": 0.01483,
+      "precision_at_k": {
+        "p@50": 0.78,
+        "p@100": 0.7,
+        "p@200": 0.505
+      },
+      "recall_at_k": {
+        "r@50": 0.2179,
+        "r@100": 0.3911,
+        "r@200": 0.5642
+      },
+      "fpr_budget": 0.01,
+      "operating_threshold": 0.6370642068511766,
+      "recall_at_fpr_budget": 0.6369,
+      "achieved_fpr": 0.01001,
+      "confusion": {
+        "tp": 114,
+        "fp": 119,
+        "fn": 65,
+        "tn": 11772
+      }
+    }
+  },
+  "figures": [
+    "results/figures/score_distribution.png",
+    "results/figures/precision_at_k.png",
+    "results/figures/anomaly_timeline.png"
+  ]
+}

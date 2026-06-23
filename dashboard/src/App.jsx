@@ -19,6 +19,7 @@ const TRACK_TAGS = {
   "03-ml-privacy": ["MITRE ATLAS", "differential privacy"],
   "04-llm-security": ["OWASP LLM Top 10"],
   "05-ml-supply-chain": ["MITRE ATLAS", "MLSecOps"],
+  "06-financial-ml": ["fraud", "AML", "anomaly detection"],
 };
 const tagsFor = (p) => TRACK_TAGS[p.track] || [];
 

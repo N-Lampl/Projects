@@ -1,0 +1,10 @@
+# data + trained models are produced at runtime, never committed
+data/*
+!data/README.md
+models/*
+!models/README.md
+
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/

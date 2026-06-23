@@ -1,0 +1,32 @@
+[project]
+name = "adv-fraud"
+version = "0.1.0"
+description = "Attack AND defend a tabular fraud classifier — feasibility-constrained evasion + adversarial training."
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.24",
+    "pandas>=2.0",
+    "scikit-learn>=1.3",
+    "matplotlib>=3.7",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.5"]
+
+[tool.pytest.ini_options]
+markers = [
+    "slow: trains models end-to-end + runs the full attack; excluded from CI via -m 'not slow'",
+]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.ruff.lint.per-file-ignores]
+# the report-card markdown is embedded as a triple-quoted f-string; its table
+# rows are intentionally longer than the code line-length limit.
+"scripts/run_capstone.py" = ["E501"]

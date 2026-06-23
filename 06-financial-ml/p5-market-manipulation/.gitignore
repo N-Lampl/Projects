@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+
+# data + model artifacts are produced at runtime, never committed
+data/*
+!data/README.md
+models/*
+!models/README.md
+
+# generated figures + metrics ARE committed as evidence, so do not ignore them
