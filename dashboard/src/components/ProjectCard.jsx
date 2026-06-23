@@ -1,51 +1,54 @@
-const asset = (url) => `${import.meta.env.BASE_URL}${url}`;
+import { IconArrow, IconExternal, IconStar } from "./icons.jsx";
 
-export default function ProjectCard({ project, repoUrl, onOpenFigure }) {
-  const { name, trackName, kind, summary, metrics, figures, repoPath } = project;
+const asset = (u) => `${import.meta.env.BASE_URL}${u}`;
+
+export default function ProjectCard({ project, tags, repoUrl, onOpen }) {
+  const { name, trackName, kind, summary, figures, repoPath } = project;
+  const open = () => onOpen(project);
   return (
-    <article className="card">
-      <div className="top">
-        <h3>{name}</h3>
-        {kind === "flagship" && <span className="badge flagship">★ flagship</span>}
-        {kind === "seed" && <span className="badge seed">seed</span>}
-      </div>
-      <span className="badge track">{trackName}</span>
-
-      {summary && <p className="summary">{summary}</p>}
-
-      {metrics?.length > 0 && (
-        <div className="chips">
-          {metrics.map((m) => (
-            <span className="chip" key={m.k}>
-              {m.k.replace(/_/g, " ")} <b>{m.v}</b>
-            </span>
-          ))}
+    <div
+      className="card"
+      role="button"
+      tabIndex={0}
+      onClick={open}
+      onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && (e.preventDefault(), open())}
+      aria-label={`Open details for ${name}`}
+    >
+      <div className="card-head">
+        <div>
+          <h3 className="card-title">{name}</h3>
+          <div className="card-track">{trackName}</div>
         </div>
-      )}
+        {kind === "flagship" && <span className="tag flag"><IconStar width={12} height={12} /> flagship</span>}
+        {kind === "seed" && <span className="tag seed">seed</span>}
+      </div>
+
+      <div className="tags">
+        {tags.map((t) => <span className="tag" key={t}>{t}</span>)}
+      </div>
+
+      {summary && <p className="card-sum">{summary}</p>}
 
       {figures?.length > 0 && (
-        <div className="thumbs">
-          {figures.map((f, i) => (
-            <img
-              key={f.url}
-              className="thumb"
-              src={asset(f.url)}
-              alt={f.name}
-              loading="lazy"
-              onClick={() => onOpenFigure(figures, i)}
-            />
+        <div className="card-figs">
+          {figures.slice(0, 2).map((f) => (
+            <img key={f.url} className="fig-thumb" src={asset(f.url)} alt={f.name} loading="lazy" />
           ))}
         </div>
       )}
 
-      <div className="links">
-        <a href={`${repoUrl}/tree/main/${repoPath}`} target="_blank" rel="noreferrer">
-          code ↗
-        </a>
-        <a href={`${repoUrl}/blob/main/${repoPath}/README.md`} target="_blank" rel="noreferrer">
-          readme ↗
+      <div className="card-foot">
+        <span className="card-cta">View details <IconArrow width={14} height={14} /></span>
+        <a
+          className="card-link"
+          href={`${repoUrl}/tree/main/${repoPath}`}
+          target="_blank"
+          rel="noreferrer"
+          onClick={(e) => e.stopPropagation()}
+        >
+          code <IconExternal width={13} height={13} />
         </a>
       </div>
-    </article>
+    </div>
   );
 }

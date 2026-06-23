@@ -1,6 +1,7 @@
 import { useEffect } from "react";
+import { IconChevron, IconClose } from "./icons.jsx";
 
-const asset = (url) => `${import.meta.env.BASE_URL}${url}`;
+const asset = (u) => `${import.meta.env.BASE_URL}${u}`;
 
 export default function Lightbox({ figures, index, onClose, onMove }) {
   useEffect(() => {
@@ -18,13 +19,27 @@ export default function Lightbox({ figures, index, onClose, onMove }) {
 
   return (
     <div className="lb" onClick={onClose}>
-      <button className="x" onClick={onClose} aria-label="close">×</button>
+      <button className="icon-btn x" onClick={onClose} aria-label="Close image"><IconClose /></button>
       {figures.length > 1 && (
-        <button className="nav prev" onClick={(e) => { e.stopPropagation(); onMove(-1); }}>‹</button>
+        <button
+          className="icon-btn"
+          style={{ position: "absolute", left: 12 }}
+          onClick={(e) => { e.stopPropagation(); onMove(-1); }}
+          aria-label="Previous"
+        >
+          <IconChevron style={{ transform: "rotate(180deg)" }} />
+        </button>
       )}
       <img src={asset(fig.url)} alt={fig.name} onClick={(e) => e.stopPropagation()} />
       {figures.length > 1 && (
-        <button className="nav next" onClick={(e) => { e.stopPropagation(); onMove(1); }}>›</button>
+        <button
+          className="icon-btn"
+          style={{ position: "absolute", right: 12 }}
+          onClick={(e) => { e.stopPropagation(); onMove(1); }}
+          aria-label="Next"
+        >
+          <IconChevron />
+        </button>
       )}
       <div className="cap">{fig.name} — {index + 1}/{figures.length}</div>
     </div>

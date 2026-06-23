@@ -1,11 +1,37 @@
 import { useMemo, useState } from "react";
 import data from "./data/projects.json";
+import { useInView, useTheme } from "./hooks.js";
+import Nav from "./components/Nav.jsx";
+import Hero from "./components/Hero.jsx";
+import Highlights from "./components/Highlights.jsx";
+import TrackChart from "./components/TrackChart.jsx";
 import ProjectCard from "./components/ProjectCard.jsx";
+import ProjectModal from "./components/ProjectModal.jsx";
 import Lightbox from "./components/Lightbox.jsx";
+import Roadmap from "./components/Roadmap.jsx";
+import { IconSearch, IconShield } from "./components/icons.jsx";
+
+// Framework tags per track (client-side; keeps the data file lean).
+const TRACK_TAGS = {
+  "00-foundations": ["MITRE ATT&CK", "MITRE ATLAS"],
+  "01-detection-engineering": ["MITRE ATT&CK", "detection-as-code"],
+  "02-adversarial-robustness": ["MITRE ATLAS", "evasion"],
+  "03-ml-privacy": ["MITRE ATLAS", "differential privacy"],
+  "04-llm-security": ["OWASP LLM Top 10"],
+  "05-ml-supply-chain": ["MITRE ATLAS", "MLSecOps"],
+};
+const tagsFor = (p) => TRACK_TAGS[p.track] || [];
+
+function Reveal({ children }) {
+  const [ref, inView] = useInView();
+  return <div ref={ref} className={`reveal ${inView ? "in" : ""}`}>{children}</div>;
+}
 
 export default function App() {
+  const [theme, toggleTheme] = useTheme();
   const [track, setTrack] = useState("all");
   const [query, setQuery] = useState("");
+  const [selected, setSelected] = useState(null);
   const [lb, setLb] = useState({ figures: null, index: null });
 
   const maxCount = Math.max(...data.tracks.map((t) => t.projectIds.length));
@@ -23,134 +49,111 @@ export default function App() {
     });
   }, [track, query]);
 
-  const openFigure = (figures, index) => setLb({ figures, index });
   const move = (d) =>
-    setLb((s) => ({
-      ...s,
-      index: (s.index + d + s.figures.length) % s.figures.length,
-    }));
+    setLb((s) => ({ ...s, index: (s.index + d + s.figures.length) % s.figures.length }));
 
   return (
     <>
-      {/* hero */}
-      <header className="hero">
-        <div className="wrap">
-          <h1>
-            ML Security Portfolio — <span className="accent">attack &amp; defend</span>
-          </h1>
-          <p>
-            A data scientist's pivot into ML security: {data.totals.projects} self-contained projects
-            across {data.totals.tracks} tracks — detection engineering, adversarial robustness, model
-            privacy, LLM red-teaming, and ML supply-chain — each reproducible and grounded in MITRE
-            ATLAS / OWASP. Every project runs offline; results below are generated, not mocked-up.
-          </p>
-          <div className="meta">
-            <a href={data.repoUrl} target="_blank" rel="noreferrer">{data.repoUrl.replace("https://", "")} ↗</a>
-            <span>· data generated {data.generatedAt}</span>
-          </div>
-          <div className="stats">
-            <div className="stat"><div className="num">{data.totals.projects}</div><div className="lab">projects</div></div>
-            <div className="stat"><div className="num good">{data.totals.projects}</div><div className="lab">passing tests</div></div>
-            <div className="stat"><div className="num">{data.totals.tracks}</div><div className="lab">tracks</div></div>
-            <div className="stat"><div className="num">{data.totals.figures}</div><div className="lab">result figures</div></div>
-          </div>
-        </div>
-      </header>
+      <Nav theme={theme} onToggleTheme={toggleTheme} repoUrl={data.repoUrl} />
+      <Hero data={data} />
 
       <main className="wrap">
-        {/* highlights */}
-        <section>
-          <h2 className="section-title">Headline results</h2>
-          <p className="section-sub">Real before/after numbers pulled from each project's metrics.json.</p>
-          <div className="highlights">
-            {data.highlights.map((h) => (
-              <div className="hl" key={h.title}>
-                <h3>{h.title}</h3>
-                <div className="ba">
-                  <span className="pill before">{h.before}</span>
-                  <span className="arrow">→</span>
-                  <span className="pill after">{h.after}</span>
-                  <span className="lab">{h.label}</span>
-                </div>
-                <p>{h.blurb}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* per-track counts */}
-        <section>
-          <h2 className="section-title">Coverage by track</h2>
-          <p className="section-sub">Balanced across the field — not just the flashy attacks.</p>
-          <div className="trackbars">
-            {data.tracks.map((t) => (
-              <div className="trackbar" key={t.id}>
-                <span className="name">{t.name}</span>
-                <span className="bar" style={{ width: `${(t.projectIds.length / maxCount) * 100}%` }} />
-                <span>{t.projectIds.length}</span>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* projects */}
-        <section>
-          <h2 className="section-title">All projects</h2>
-          <p className="section-sub">Filter by track or search. Click a chart to enlarge.</p>
-          <div className="controls">
-            <button className={`pill-btn ${track === "all" ? "active" : ""}`} onClick={() => setTrack("all")}>
-              All ({data.projects.length})
-            </button>
-            {data.tracks.map((t) => (
-              <button
-                key={t.id}
-                className={`pill-btn ${track === t.id ? "active" : ""}`}
-                onClick={() => setTrack(t.id)}
-              >
-                {t.name} ({t.projectIds.length})
-              </button>
-            ))}
-            <input
-              className="search"
-              placeholder="search projects…"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-            />
-          </div>
-
-          {visible.length === 0 ? (
-            <p className="empty">No projects match “{query}”.</p>
-          ) : (
-            <div className="grid">
-              {visible.map((p) => (
-                <ProjectCard key={p.id} project={p} repoUrl={data.repoUrl} onOpenFigure={openFigure} />
-              ))}
+        <section className="section" id="results">
+          <Reveal>
+            <div className="section-head">
+              <span className="kicker">// headline results</span>
+              <h2 className="section-title">What the attacks &amp; defenses prove</h2>
+              <p className="section-sub">Real before/after numbers pulled straight from each project's metrics.json.</p>
             </div>
-          )}
+            <Highlights highlights={data.highlights} />
+          </Reveal>
         </section>
 
-        {/* roadmap */}
-        <section>
-          <h2 className="section-title">How to build on this</h2>
-          <p className="section-sub">Each project ships an offline path; here's how to take it further.</p>
-          <div className="roadmap">
-            {data.roadmap.map((r) => (
-              <div className="rm" key={r.title}>
-                <h4>{r.title}</h4>
-                <p>{r.detail}</p>
+        <section className="section" id="coverage">
+          <Reveal>
+            <div className="section-head">
+              <span className="kicker">// breadth</span>
+              <h2 className="section-title">Coverage across the field</h2>
+              <p className="section-sub">Balanced from foundations to flagship capstones — not just the flashy attacks.</p>
+            </div>
+            <TrackChart tracks={data.tracks} max={maxCount} />
+          </Reveal>
+        </section>
+
+        <section className="section" id="projects">
+          <Reveal>
+            <div className="section-head">
+              <span className="kicker">// {data.projects.length} projects</span>
+              <h2 className="section-title">Every project</h2>
+              <p className="section-sub">Filter by track or search. Click any card for full metrics and figures.</p>
+            </div>
+            <div className="controls">
+              <div className="filters">
+                <button className={`chip-btn ${track === "all" ? "active" : ""}`} onClick={() => setTrack("all")}>
+                  all · {data.projects.length}
+                </button>
+                {data.tracks.map((t) => (
+                  <button
+                    key={t.id}
+                    className={`chip-btn ${track === t.id ? "active" : ""}`}
+                    onClick={() => setTrack(t.id)}
+                  >
+                    {t.name} · {t.projectIds.length}
+                  </button>
+                ))}
               </div>
-            ))}
-          </div>
+              <label className="search-wrap">
+                <IconSearch width={15} height={15} />
+                <input
+                  className="search"
+                  placeholder="search projects…"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  aria-label="Search projects"
+                />
+              </label>
+            </div>
+
+            {visible.length === 0 ? (
+              <p className="empty">No projects match “{query}”.</p>
+            ) : (
+              <div className="grid">
+                {visible.map((p) => (
+                  <ProjectCard key={p.id} project={p} tags={tagsFor(p)} repoUrl={data.repoUrl} onOpen={setSelected} />
+                ))}
+              </div>
+            )}
+          </Reveal>
+        </section>
+
+        <section className="section" id="roadmap">
+          <Reveal>
+            <div className="section-head">
+              <span className="kicker">// what's next</span>
+              <h2 className="section-title">How to build on this</h2>
+              <p className="section-sub">Each project ships an offline path; here's how it scales up to real data and models.</p>
+            </div>
+            <Roadmap items={data.roadmap} />
+          </Reveal>
         </section>
       </main>
 
-      <footer>
-        <div className="wrap">
-          Built as a learning + portfolio repo. Dual-use techniques, authorized-use only — see the
-          repo's ETHICS.md. · <a href={data.repoUrl} target="_blank" rel="noreferrer">source ↗</a>
+      <footer className="footer">
+        <div className="wrap row">
+          <span className="warn"><IconShield width={15} height={15} /> Dual-use techniques · authorized-use only (see ETHICS.md)</span>
+          <span>
+            <a href={data.repoUrl} target="_blank" rel="noreferrer">github.com/N-Lampl/Cyber-Projects</a>
+          </span>
         </div>
       </footer>
 
+      <ProjectModal
+        project={selected}
+        tags={selected ? tagsFor(selected) : []}
+        repoUrl={data.repoUrl}
+        onClose={() => setSelected(null)}
+        onOpenFig={(figures, index) => setLb({ figures, index })}
+      />
       <Lightbox
         figures={lb.figures}
         index={lb.index}
