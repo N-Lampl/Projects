@@ -1,7 +1,8 @@
 name: deploy-dashboard
 
 # Builds the React/Vite results dashboard and publishes it to GitHub Pages.
-# One-time setup: repo Settings -> Pages -> Build and deployment -> Source: "GitHub Actions".
+# One-time setup (done): repo Settings -> Pages -> Build and deployment -> Source: "GitHub Actions".
+# Live at https://n-lampl.github.io/Projects/ (Playground section loads first).
 on:
   push:
     branches: [main]
