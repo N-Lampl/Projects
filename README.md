@@ -8,9 +8,14 @@
 **Authorized use only.** Every technique here runs against models, data, and apps I own or am
 licensed to test. See **[ETHICS.md](ETHICS.md)**.
 
-**Interactive results dashboard** (React/Vite) in [`dashboard/`](dashboard/) — headline
-before/after results, every project's metrics + figures, and a build-on-this roadmap. Deploys to
-GitHub Pages (`npm install && npm run dev` to run locally).
+**▶ Live Playground — attack these models in your browser.** The [`dashboard/`](dashboard/)
+(React/Vite) opens with two interactive demos that run the **real trained models entirely
+client-side** (no backend): a prompt-injection detector you can try to sneak past, and a fraud model
+you can watch a fraudster evade — before the adversarially-hardened version shuts the attack down.
+Weights are exported from the Python projects and the scoring math is reproduced in JavaScript to
+~1e-6 parity. Below the Playground: headline before/after results, every project's metrics +
+figures, and a build-on-this roadmap. See **[docs/PLAYGROUND.md](docs/PLAYGROUND.md)** for the story;
+`cd dashboard && npm install && npm run dev` to run locally. Deploys to GitHub Pages.
 
 ---
 

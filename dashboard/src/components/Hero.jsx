@@ -28,7 +28,8 @@ export default function Hero({ data }) {
             ATLAS / OWASP. The results below are generated from real runs, not mocked up.
           </p>
           <div className="hero-cta">
-            <a className="btn btn-primary" href="#results">See the results <IconArrow /></a>
+            <a className="btn btn-primary" href="#playground">Try the live demos <IconArrow /></a>
+            <a className="btn" href="#results">See the results</a>
             <a className="btn" href={data.repoUrl} target="_blank" rel="noreferrer">
               <IconGithub /> Source code
             </a>

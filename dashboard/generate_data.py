@@ -247,7 +247,7 @@ def main() -> None:
     by_id = {p["id"]: p for p in projects}
     data = {
         "generatedAt": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
-        "repoUrl": "https://github.com/N-Lampl/Cyber-Projects",
+        "repoUrl": "https://github.com/N-Lampl/Projects",
         "totals": {"projects": len(projects), "tracks": len(tracks_out), "figures": total_figs},
         "tracks": tracks_out,
         "projects": projects,

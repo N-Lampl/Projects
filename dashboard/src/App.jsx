@@ -9,6 +9,7 @@ import ProjectCard from "./components/ProjectCard.jsx";
 import ProjectModal from "./components/ProjectModal.jsx";
 import Lightbox from "./components/Lightbox.jsx";
 import Roadmap from "./components/Roadmap.jsx";
+import Playground from "./components/Playground.jsx";
 import { IconSearch, IconShield } from "./components/icons.jsx";
 
 // Framework tags per track (client-side; keeps the data file lean).
@@ -59,6 +60,17 @@ export default function App() {
       <Hero data={data} />
 
       <main className="wrap">
+        <section className="section" id="playground">
+          <Reveal>
+            <div className="section-head">
+              <span className="kicker">// try it yourself</span>
+              <h2 className="section-title">Live attack &amp; defense playground</h2>
+              <p className="section-sub">Real trained models running client-side — attack them, then watch the hardened versions hold.</p>
+            </div>
+            <Playground />
+          </Reveal>
+        </section>
+
         <section className="section" id="results">
           <Reveal>
             <div className="section-head">
@@ -143,7 +155,7 @@ export default function App() {
         <div className="wrap row">
           <span className="warn"><IconShield width={15} height={15} /> Dual-use techniques · authorized-use only (see ETHICS.md)</span>
           <span>
-            <a href={data.repoUrl} target="_blank" rel="noreferrer">github.com/N-Lampl/Cyber-Projects</a>
+            <a href={data.repoUrl} target="_blank" rel="noreferrer">github.com/N-Lampl/Projects</a>
           </span>
         </div>
       </footer>

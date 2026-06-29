@@ -1,6 +1,7 @@
 import { IconGithub, IconMoon, IconSun } from "./icons.jsx";
 
 const LINKS = [
+  ["#playground", "Playground"],
   ["#results", "Results"],
   ["#coverage", "Coverage"],
   ["#projects", "Projects"],
