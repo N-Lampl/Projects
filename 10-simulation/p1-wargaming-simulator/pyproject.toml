@@ -1,0 +1,29 @@
+[project]
+name = "dow-sim"
+version = "0.1.0"
+description = "DOW: a hex-grid tactical war-gaming simulator with Monte Carlo win-probability analysis (CPU, offline, no LLM)."
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.24,<2.0",
+    "matplotlib>=3.7",
+]
+
+[project.optional-dependencies]
+dashboard = ["streamlit>=1.30"]
+dev = ["pytest>=8", "ruff>=0.5"]
+
+[project.scripts]
+dow = "dow_sim.cli:main"
+
+[tool.pytest.ini_options]
+markers = [
+    "slow: large Monte Carlo / full reproduce runs; excluded from CI via -m 'not slow'",
+]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

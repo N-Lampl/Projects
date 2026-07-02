@@ -5,7 +5,6 @@ const LINKS = [
   ["#results", "Results"],
   ["#coverage", "Coverage"],
   ["#projects", "Projects"],
-  ["#roadmap", "Roadmap"],
 ];
 
 export default function Nav({ theme, onToggleTheme, repoUrl }) {

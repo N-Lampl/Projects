@@ -30,7 +30,7 @@ for LLMs).
 
 ## Project index
 
-**45 projects across 8 tracks — all built, every one passing its fast test suite.** Each runs
+**51 projects across 10 tracks — all built, every one passing its fast test suite.** Each runs
 **offline & deterministically** out of the box (synthetic data / mock LLM fallbacks); real datasets,
 LLM API keys, or a GPU *enhance* specific projects but are never required to see them work.
 
@@ -49,6 +49,8 @@ Legend: built & tested · flagship = interview pieces
 | **06 financial** | fraud-detection, transaction-anomaly, aml-typologies, credit-risk-scoring, market-manipulation | Financial-crime & risk ML: imbalanced fraud, anomaly detection, AML graphs, calibration | fraud · AML · risk | done |
 | **06 financial** | CAPSTONE-adversarial-fraud | Evade my **own** fraud model under feature-mutability constraints → harden → re-measure | ATLAS AML.T0015 | done |
 | **07 applied-nlp** | p1-car-reviews | HuggingFace sentiment over 36,984 car reviews **by brand & model**, validated vs. 1-5 star ratings; aspects, keywords, topics, summaries | applied NLP · sentiment | done |
+| **08 ml-depth** | causal-inference, bayesian-probabilistic, graph-neural-networks | Causal ATE (IPW / doubly-robust AIPW), a from-scratch Bayesian Gibbs sampler with calibration, a pure-PyTorch GCN — each scored vs known ground truth | ML depth · inference | done |
+| **09 deep-learning** | transformer-interp, rl-rlhf, model-compression | Induction heads + logit lens + activation patching, policy gradients + RLHF-from-preferences, pruning/quantization/distillation Pareto | ML depth · modern DL | done |
 
 The full rationale, 30-week learning roadmap, and scope decisions live in
 [`docs/ROADMAP.md`](docs/ROADMAP.md). The interactive showcase **dashboard** (React/Vite) is the planned
@@ -79,6 +81,8 @@ git-ignored `data/` + `models/`), so once you've read one you can read them all.
 05-ml-supply-chain/
 06-financial-ml/
 07-applied-nlp/        # applied NLP / data science (the ML strength the security half builds on)
+08-ml-depth/           # causal inference, Bayesian modeling, graph neural networks
+09-deep-learning/      # transformer interpretability, RL/RLHF, model compression
 docs/                  # ROADMAP.md, shared ATLAS/ATT&CK navigator layers, top-level plots
 ```
 

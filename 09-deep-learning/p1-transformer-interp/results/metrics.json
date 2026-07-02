@@ -1,0 +1,52 @@
+{
+  "project": "p1-transformer-interp",
+  "summary": "A 2-layer transformer trained from scratch on the induction task reaches val loss 0.002; an induction head emerged at layer 0 head 3 with attention mass 0.77 on the previous-occurrence+1 token. The logit lens shows next-token accuracy rising from 0.02 (embedding) to 1.00 (final layer), and activation patching recovers up to 100% of the clean-vs-corrupt logit gap \u2014 localizing where the induction computation lives.",
+  "data_source": "synthetic induction task (repeated random subsequences)",
+  "seed": 42,
+  "val_loss": 0.0017878954531624913,
+  "final_train_loss": 0.0018073272658511996,
+  "induction_head_score": {
+    "max_score": 0.7692092061042786,
+    "best_layer": 0,
+    "best_head": 3,
+    "per_head": [
+      [
+        0.7277825474739075,
+        0.7230327725410461,
+        0.7291187047958374,
+        0.7692092061042786
+      ],
+      [
+        0.7068957686424255,
+        0.6842273473739624,
+        0.6931992769241333,
+        0.6857575178146362
+      ]
+    ]
+  },
+  "logit_lens_by_layer": {
+    "accuracy": [
+      0.015104166232049465,
+      0.9994791746139526,
+      1.0
+    ],
+    "correct_logit": [
+      0.0038052559830248356,
+      9.251290321350098,
+      12.138176918029785
+    ]
+  },
+  "patching_effect": {
+    "position": 30,
+    "effect_by_layer": [
+      0.00372968427836895,
+      0.7274016737937927,
+      1.0
+    ]
+  },
+  "figures": [
+    "results/figures/attention_induction.png",
+    "results/figures/logit_lens.png",
+    "results/figures/activation_patching.png"
+  ]
+}

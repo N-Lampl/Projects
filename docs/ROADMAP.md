@@ -11,6 +11,22 @@ attack-and-defend flagships, finish the most market-aligned work (LLM security) 
 | **3 — LLM security** | 15–22 | API-first (cheap model), Ollama fallback. Build the vulnerable RAG target BEFORE attacking it. Add agent/tool-abuse + injection→tool-call→exfiltration. Land defend-the-RAG + CI-gated AppSec capstone. | End-to-end LLM AppSec story: threat-model → scan → build target → attack → defend (quantified ASR drop) → CI gate + dashboard + threat report. |
 | **4 — Supply-chain + privacy** | 22–30 | Promote the supply-chain capstone (high MLSecOps hireability). Then privacy as depth; CPU-heavy LiRA/DP-SGD last as overnight batch. | Supply-chain capstone is a headline artifact; privacy rounds out depth. Security+ exam sat. |
 
+## Extension beyond the original 30-week scope — ML depth (tracks 08–09)
+
+The four phases above cover the security half. Tracks **07 applied-nlp**, **08 ml-depth**, and
+**09 deep-learning** are the deliberate *other* half — the ML/DS strength the security work is
+built on top of — added after the core roadmap. They carry the same engineering bar (self-contained
+project, reproducible `make run`, committed figures + `metrics.json`, offline synthetic fallback,
+CPU-only, green CI) but no forced security framing:
+
+- **08 ml-depth** — causal inference (ATE via IPW/doubly-robust AIPW), Bayesian hierarchical
+  modeling (from-scratch Gibbs sampler + calibration), graph neural networks (a pure-PyTorch GCN).
+- **09 deep-learning** — transformer internals & mechanistic interpretability (induction heads,
+  logit lens, activation patching), RL / RLHF (policy gradients + a reward-model-from-preferences
+  pipeline), model compression & efficient inference (pruning, quantization, distillation).
+
+These are not on the security critical path; they round out the portfolio as depth pieces.
+
 ## Final deliverable — showcase dashboard (build LAST)
 
 After the projects exist, build an **interactive portfolio dashboard** as a **React/Vite SPA**,

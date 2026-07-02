@@ -1,0 +1,39 @@
+{
+  "project": "p3-model-compression",
+  "summary": "A 78,858-param teacher hits 96.4% accuracy at 0.30 MB. Magnitude pruning to 80% sparsity keeps 91.5% accuracy; dynamic int8 quantization shrinks the model to 0.08 MB (3.7x smaller); and a 1,642-param distilled student (48x fewer params) reaches 96.7% at 0.008 MB and 0.04 ms/forward.",
+  "data_source": "synthetic blobs (d=40, k=10)",
+  "seed": 42,
+  "teacher_params": 78858,
+  "student_params": 1642,
+  "prune_fraction": 0.8,
+  "variants": {
+    "baseline": {
+      "accuracy": 0.9639999866485596,
+      "size_mb": 0.30304718017578125,
+      "latency_ms": 0.15201699716271833,
+      "sparsity": 0.0
+    },
+    "pruned": {
+      "accuracy": 0.9146666526794434,
+      "size_mb": 0.30310821533203125,
+      "latency_ms": 0.14503499551210552,
+      "sparsity": 0.8000025531045751
+    },
+    "quantized": {
+      "accuracy": 0.9646666646003723,
+      "size_mb": 0.08085823059082031,
+      "latency_ms": 1.04055800329661,
+      "sparsity": 0.0
+    },
+    "distilled": {
+      "accuracy": 0.9673333168029785,
+      "size_mb": 0.0080718994140625,
+      "latency_ms": 0.04333499964559451,
+      "sparsity": 0.0
+    }
+  },
+  "figures": [
+    "results/figures/pareto_accuracy_vs_size.png",
+    "results/figures/latency_vs_variant.png"
+  ]
+}

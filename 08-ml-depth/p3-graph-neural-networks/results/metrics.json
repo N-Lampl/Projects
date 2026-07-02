@@ -1,0 +1,15 @@
+{
+  "project": "p3-graph-neural-networks",
+  "summary": "On a synthetic SBM (300 nodes, 1770 edges, 3 planted communities) where node features alone are only weakly informative, a 2-layer GCN reaches 0.95 test accuracy versus 0.72 for a graph-blind MLP of identical shape \u2014 a 23-point lift from message passing over the graph structure.",
+  "data_source": "synthetic SBM (N=300, C=3, p_in=0.08, p_out=0.02, snr=0.45)",
+  "seed": 42,
+  "gcn_test_acc": 0.9538461565971375,
+  "mlp_test_acc": 0.7230769395828247,
+  "n_nodes": 300,
+  "n_edges": 1770,
+  "n_classes": 3,
+  "figures": [
+    "results/figures/accuracy_gcn_vs_mlp.png",
+    "results/figures/embedding_tsne.png"
+  ]
+}

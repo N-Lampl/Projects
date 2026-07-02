@@ -23,7 +23,7 @@ jobs:
         run: uv python install 3.10
 
       - name: Install dev + light deps
-        run: uv pip install --system ruff pytest numpy torch --extra-index-url https://download.pytorch.org/whl/cpu
+        run: uv pip install --system ruff pytest numpy pandas scikit-learn scipy matplotlib torch --extra-index-url https://download.pytorch.org/whl/cpu
 
       - name: Lint
         run: ruff check .

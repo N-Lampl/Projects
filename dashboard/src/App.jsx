@@ -8,7 +8,6 @@ import TrackChart from "./components/TrackChart.jsx";
 import ProjectCard from "./components/ProjectCard.jsx";
 import ProjectModal from "./components/ProjectModal.jsx";
 import Lightbox from "./components/Lightbox.jsx";
-import Roadmap from "./components/Roadmap.jsx";
 import Playground from "./components/Playground.jsx";
 import { IconSearch, IconShield } from "./components/icons.jsx";
 
@@ -136,17 +135,6 @@ export default function App() {
                 ))}
               </div>
             )}
-          </Reveal>
-        </section>
-
-        <section className="section" id="roadmap">
-          <Reveal>
-            <div className="section-head">
-              <span className="kicker">// what's next</span>
-              <h2 className="section-title">How to build on this</h2>
-              <p className="section-sub">Each project ships an offline path; here's how it scales up to real data and models.</p>
-            </div>
-            <Roadmap items={data.roadmap} />
           </Reveal>
         </section>
       </main>

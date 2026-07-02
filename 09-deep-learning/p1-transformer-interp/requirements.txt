@@ -1,0 +1,9 @@
+--extra-index-url https://download.pytorch.org/whl/cpu
+numpy==1.26.4
+matplotlib==3.9.0
+torch==2.2.2
+# dev:
+# pytest==8.2.0
+# ruff==0.5.6
+# optional HF cross-check for the @slow test (not needed for the default run):
+# transformers==4.44.2
