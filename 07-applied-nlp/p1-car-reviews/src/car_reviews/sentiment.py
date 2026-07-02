@@ -21,6 +21,8 @@ from collections.abc import Sequence
 from dataclasses import dataclass
 from typing import Protocol
 
+import numpy as np
+
 # --- model registry ----------------------------------------------------------
 
 
@@ -90,6 +92,36 @@ _CONVERTERS = {
     "binary": _convert_binary,
     "cardiff3": _convert_cardiff3,
 }
+
+# Canonical class order per model kind (columns of predict_proba's matrix).
+_CLASS_LABELS: dict[str, list] = {
+    "star5": [1, 2, 3, 4, 5],
+    "binary": ["negative", "positive"],
+    "cardiff3": ["negative", "neutral", "positive"],
+}
+
+
+def _proba_vector(scores: list[dict], kind: str) -> np.ndarray:
+    """One input's class scores -> ordered probability vector (see _CLASS_LABELS)."""
+    m = _as_map(scores)
+    if kind == "star5":
+        v = np.zeros(5)
+        for label, p in m.items():
+            digit = re.match(r"(\d)", label)
+            if digit:
+                v[int(digit.group(1)) - 1] = p
+        return v
+    if kind == "binary":
+        return np.array(
+            [m.get("negative", m.get("label_0", 0.0)), m.get("positive", m.get("label_1", 0.0))]
+        )
+    return np.array(
+        [
+            m.get("negative", m.get("label_0", 0.0)),
+            m.get("neutral", m.get("label_1", 0.0)),
+            m.get("positive", m.get("label_2", 0.0)),
+        ]
+    )
 
 
 # --- backends ----------------------------------------------------------------
@@ -236,14 +268,14 @@ class HFBackend:
             device=-1,  # CPU
         )
 
-    def predict(self, texts: Sequence[str]) -> list[Prediction]:
+    def _run_raw(self, texts: Sequence[str]) -> list:
+        """Chunked, length-sorted inference; raw per-input label/score lists in order."""
         if self._pipe is None:
             self._build()
         prepped = [str(t)[: self.char_cap] for t in texts]
         n = len(prepped)
-        # Length-sorted batching minimises pad waste; re-map to original order.
-        order = sorted(range(n), key=lambda i: len(prepped[i]))
-        results: list[Prediction | None] = [None] * n
+        order = sorted(range(n), key=lambda i: len(prepped[i]))  # minimise pad waste
+        raw_out: list = [None] * n
         done = 0
         for start in range(0, n, self.chunk):
             idx = order[start : start + self.chunk]
@@ -252,11 +284,23 @@ class HFBackend:
                 batch, batch_size=self.batch_size, truncation=True, max_length=self.max_length
             )
             for local, gi in enumerate(idx):
-                results[gi] = self._convert(raw[local])
+                raw_out[gi] = raw[local]
             done += len(idx)
             if self.verbose and n > self.chunk:
                 print(f"[sentiment] {done}/{n} reviews scored", flush=True)
-        return [r for r in results if r is not None]
+        return raw_out
+
+    def predict(self, texts: Sequence[str]) -> list[Prediction]:
+        return [self._convert(r) for r in self._run_raw(texts)]
+
+    def predict_proba(self, texts: Sequence[str]) -> tuple[np.ndarray, list]:
+        """Ordered class-probability matrix (n x k) + class labels (see _CLASS_LABELS)."""
+        raw_out = self._run_raw(texts)
+        labels = _CLASS_LABELS[self.spec.kind]
+        mat = np.zeros((len(raw_out), len(labels)))
+        for i, scores in enumerate(raw_out):
+            mat[i] = _proba_vector(scores, self.spec.kind)
+        return mat, labels
 
 
 def get_sentiment_backend(

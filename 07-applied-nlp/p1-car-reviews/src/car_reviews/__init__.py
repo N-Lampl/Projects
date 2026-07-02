@@ -26,6 +26,14 @@ from .aggregate import (
 from .aspects import ASPECT_LEXICON, aspect_sentiment, split_sentences
 from .data import HF_DATASET, load_reviews
 from .evaluate import validate_against_rating
+from .finetune import finetune_distilbert, load_finetuned
+from .improve import (
+    Calibrator,
+    build_text,
+    make_splits,
+    predictions_from_star_probs,
+    stratified_sample,
+)
 from .keywords import tfidf_distinctive_terms
 from .parsing import (
     CANONICAL_MAKES,
@@ -75,4 +83,11 @@ __all__ = [
     "fit_topics",
     "summarize_top_models",
     "extractive_summary",
+    "make_splits",
+    "stratified_sample",
+    "build_text",
+    "Calibrator",
+    "predictions_from_star_probs",
+    "finetune_distilbert",
+    "load_finetuned",
 ]

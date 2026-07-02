@@ -121,6 +121,39 @@ def plot_aspect_heatmap(by_brand: pd.DataFrame, top_brands: list[str], out: Path
     return out
 
 
+def plot_improvement(results: dict, out: Path) -> Path:
+    """Grouped bars comparing baseline vs. calibrated vs. fine-tuned on the test set."""
+    metrics = [
+        ("exact_accuracy", "exact acc"),
+        ("within_1_accuracy", "±1 acc"),
+        ("spearman", "Spearman"),
+        ("mae", "MAE (lower=better)"),
+    ]
+    stages = list(results)
+    stage_color = {"baseline": RED, "calibrated": ORANGE, "fine-tuned": GREEN, "finetuned": GREEN}
+    x = np.arange(len(metrics))
+    width = 0.8 / max(len(stages), 1)
+    fig, ax = plt.subplots(figsize=(10, 4.5))
+    for i, stage in enumerate(stages):
+        vals = [results[stage].get(k) or 0.0 for k, _ in metrics]
+        bars = ax.bar(x + i * width, vals, width, label=stage, color=stage_color.get(stage, BLUE))
+        for b, v in zip(bars, vals, strict=False):
+            ax.annotate(
+                f"{v:.2f}", (b.get_x() + b.get_width() / 2, v), ha="center", va="bottom", fontsize=8
+            )
+    ax.set_xticks(x + width * (len(stages) - 1) / 2, labels=[lbl for _, lbl in metrics])
+    ax.set_ylabel("score")
+    ax.set_title(
+        "Making the model better: baseline → calibrated → fine-tuned (held-out test)", pad=10
+    )
+    ax.legend(fontsize=9)
+    ax.grid(True, axis="y", alpha=0.3)
+    fig.tight_layout()
+    fig.savefig(out, dpi=120)
+    plt.close(fig)
+    return out
+
+
 def plot_topics_prevalence(topics: list[dict], out: Path) -> Path:
     labels = [t["label"] for t in topics]
     vals = [t["prevalence"] for t in topics]

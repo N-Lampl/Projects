@@ -1,0 +1,163 @@
+{
+  "project": "p1-car-reviews",
+  "task": "model improvement \u2014 baseline vs. calibrated vs. fine-tuned",
+  "test_n": 5000,
+  "seed": 42,
+  "results": {
+    "baseline": {
+      "scale": "1-5",
+      "exact_accuracy": 0.5002,
+      "within_1_accuracy": 0.87,
+      "mae": 0.7017,
+      "spearman": 0.6347,
+      "confusion": [
+        [
+          58,
+          38,
+          3,
+          2,
+          0
+        ],
+        [
+          91,
+          95,
+          15,
+          2,
+          2
+        ],
+        [
+          96,
+          204,
+          75,
+          13,
+          3
+        ],
+        [
+          50,
+          230,
+          284,
+          497,
+          319
+        ],
+        [
+          3,
+          66,
+          193,
+          885,
+          1776
+        ]
+      ],
+      "confusion_labels": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    "calibrated": {
+      "scale": "1-5",
+      "exact_accuracy": 0.513,
+      "within_1_accuracy": 0.9316,
+      "mae": 0.6487,
+      "spearman": 0.6317,
+      "confusion": [
+        [
+          0,
+          86,
+          13,
+          2,
+          0
+        ],
+        [
+          0,
+          144,
+          55,
+          4,
+          2
+        ],
+        [
+          0,
+          205,
+          163,
+          22,
+          1
+        ],
+        [
+          0,
+          141,
+          305,
+          672,
+          262
+        ],
+        [
+          0,
+          26,
+          153,
+          1158,
+          1586
+        ]
+      ],
+      "confusion_labels": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    "fine-tuned": {
+      "scale": "1-5",
+      "exact_accuracy": 0.6812,
+      "within_1_accuracy": 0.9728,
+      "mae": 0.416,
+      "spearman": 0.6656,
+      "confusion": [
+        [
+          0,
+          45,
+          46,
+          9,
+          1
+        ],
+        [
+          0,
+          36,
+          136,
+          28,
+          5
+        ],
+        [
+          0,
+          27,
+          237,
+          111,
+          16
+        ],
+        [
+          0,
+          12,
+          163,
+          602,
+          603
+        ],
+        [
+          0,
+          0,
+          19,
+          373,
+          2531
+        ]
+      ],
+      "confusion_labels": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    }
+  },
+  "figure": "results/figures/baseline_vs_improved.png",
+  "summary": "baseline: exact 0.50, +/-1 0.87, MAE 0.70, Spearman 0.6347 | calibrated: exact 0.51, +/-1 0.93, MAE 0.65, Spearman 0.6317 | fine-tuned: exact 0.68, +/-1 0.97, MAE 0.42, Spearman 0.6656"
+}

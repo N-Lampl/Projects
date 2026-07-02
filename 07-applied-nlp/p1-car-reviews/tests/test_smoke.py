@@ -11,6 +11,7 @@ import pytest
 
 from car_reviews import (
     ASPECT_LEXICON,
+    Calibrator,
     StubBackend,
     add_parsed_columns,
     aspect_sentiment,
@@ -19,7 +20,9 @@ from car_reviews import (
     fit_topics,
     make_coverage,
     make_reviews,
+    make_splits,
     parse_vehicle_title,
+    predictions_from_star_probs,
     set_seed,
     tfidf_distinctive_terms,
     validate_against_rating,
@@ -123,6 +126,57 @@ def test_keywords_and_topics_shapes():
     assert topics["n_topics"] >= 2
     assert len(topics["topics"]) == topics["n_topics"]
     assert all("label" in t and "top_terms" in t for t in topics["topics"])
+
+
+def test_make_splits_disjoint_and_deterministic():
+    df = add_parsed_columns(make_reviews(n=600, seed=5))
+    tr, val, te = make_splits(df, test_size=100, val_size=60, seed=5)
+    assert len(tr) + len(val) + len(te) == len(df)
+    assert len(te) == 100 and len(val) == 60
+    _tr2, _v2, te2 = make_splits(df, test_size=100, val_size=60, seed=5)
+    assert te.reset_index(drop=True).equals(te2.reset_index(drop=True))  # deterministic
+
+
+def test_calibrator_fixes_systematic_bias():
+    # a biased "model": probability mass centered one star BELOW the truth.
+    rng = np.random.default_rng(0)
+    n = 2400
+    y = rng.integers(1, 6, size=n)
+    probs = np.zeros((n, 5))
+    for i, yi in enumerate(y):
+        center = max(1, yi - 1)
+        w = np.exp(-np.abs(np.arange(1, 6) - center))
+        probs[i] = w / w.sum()
+    tr, te = slice(0, 1200), slice(1200, n)
+    base = validate_against_rating(predictions_from_star_probs(probs[te]), y[te], "1-5")
+    cal = Calibrator(seed=0).fit(probs[tr], y[tr])
+    calib = validate_against_rating(cal.predict(probs[te]), y[te], "1-5")
+    assert calib["mae"] < base["mae"]  # calibration removes the systematic shift
+    assert calib["exact_accuracy"] >= base["exact_accuracy"]
+
+
+@pytest.mark.slow
+def test_finetune_smoke(tmp_path):
+    """Fine-tune DistilBERT 1 epoch on a tiny sample; it must save, load, and score."""
+    pytest.importorskip("transformers")
+    from car_reviews import finetune_distilbert, load_finetuned
+
+    df = add_parsed_columns(make_reviews(n=64, seed=1))
+    out = finetune_distilbert(
+        df.iloc[:52],
+        val_df=None,
+        out_dir=tmp_path / "ft",
+        epochs=1,
+        max_length=64,
+        batch_size=8,
+        seed=1,
+        verbose=False,
+    )
+    ft = load_finetuned(out, max_length=64, batch_size=8, verbose=False)
+    probs, labels = ft.predict_proba(df["Review"].tolist()[:8])
+    assert probs.shape == (8, 5)
+    assert labels == [1, 2, 3, 4, 5]
+    assert np.allclose(probs.sum(axis=1), 1.0, atol=1e-3)
 
 
 @pytest.mark.slow

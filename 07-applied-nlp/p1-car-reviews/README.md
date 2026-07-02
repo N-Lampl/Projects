@@ -42,6 +42,8 @@ synthetic review generator, so tests and CI run with zero downloads.
 ```bash
 make run            # fast --sample 3000 (downloads nlptown + dataset on first use)
 make run-full       # the committed artifact: ALL 36,715 reviews (~30-40 min, CPU)
+make finetune       # fine-tune DistilBERT on the star labels (~2 h CPU) -> models/ (see below)
+make improve        # baseline vs. calibrated vs. fine-tuned on the held-out test set
 make test           # fast offline smoke tests (stub backend, -m 'not slow')
 make run ARGS='--model sst2 --summaries abstractive'   # swap model / summarizer
 ```
@@ -59,11 +61,13 @@ Outputs land in [results/](results/):
 
 On all 36,715 reviews, nlptown's predicted star matches the actual `Rating` **within ±1
 for 87% of reviews** (exact 51%, MAE 0.69, Spearman ρ = 0.64) — the sentiment model
-tracks how owners actually scored their cars. Exact-match is a coin-flip *because* the
-hard call is "is this a 4 or a 5?", and the 5×5 confusion shows exactly that: genuine
-3-star reviews are most often read as 4-star and true 4s bleed into 5s — the known
-positive-skew of consumer reviews. That's why **±1 accuracy and ρ are the honest
-headline**, not exact match.
+tracks how owners actually scored their cars. Exact-match is only a coin-flip because the
+dataset is overwhelmingly positive — **86% of reviews are 4-5 stars** — while this
+general-domain model is *more conservative* than car owners: the 5×5 confusion shows it
+**under-rates**, pushing genuine 3-star reviews down to 1-2 and spreading true 4s and 5s
+rather than matching them. The *ordering* is already decent (that's the ρ = 0.64); the
+disagreement is a systematic **calibration gap** — exactly what the improvement work below
+closes. That's why **±1 accuracy and ρ are the honest headline**, not exact match.
 
 Across the 3 brands, **BMW edges the top (0.73 mean sentiment), just ahead of Toyota
 (0.72), with Nissan a step behind (0.67)** — but the aspect breakdown is the more
@@ -77,28 +81,75 @@ the BMW 3 Series, *truck*/*trd* for the Tacoma, *transmission* for the Altima �
 modeling surfaces what reviewers actually dwell on (mileage/MPG, long-term miles,
 fun-to-drive).
 
+## Making it better: calibrate, then fine-tune
+
+The baseline's weak spot is **calibration, not capability** — ρ = 0.64 says the ordering is
+already there, the model is just miscalibrated to this very-positive domain. So the
+improvement goes in two measured steps, each scored on the **same held-out 5,000-review test
+set** (seeded, never trained on):
+
+**1 · Calibrate (seconds, CPU).** Fit a multinomial-logistic model that maps nlptown's five
+class-probabilities to the actual `Rating` on a train split, then apply it to the test set —
+i.e. stack a light classifier on the *frozen* model to undo its domain bias
+([`improve.py`](src/car_reviews/improve.py)):
+
+| | exact | ±1 acc | MAE | Spearman |
+|---|---|---|---|---|
+| baseline (nlptown) | 0.50 | 0.87 | 0.70 | 0.635 |
+| **+ calibration** | 0.51 | **0.93** | **0.65** | 0.632 |
+
+Calibration lifts **±1 accuracy by 6 points and cuts MAE** — it re-centres the systematic
+under-rating for essentially zero compute. But **Spearman doesn't move**: recalibrating
+re-weights the model's *existing* signal, it can't manufacture new ranking power. For that
+you need better representations.
+
+**2 · Fine-tune DistilBERT (~2 h, CPU).** Fine-tune `distilbert-base-uncased` as a 5-class
+head on the star labels (10,000 train reviews, 2 epochs) so the model learns car-review
+language end-to-end ([`finetune.py`](src/car_reviews/finetune.py)). Same held-out test set:
+
+| | exact | ±1 acc | MAE | Spearman |
+|---|---|---|---|---|
+| baseline (nlptown) | 0.50 | 0.87 | 0.70 | 0.635 |
+| + calibration | 0.51 | 0.93 | 0.65 | 0.632 |
+| **fine-tuned** | **0.68** | **0.97** | **0.42** | **0.666** |
+
+The fine-tune moves **everything, including Spearman**: exact accuracy jumps from 51% to
+**68%**, ±1 accuracy to **97%**, MAE nearly halves (0.70 → **0.42**), and ρ rises to
+**0.67**. Unlike calibration it improves the *ranking* too — because it learned car-review
+representations end-to-end rather than re-weighting a general model's guesses. That's the
+payoff of ~2 h of CPU fine-tuning on 10k in-domain labels: a model that agrees with owners
+far more often **and** orders them better.
+
+`results/figures/baseline_vs_improved.png` puts all three side by side and
+`results/improvement.json` has the full numbers. Reproduce with `make finetune && make improve`
+(the calibrated column alone needs no training). Fine-tuned weights land in `models/`
+(git-ignored); only the comparison figure + JSON are committed.
+
 ## Interview story (3 sentences)
 
-> I ran a pretrained HuggingFace sentiment model over 36,715 real car reviews entirely on
-> CPU, broke the sentiment down by brand and by 116 specific models, and — crucially —
-> validated the predictions against the dataset's own 1-5 star rating rather than trusting
-> them (±1 accuracy ~87%, Spearman ~0.64). I handled the parts that bite in
-> practice: parsing messy `Vehicle_Title` strings into make/model, shrinking small-sample
-> rankings toward the global mean so a handful of reviews can't top the chart, and keeping
-> the whole thing reproducible with an offline stub backend for CI. It shows I can take an
-> NLP model from the Hub to a validated, honest, end-to-end analysis — not just call a
-> pipeline and eyeball the output.
+> I ran a pretrained HuggingFace sentiment model over 36,715 real car reviews on CPU, broke
+> sentiment down by brand and by 116 specific models, and validated every prediction against
+> the dataset's own 1-5 star rating instead of trusting it. Reading the confusion matrix I saw
+> the model wasn't weak, it was **miscalibrated** to a very-positive domain — ranking was fine
+> (ρ = 0.64) but it systematically under-rated — so I improved it in two measured steps: a
+> zero-compute logistic **calibration** that lifted ±1 accuracy from 87% to 93%, then a
+> **DistilBERT fine-tune** on the star labels that pushed exact accuracy from 51% to 68% and
+> halved MAE while improving the ranking too. It shows I can diagnose *why* a
+> model underperforms and improve it deliberately, keep the whole thing reproducible and
+> honest (seeded held-out test, offline stub backend for CI) — not just call a pipeline and
+> eyeball the output.
 
 ## Layout
 
 ```
 src/car_reviews/  utils · data (HF loader + offline fallback) · synthetic · parsing
-                  sentiment (stub/HF backends) · aggregate (shrinkage) · aspects
+                  sentiment (stub/HF backends, predict_proba) · aggregate (shrinkage) · aspects
                   keywords (TF-IDF) · topics (NMF) · summarize · evaluate · plots
-scripts/          run_analysis.py  (load -> parse -> score -> validate -> figures + metrics.json)
-tests/            test_smoke.py  (offline stub + synthetic; one @slow real-model test)
-results/          figures/*.png + metrics.json  (committed)
-data/ models/     git-ignored (HF dataset + weights downloaded by code)
+                  improve (splits + Calibrator) · finetune (DistilBERT)
+scripts/          run_analysis.py (analysis) · improve_model.py (compare) · train_finetune.py
+tests/            test_smoke.py  (offline stub + synthetic; @slow real-model + fine-tune tests)
+results/          figures/*.png + metrics.json + improvement.json  (committed)
+data/ models/     git-ignored (HF dataset + baseline & fine-tuned weights downloaded/trained by code)
 ```
 
 ## References
