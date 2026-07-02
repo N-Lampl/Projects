@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-06-29 22:42 UTC",
+  "generatedAt": "2026-07-02 02:55 UTC",
   "repoUrl": "https://github.com/N-Lampl/Projects",
   "totals": {
-    "projects": 44,
-    "tracks": 7,
-    "figures": 90
+    "projects": 52,
+    "tracks": 11,
+    "figures": 115
   },
   "tracks": [
     {
@@ -98,6 +98,42 @@
         "06-financial-ml__p3-aml-typologies",
         "06-financial-ml__p4-credit-risk-scoring",
         "06-financial-ml__p5-market-manipulation"
+      ]
+    },
+    {
+      "id": "07-applied-nlp",
+      "name": "Applied NLP",
+      "blurb": "The ML/data-science strength the security half builds on: HuggingFace sentiment over 36k car reviews, validated vs. star ratings.",
+      "projectIds": [
+        "07-applied-nlp__p1-car-reviews"
+      ]
+    },
+    {
+      "id": "08-ml-depth",
+      "name": "ML Depth",
+      "blurb": "Classical-but-deep ML scored vs. known ground truth: causal inference (doubly-robust ATE), Bayesian hierarchical modeling, graph neural networks.",
+      "projectIds": [
+        "08-ml-depth__p1-causal-inference",
+        "08-ml-depth__p2-bayesian-probabilistic",
+        "08-ml-depth__p3-graph-neural-networks"
+      ]
+    },
+    {
+      "id": "09-deep-learning",
+      "name": "Deep Learning",
+      "blurb": "Modern DL depth: transformer mechanistic interpretability, reinforcement learning / RLHF, and model compression & efficient inference.",
+      "projectIds": [
+        "09-deep-learning__p1-transformer-interp",
+        "09-deep-learning__p2-rl-rlhf",
+        "09-deep-learning__p3-model-compression"
+      ]
+    },
+    {
+      "id": "10-simulation",
+      "name": "Simulation",
+      "blurb": "Agent-based simulation: a tactical war-gaming engine running thousands of battles to stress-test strategies and quantify outcomes.",
+      "projectIds": [
+        "10-simulation__p1-wargaming-simulator"
       ]
     }
   ],
@@ -4681,6 +4717,1638 @@
         ]
       },
       "repoPath": "06-financial-ml/p5-market-manipulation"
+    },
+    {
+      "id": "07-applied-nlp__p1-car-reviews",
+      "track": "07-applied-nlp",
+      "trackName": "Applied NLP",
+      "slug": "p1-car-reviews",
+      "name": "Car reviews by brand & model \u2014 HuggingFace sentiment on CPU",
+      "shortName": "p1-car-reviews",
+      "summary": "nlptown/bert-base-multilingual-uncased-sentiment on 36,715 reviews (full dataset): predicted stars match the Rating within +/-1 for 87% of reviews (exact 51%, MAE 0.69, Spearman 0.64). Top brand = BMW (0.73, n=7500), bottom = Nissan (0.67, n=11405).",
+      "kind": "project",
+      "metrics": [
+        {
+          "k": "data_source",
+          "v": "huggingface: florentgbelidji/car-reviews"
+        },
+        {
+          "k": "backend",
+          "v": "hf"
+        },
+        {
+          "k": "full",
+          "v": "yes"
+        },
+        {
+          "k": "n_reviews",
+          "v": "36715"
+        },
+        {
+          "k": "n_reviews_total",
+          "v": "36715"
+        },
+        {
+          "k": "n_brands",
+          "v": "3"
+        }
+      ],
+      "figures": [
+        {
+          "name": "aspect sentiment heatmap",
+          "url": "figures/07-applied-nlp__p1-car-reviews/aspect_sentiment_heatmap.png"
+        },
+        {
+          "name": "baseline vs improved",
+          "url": "figures/07-applied-nlp__p1-car-reviews/baseline_vs_improved.png"
+        },
+        {
+          "name": "brand sentiment ranking",
+          "url": "figures/07-applied-nlp__p1-car-reviews/brand_sentiment_ranking.png"
+        },
+        {
+          "name": "model sentiment ranking",
+          "url": "figures/07-applied-nlp__p1-car-reviews/model_sentiment_ranking.png"
+        },
+        {
+          "name": "sentiment vs rating confusion",
+          "url": "figures/07-applied-nlp__p1-car-reviews/sentiment_vs_rating_confusion.png"
+        },
+        {
+          "name": "topics prevalence",
+          "url": "figures/07-applied-nlp__p1-car-reviews/topics_prevalence.png"
+        }
+      ],
+      "raw": {
+        "project": "p1-car-reviews",
+        "summary": "nlptown/bert-base-multilingual-uncased-sentiment on 36,715 reviews (full dataset): predicted stars match the Rating within +/-1 for 87% of reviews (exact 51%, MAE 0.69, Spearman 0.64). Top brand = BMW (0.73, n=7500), bottom = Nissan (0.67, n=11405).",
+        "data_source": "huggingface: florentgbelidji/car-reviews",
+        "backend": "hf",
+        "model_id": "nlptown/bert-base-multilingual-uncased-sentiment",
+        "seed": 42,
+        "full": true,
+        "n_reviews": 36715,
+        "n_reviews_total": 36715,
+        "n_brands": 3,
+        "n_models": 116,
+        "n_models_ranked": 74,
+        "min_reviews_per_model": 30,
+        "per_model_cap": 200,
+        "parse_make_coverage": 1.0,
+        "parse_unmatched_make_examples": [],
+        "sentiment_vs_rating": {
+          "scale": "1-5",
+          "exact_accuracy": 0.508,
+          "within_1_accuracy": 0.8748,
+          "mae": 0.6915,
+          "spearman": 0.6401,
+          "confusion": [
+            [
+              467,
+              228,
+              29,
+              9,
+              7
+            ],
+            [
+              708,
+              680,
+              102,
+              12,
+              7
+            ],
+            [
+              660,
+              1489,
+              538,
+              161,
+              20
+            ],
+            [
+              330,
+              1674,
+              2082,
+              3745,
+              2302
+            ],
+            [
+              49,
+              464,
+              1337,
+              6393,
+              13222
+            ]
+          ],
+          "confusion_labels": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        },
+        "top_brands": [
+          {
+            "make": "BMW",
+            "mean_sentiment": 0.731,
+            "n": 7500
+          },
+          {
+            "make": "Toyota",
+            "mean_sentiment": 0.7225,
+            "n": 17810
+          },
+          {
+            "make": "Nissan",
+            "mean_sentiment": 0.6738,
+            "n": 11405
+          }
+        ],
+        "bottom_brands": [
+          {
+            "make": "Nissan",
+            "mean_sentiment": 0.6738,
+            "n": 11405
+          },
+          {
+            "make": "Toyota",
+            "mean_sentiment": 0.7225,
+            "n": 17810
+          },
+          {
+            "make": "BMW",
+            "mean_sentiment": 0.731,
+            "n": 7500
+          }
+        ],
+        "top_models": [
+          {
+            "model_key": "BMW M5",
+            "mean_sentiment": 0.8679,
+            "n": 186
+          },
+          {
+            "model_key": "BMW M",
+            "mean_sentiment": 0.8524,
+            "n": 101
+          },
+          {
+            "model_key": "Toyota Supra",
+            "mean_sentiment": 0.8837,
+            "n": 34
+          },
+          {
+            "model_key": "Toyota T100",
+            "mean_sentiment": 0.8676,
+            "n": 45
+          },
+          {
+            "model_key": "Toyota ECHO",
+            "mean_sentiment": 0.8319,
+            "n": 200
+          },
+          {
+            "model_key": "BMW 6 Series",
+            "mean_sentiment": 0.8228,
+            "n": 200
+          },
+          {
+            "model_key": "Toyota Land Cruiser",
+            "mean_sentiment": 0.8206,
+            "n": 200
+          },
+          {
+            "model_key": "Toyota Celica",
+            "mean_sentiment": 0.8192,
+            "n": 200
+          },
+          {
+            "model_key": "BMW Z4",
+            "mean_sentiment": 0.8164,
+            "n": 200
+          },
+          {
+            "model_key": "Toyota MR2 Spyder",
+            "mean_sentiment": 0.8138,
+            "n": 200
+          },
+          {
+            "model_key": "BMW M3",
+            "mean_sentiment": 0.8137,
+            "n": 200
+          },
+          {
+            "model_key": "Toyota Camry Solara",
+            "mean_sentiment": 0.8114,
+            "n": 200
+          },
+          {
+            "model_key": "Nissan 350Z",
+            "mean_sentiment": 0.8071,
+            "n": 200
+          },
+          {
+            "model_key": "Toyota 4Runner",
+            "mean_sentiment": 0.8028,
+            "n": 200
+          },
+          {
+            "model_key": "Toyota Tercel",
+            "mean_sentiment": 0.829,
+            "n": 38
+          }
+        ],
+        "bottom_models": [
+          {
+            "model_key": "Nissan Rogue",
+            "mean_sentiment": 0.5734,
+            "n": 200
+          },
+          {
+            "model_key": "Nissan Quest",
+            "mean_sentiment": 0.6165,
+            "n": 200
+          },
+          {
+            "model_key": "Nissan Versa Note",
+            "mean_sentiment": 0.6143,
+            "n": 90
+          },
+          {
+            "model_key": "BMW X5",
+            "mean_sentiment": 0.6264,
+            "n": 200
+          },
+          {
+            "model_key": "Nissan Altima",
+            "mean_sentiment": 0.6282,
+            "n": 200
+          },
+          {
+            "model_key": "Nissan Sentra",
+            "mean_sentiment": 0.6282,
+            "n": 200
+          },
+          {
+            "model_key": "Toyota Venza",
+            "mean_sentiment": 0.6375,
+            "n": 200
+          },
+          {
+            "model_key": "Toyota RAV4",
+            "mean_sentiment": 0.6393,
+            "n": 200
+          },
+          {
+            "model_key": "Nissan Versa",
+            "mean_sentiment": 0.6418,
+            "n": 200
+          },
+          {
+            "model_key": "Nissan Juke",
+            "mean_sentiment": 0.6494,
+            "n": 158
+          },
+          {
+            "model_key": "Nissan Titan XD",
+            "mean_sentiment": 0.6335,
+            "n": 54
+          },
+          {
+            "model_key": "Toyota Camry",
+            "mean_sentiment": 0.6573,
+            "n": 200
+          },
+          {
+            "model_key": "Toyota Sienna",
+            "mean_sentiment": 0.6619,
+            "n": 200
+          },
+          {
+            "model_key": "Nissan Pathfinder",
+            "mean_sentiment": 0.6682,
+            "n": 200
+          },
+          {
+            "model_key": "BMW 7 Series",
+            "mean_sentiment": 0.6801,
+            "n": 200
+          }
+        ],
+        "aspects": {
+          "performance": {
+            "mean_sentiment": 0.6708,
+            "n_mentions": 3233,
+            "top_brand": {
+              "make": "BMW",
+              "mean": 0.7185
+            }
+          },
+          "comfort": {
+            "mean_sentiment": 0.6799,
+            "n_mentions": 3675,
+            "top_brand": {
+              "make": "BMW",
+              "mean": 0.7003
+            }
+          },
+          "reliability": {
+            "mean_sentiment": 0.5603,
+            "n_mentions": 2595,
+            "top_brand": {
+              "make": "Toyota",
+              "mean": 0.594
+            }
+          },
+          "price": {
+            "mean_sentiment": 0.5629,
+            "n_mentions": 1700,
+            "top_brand": {
+              "make": "Toyota",
+              "mean": 0.5783
+            }
+          },
+          "fuel_economy": {
+            "mean_sentiment": 0.6094,
+            "n_mentions": 2738,
+            "top_brand": {
+              "make": "Toyota",
+              "mean": 0.6257
+            }
+          },
+          "safety": {
+            "mean_sentiment": 0.6373,
+            "n_mentions": 907,
+            "top_brand": {
+              "make": "BMW",
+              "mean": 0.7157
+            }
+          }
+        },
+        "keywords_by_model": {
+          "BMW 3 Series": [
+            "bmw",
+            "car",
+            "sport",
+            "series",
+            "handling",
+            "fun",
+            "328i",
+            "325i",
+            "package",
+            "drive"
+          ],
+          "Toyota Tacoma": [
+            "truck",
+            "tacoma",
+            "cab",
+            "toyota",
+            "trd",
+            "great truck",
+            "bed",
+            "trucks",
+            "4x4",
+            "v6"
+          ],
+          "Toyota Camry": [
+            "camry",
+            "toyota",
+            "car",
+            "toyota camry",
+            "se",
+            "miles",
+            "le",
+            "oil",
+            "reliable",
+            "v6"
+          ],
+          "Nissan Altima": [
+            "altima",
+            "nissan",
+            "car",
+            "cvt",
+            "nissan altima",
+            "transmission",
+            "miles",
+            "000 miles",
+            "000",
+            "accord"
+          ],
+          "Nissan Frontier": [
+            "truck",
+            "frontier",
+            "nissan",
+            "tacoma",
+            "cab",
+            "bed",
+            "crew",
+            "trucks",
+            "crew cab",
+            "nissan frontier"
+          ],
+          "Toyota Tundra": [
+            "truck",
+            "tundra",
+            "toyota",
+            "trucks",
+            "cab",
+            "ford",
+            "towing",
+            "bed",
+            "great truck",
+            "v8"
+          ],
+          "Toyota RAV4": [
+            "rav4",
+            "rav",
+            "toyota",
+            "suv",
+            "vehicle",
+            "crv",
+            "v6",
+            "awd",
+            "noise",
+            "easy"
+          ],
+          "Toyota Corolla": [
+            "corolla",
+            "car",
+            "toyota",
+            "toyota corolla",
+            "reliable",
+            "miles",
+            "le",
+            "oil",
+            "corolla le",
+            "gas"
+          ],
+          "BMW 5 Series": [
+            "bmw",
+            "car",
+            "series",
+            "idrive",
+            "sport",
+            "530i",
+            "540i",
+            "528i",
+            "performance",
+            "wagon"
+          ],
+          "Nissan Maxima": [
+            "maxima",
+            "nissan",
+            "car",
+            "nissan maxima",
+            "se",
+            "max",
+            "bose",
+            "maximas",
+            "transmission",
+            "cvt"
+          ],
+          "Toyota 4Runner": [
+            "4runner",
+            "suv",
+            "vehicle",
+            "runner",
+            "4wd",
+            "toyota",
+            "sr5",
+            "v8",
+            "road",
+            "limited"
+          ],
+          "Toyota Highlander": [
+            "highlander",
+            "suv",
+            "toyota",
+            "row",
+            "vehicle",
+            "limited",
+            "toyota highlander",
+            "highlander limited",
+            "3rd row",
+            "3rd"
+          ],
+          "Toyota Sienna": [
+            "sienna",
+            "van",
+            "minivan",
+            "toyota",
+            "odyssey",
+            "door",
+            "sliding",
+            "xle",
+            "toyota sienna",
+            "family"
+          ],
+          "Toyota Avalon": [
+            "avalon",
+            "car",
+            "toyota",
+            "lexus",
+            "toyota avalon",
+            "xls",
+            "comfort",
+            "ride",
+            "comfortable",
+            "avalon limited"
+          ],
+          "Nissan Sentra": [
+            "sentra",
+            "nissan",
+            "car",
+            "nissan sentra",
+            "cvt",
+            "civic",
+            "bought car",
+            "miles",
+            "bought",
+            "replaced"
+          ],
+          "Nissan Pathfinder": [
+            "pathfinder",
+            "nissan",
+            "suv",
+            "vehicle",
+            "transmission",
+            "nissan pathfinder",
+            "radiator",
+            "problem",
+            "row",
+            "bought pathfinder"
+          ],
+          "Toyota Prius": [
+            "prius",
+            "mpg",
+            "50",
+            "gas",
+            "hybrid",
+            "50 mpg",
+            "mileage",
+            "battery",
+            "45",
+            "average"
+          ],
+          "Toyota Camry Solara": [
+            "solara",
+            "convertible",
+            "car",
+            "sle",
+            "smooth",
+            "lexus",
+            "toyota",
+            "quiet",
+            "toyota solara",
+            "v6"
+          ],
+          "Nissan Rogue": [
+            "rogue",
+            "nissan",
+            "cvt",
+            "nissan rogue",
+            "rouge",
+            "sl",
+            "awd",
+            "transmission",
+            "suv",
+            "rogue sl"
+          ],
+          "Nissan Xterra": [
+            "xterra",
+            "suv",
+            "vehicle",
+            "nissan",
+            "road",
+            "love xterra",
+            "nissan xterra",
+            "terra",
+            "bought xterra",
+            "snow"
+          ],
+          "BMW X5": [
+            "x5",
+            "bmw",
+            "suv",
+            "bmw x5",
+            "sav",
+            "vehicle",
+            "machine",
+            "sport",
+            "performance",
+            "shop"
+          ],
+          "Nissan Titan": [
+            "titan",
+            "truck",
+            "nissan",
+            "trucks",
+            "power",
+            "chevy",
+            "ford",
+            "nissan titan",
+            "best truck",
+            "cab"
+          ],
+          "BMW 7 Series": [
+            "bmw",
+            "series",
+            "car",
+            "idrive",
+            "740il",
+            "750li",
+            "luxury",
+            "mercedes",
+            "740i",
+            "745li"
+          ],
+          "Nissan Versa": [
+            "versa",
+            "nissan",
+            "nissan versa",
+            "car",
+            "cvt",
+            "hatchback",
+            "fit",
+            "price",
+            "sl",
+            "roomy"
+          ],
+          "Toyota Sequoia": [
+            "sequoia",
+            "suv",
+            "vehicle",
+            "toyota",
+            "row",
+            "family",
+            "kids",
+            "large",
+            "toyota sequoia",
+            "tahoe"
+          ],
+          "Nissan Quest": [
+            "quest",
+            "van",
+            "nissan",
+            "nissan quest",
+            "minivan",
+            "odyssey",
+            "family",
+            "kids",
+            "sliding",
+            "vans"
+          ],
+          "Nissan 350Z": [
+            "350z",
+            "fun",
+            "sports",
+            "sports car",
+            "car",
+            "performance",
+            "drive",
+            "roadster",
+            "fun drive",
+            "handling"
+          ],
+          "Toyota Matrix": [
+            "matrix",
+            "xr",
+            "mileage",
+            "cargo",
+            "toyota matrix",
+            "gas",
+            "toyota",
+            "room",
+            "bought matrix",
+            "car"
+          ],
+          "BMW X3": [
+            "x3",
+            "bmw",
+            "suv",
+            "bmw x3",
+            "sav",
+            "handling",
+            "fun",
+            "vehicle",
+            "warranty",
+            "drive"
+          ],
+          "BMW M3": [
+            "m3",
+            "smg",
+            "car",
+            "performance",
+            "handling",
+            "convertible",
+            "bmw",
+            "best",
+            "sports",
+            "e46"
+          ]
+        },
+        "topics": {
+          "method": "nmf",
+          "n_topics": 8,
+          "topics": [
+            {
+              "id": 2,
+              "label": "miles / 000",
+              "top_terms": [
+                "miles",
+                "000",
+                "new",
+                "nissan",
+                "replaced",
+                "bought",
+                "oil",
+                "problems"
+              ],
+              "prevalence": 0.2171,
+              "top_model": "Nissan"
+            },
+            {
+              "id": 0,
+              "label": "mpg / good",
+              "top_terms": [
+                "mpg",
+                "good",
+                "gas",
+                "mileage",
+                "seats",
+                "driving",
+                "like",
+                "highway"
+              ],
+              "prevalence": 0.155,
+              "top_model": "Toyota Prius c"
+            },
+            {
+              "id": 5,
+              "label": "vehicle / toyota",
+              "top_terms": [
+                "vehicle",
+                "toyota",
+                "owned",
+                "suv",
+                "best",
+                "quality",
+                "ve",
+                "years"
+              ],
+              "prevalence": 0.1495,
+              "top_model": "Toyota Sequoia"
+            },
+            {
+              "id": 3,
+              "label": "car / best",
+              "top_terms": [
+                "car",
+                "best",
+                "owned",
+                "like",
+                "sports",
+                "ve",
+                "reliable",
+                "cars"
+              ],
+              "prevalence": 0.126,
+              "top_model": "Nissan 350Z NISMO"
+            },
+            {
+              "id": 6,
+              "label": "drive / fun",
+              "top_terms": [
+                "drive",
+                "fun",
+                "bmw",
+                "easy",
+                "driving",
+                "handles",
+                "just",
+                "test"
+              ],
+              "prevalence": 0.1059,
+              "top_model": "BMW X6 M"
+            },
+            {
+              "id": 1,
+              "label": "truck / tacoma",
+              "top_terms": [
+                "truck",
+                "tacoma",
+                "tundra",
+                "frontier",
+                "cab",
+                "trucks",
+                "bed",
+                "titan"
+              ],
+              "prevalence": 0.0938,
+              "top_model": "Nissan Titan XD"
+            },
+            {
+              "id": 4,
+              "label": "great / mileage",
+              "top_terms": [
+                "great",
+                "mileage",
+                "gas",
+                "reliable",
+                "suv",
+                "value",
+                "looks",
+                "drives"
+              ],
+              "prevalence": 0.0775,
+              "top_model": "Toyota Yaris iA"
+            },
+            {
+              "id": 7,
+              "label": "love / bought",
+              "top_terms": [
+                "love",
+                "bought",
+                "way",
+                "just",
+                "awesome",
+                "absolutely",
+                "new",
+                "van"
+              ],
+              "prevalence": 0.0752,
+              "top_model": "Toyota Supra"
+            }
+          ]
+        },
+        "summaries": {
+          "method": "extractive",
+          "top_n": 10,
+          "by_model": {
+            "BMW 3 Series": "Though now nearly 15y ears old,it has features that most new cars still don't have.Handling is very good, takes corners at 30 mph though not recommeneded for safety reasons.0-60 in under 7 seconds, still good by even today's standards, very good in the late 90s.Steering is well balanced, not heavy oe too light.My 04 Infinity feels like a tank in comparison sterring wise.Car feels very solid, though it moves athletically.Everything is expensive to repair, but the engine itself is very solid-no oil leaks, shakes, overheating, stalling in the 3 years I have had it (purchased at 100k miles). I just bought this car a couple of months ago.The previous owner spent over one thousand dollars at a BMW dealer attempting to fix the convertible-after all-that is why you buy this model.Although it does go up and down, it doesn't do it anywhere near as smooth as you would expect from a BMW.I am still going back and forth with the dealer I bought it from to get it right.Don't get me wrong-I LOVE the car_but I bought it for the convertible aspect and it is a very expensive and difficult thing to deal with. This car is incredible (Incredible!!) And if you are older than 45, this car is more like a sci-fi transporter out of a comic book.It's so smooth and goes so easily 30mph over the speed limit that you'll think it's a set up by the Klingons to get your money.However, three problems remain in the 2007 and up, 1: subframe/serpentine belt damage 2: wastegate failure in the turbo/turbos 3: high pressure fuel pump failure. Great fun car to drive, looks great, but everytime i go to the dealership, they find something that is not under the certified pre owned warranty, and had the car 2 1/2 yrs, replaced run flats 3 times, very expensive tires, 0 miles warranty, finally last time i just went and bought 2 michellin tires for the back which were same as 1 run flat, and had 45k warranty on the full replacement, not pro rated, full free replacement, only thing i am affraid off is that i have no room for a spare in the trunk, so if i get a flat i have to get the car towed, guess i will just buy a tire inflator pump for the road, and get it towed at Bmw roadside expense if i get a flat.",
+            "Toyota Tacoma": "I have test drove and researched every single one and this is by far the best truck out there.I was initially looking for a full size for my 4 kids but with the double cab, their carseats fit with ease.The interior is very nice and the seats are the most comfortable I have ever sat in.If you are going to get it I would highly recommended the TRD Sport package, because it handles like no other.As far as reliability, I can't speak on that for this one (2011), but I did have a 2000 Tacoma for 12 years and it was bullet proof, nothing but normal maintenance until the 125,000 mile spot. This truck was my first car i had a 2002 Tacoma TRD off-road limited and it ran with 258,000 miles on it until i rolled it into a ditch, and even after the accident the cab stayed intact, i landed upside down and all that affected the cab was the center of the windshield and the sunroof bent in a few inches. Have had no problems with this truck since new except a water leak (wet rug) which the dealer managed to diagnose & fix on the first try (a grommet located on the fire wall was leaking.)\rI previously owned a 94 Tacoma (hilux) Reg Cab 4wd and found it to be a nice little truck; but I've found the 2000 to be much more refined and comfortable, by a long shot. of rocks, full bed of mulch, the truck is great, the composite material bed is always great and washes out well, my kid said something I wouldn't have even thought of \"the bed doesn't get as hot in the sun, like the neighbors truck bed,\" a Nissan I think, the power coming from that V6 is excellent, the manual shifter is the only way to go, I thought maybe I should get the automatic, but really glad I searched for the 6 speed, no slush box for me, the manual takes a little to get used to but then the real fun begins, only drawback is I am getting only 16 mph.",
+            "Toyota Camry": "1st off, I am a Toyota Salesman.I own a 1956 Ford Victoria, a 1970 Chevy Chevelle SS 396, 2002 Chevy Silverado and 20 days ago, a 2014 Toyota Camry SE 4 cylinder w/17\" rims.Now, I am used to vehicles with big muscle and horsepower...crappy MPG just goes with the program...when I first saw the 14' Camry SE in Cosmic Gray I fell in love.What a sexy car.Now, what would make me think about purchasing a 4 cylinder car?All I have to say is drive one.This is a fast car that, in my car, is giving me 29 MPG.Sexy style, comfort, power, quiet, excellent handling, value and it's gonna last 500,000 miles.Try that in any other car besides a Honda.The ride is affected with the 18\" rims. This is the second Camry I have had in 19 years.The first was a 1992 LE 4 cylinder (remember those?).Anyway, I liked it so much for work (outside sales) that I bought a new one in 1999.I have driven it ever since.It now has 140,700 miles on it with NO signs of giving up.I am in outside sales and believe me, I drive it.Despite it now has it's slight dings and scratches the paint is still beautiful after all these years.It runs smoooooooth as can be thanks in part to using 5-30 Mobile 1 since day one...not a drop burns, not drip anywhere.Mechanically, this thing has run like a top for 12 years and counting.No major repairs. I will write mostly about Maintenance1) My O2 Sensor was on at 76k miles, had to replace Catalatic Converter- fixed it with Company waranty, which is normally 80k miles for Catalatic Convertors- 2000$ TOYOTA Bill2) At 80k & 135k- Front Brakes shoes and Disc-250$3) at 139k- Starter- 300$4) at 90k- collant tank leak- 200$5) All four tires at 70k and 125k -600$6) Front and Back STRUTS are leaking, needs to replace at 105k- estimates around 1600$ TOYOTA Estimate7) Engine Oil is leaking at 100k miles8) Replaced Battery at 80k and 125k I previously left my review back in 2012 and now its 2015 and its been better and I had the transmission serviced and now have no issues with the car at all im at 98000 miles and its running strong and the build quality has improved and looks a lot better now that the recalls on dashboard has been done and it fixed a lot of mismatches with the pillars and things and now my car is fully cleaned and detailed and its great to have a car that I trust on the road my car does not burn any oil and that's with me changing the oil every 3000 miles and I haven't missed a oil change and I get 28 to 30 hwy and city I get 25.8 so I haven't gotten 31 mpg yet and I drive the car once a week straight hwy ....",
+            "Nissan Altima": "Purchased my Altima with 75K miles, it now has 191K miles.Nothing really major that I can complain about, it's taken my abuse very well.My CONS would be:Cam Shaft sensor failed around 150K miles.Both rear calipers seized around 100K miles.#4 cylinder ignition coil failed around 175K miles.BOSE CD changer is completely unreliable.Pop out gasoline door is horrendous, I need to use a prybar to get it open.Around 150K miles the car started having intermittent difficulties with engine starts...takes 10-15 seconds to start.Mechanic doesn't have a good solution to the problem.Door actuators seize when it's cold out. I bought this car a year after it came out luckily I bought through Carmax because once I started having the problem and called Nissan they basically gave me the runaround but Carmax is dealing with the problem superbly now for everyone having the shuttering problem like I am having it seems to be the transmission but the CVT transmissions are very sensitive to  The electrical current that they receive and the alternators on these are faulty Nevada how many transmissions they throw in it if they don't change your alternator you're going to continue having the problem over and over again so anybody researching this get the alternator fixed before it destroys your transmission I had the alternator and belt tensioner replaced and problem was gone the shuttering that everybody has. bought this car used in 2005 with 21000 miles on it was evrything i wanted loved my car praised it was black on black with leather 6 years later still turnning heads flawless inside and out took the best care of the car nothing but synthetic oil changes every 3000 miles nothing but premiume 91 76 gas and last week discovered no oil in my engine with only 82000 miles had read up on it about a year ago and called nissan and they said it has to do with how you maintence your car so i thought would not happen to mine but i was wrong no one took better care of a car then i did nissan needs to do something will never buy another nissan and will tell anyone who will listen getting rid of my baby Nissan quality has went down hill since the 90's.The 2002 -2005 2.5Lcommonly has the head gasket go bad, before 100k miles.Mine went at 98k miles.If you pay someone it will cost you $1,600.Also it is possible that the forward catalytic converter will go bad, blow debris into your cylinders, and ruin them.WIth cloth seats, the drivers seat is rock hard.The seat doesn't support my thighs,causes pain.The Altima is supposed to ride stiffer and sportier than other cars, but on a really bumpy road it is just torture.",
+            "Nissan Frontier": "Years ago I had pathfinder and 720 pickup and went Jeep for a bit.Our Nissans were great and I am very glad I returned.I recently bought new Frontier crew cab Pro 4x and it is a dream.The styling, power, performance, and features set it apart from the many other brands considered and researched.It helps that the local dealership has such great service dept.It is quiet, has a nice music package, moonroof (my first), and handles really well.I think the safety features are a sure plus.Mileage is ok, but is sure to get better as she ages.I had my Jeep for twelve years and look forward to at least that with this truck.Now it's 2016 and I have abt 57,000 miles on it and I'm totally impressed. Never thought I'd keep one vehicle for more than four years.Still driving it after almost eight years and still loving it.Just added k&n air filter and upgraded to a magnaflow exhaust which made a significant difference on the daily driving experience (wish I've done that sooner).Getting 17mpg right now with mixed hwy/city driving.No major engine repairs and still runs pretty smooth.Power conveniences (windows, locks, side mirrors) are all still working.The original CD player system did jam and won't eject at year six so i replaced the whole thing. Wanted a truck to pull with occasionally and carry small loads.The Sports Appearance Package is a big eye catcher and I have received lots of compliments on the wheels and overall looks.Pulls great, lots of power for getting on and off highways, mileage is ok at 19.5 with a mix of city and highway, and bluetooth works great.Backseats are not for anything more than a small child, better to use the area for storage.Handles really well, steering feels good and tight and I love the locking tailgate.Headlights and fog lights light the roads well and was very comfortable on an 8 hour road trip. This is another winner from Nissan.After owning a used 1993 Hardbody D21,I was determined to upgrade to a crew cab Nissan Frontier (my Hardbody smoked my old Toyota,with way better off road performance).This truck even impressed my wife,who hated my old Toyota,with comfortable seating (we're short people),logical controls,and especially visiblity.The model we bought lacks power windows and power door locks,but after our hunting trip to eastern Oregon,in which we locked ourself out a couple of times in the Chevy,I can do without such conveniences.Be prepared to battle the dealerships,who will way overprice these popular trucks.Arm yourself with Internet knowledge and roll up your sleeves and be prepared for a three hour ordeal.We got close to our target price.We love this truck.I added a receiver hitch,that required no drilling of the frame (WOW) to mount.Update:so far a great little truck,absolutely no problems,and does everything we expected.",
+            "Toyota Tundra": "This is my third Toyota truck and is by far the best.I looked (briefly) at others when it was time to trade and I easily came home to Toyota.This truck has it all - capacity, comfort, durability and great looks.The 5.7L V-8 offers plenty of power for even the most demanding of tasks.Plenty of room in the front, back and the bed.Leather interior is top-notch.Navigation w/ JBL sound system is superior to others I have owned including Bose.We often take the truck to our vacation home and find the ride pleasant and relaxing.Lots of storage space to keep things organized.If you are looking for a full-sized pickup truck, give the Tundra a close look.You won't be disappointed. <!--[if gte mso 9]><xml> <o:OfficeDocumentSettings>  <o:AllowPNG/> </o:OfficeDocumentSettings></xml><![endif]--><!--[if gte mso 9]><xml> <w:WordDocument>  <w:View>Normal</w:View>  <w:Zoom>0</w:Zoom>  <w:TrackMoves/>  <w:TrackFormatting/>  <w:PunctuationKerning/>  <w:ValidateAgainstSchemas/>  <w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid>  <w:IgnoreMixedContent>false</w:IgnoreMixedContent>  <w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText>  <w:DoNotPromoteQF/>  <w:LidThemeOther>EN-US</w:LidThemeOther>  <w:LidThemeAsian>X-NONE</w:LidThemeAsian>  <w:LidThemeComplexScript>X-NONE</w:LidThemeComplexScript>  <w:Compatibility>   <w:BreakWrappedTables/>   <w:SnapToGridInCell/>   <w:WrapTextWithPunct/>   <w:UseAsianBreakRules/>   <w:DontGrowAutofit/>   <w:SplitPgBreakAndParaMark/>   <w:EnableOpenTypeKerning/>   <w:DontFlipMirrorIndents/>   <w:OverrideTableStyleHps/>  </w:Compatibility>  <m:mathPr>   <m:mathFont m:val=\"Cambria Math\"/>   <m:brkBin m:val=\"before\"/>   <m:brkBinSub m:val=\"&#45;-\"/>   <m:smallFrac m:val=\"off\"/>   <m:dispDef/>   <m:lMargin m:val=\"0\"/>   <m:rMargin m:val=\"0\"/>   <m:defJc m:val=\"centerGroup\"/>   <m:wrapIndent m:val=\"1440\"/>   <m:intLim m:val=\"subSup\"/>   <m:naryLim m:val=\"undOvr\"/>  </m:mathPr></w:WordDocument></xml><![endif]-->Several buttons in the cab don't have lights i.e window ordoor lock buttons. The dealer blamed the alignment, so on the second set of tires they have done all the aligments.So now the dealership is blaming the tire maker.All I travel is roads and highways.I keep it aligned but the tires are wearing out unevenly.The radio was replaced twice and the truck has a bounce that has made my child car sick on two occasions.The truck dents easily and is not as good on gas mileage as I would hope a 6 cyclinder would be.I like the acceleration and the look of the truck. Bought it in 2011 with 181,000 miles.Miles mean nothing on Toyotas if they have been maintained.Replaced the shocks with Bilstein HD's (Yellow), and it made it ride like a new truck!With 220,000 miles on it, I am ready to declare my Tundra the worthy successor to the Beast!Had one single failure, a bad coil, which was easy to replace.400,000 here I come!",
+            "Toyota RAV4": "I wasn't planning to get another car for another year or so, but when the postcard came in the mail, I went to check this vehicle out.Took the test drive and liked the ride.I was coming out of a Honda Fit, so driving this around felt like driving a beast, but I kinda liked it.The Fit was a nice little car with great gas milage, but I just wanted something a bit more capable.Also, the Fit was rather a slow vehicle for something so small.I'm happy to say The Rav4's base 4 cylinder actually is quicker than the Fit.The handling is good, not as good as the CRV I once drove, but still solid.The ride is smoother than either of the other vehicles.Still, the gas milage is pretty low. I got the top trim level and added remote start, homelink, and a trailer hitch.Remote start and heated seats are great on those chilly, Midwest mornings.I am a conservative driver, having traded in a 2008 Prius, and I am routinely getting between 32-33 mpg on the hwy, and about 27-28 in city driving in Eco mode.This vehicle is fun to drive, and dollar for dollar is the best deal on the market.I test drove the Honda CRV, Subaru Forester and Crosstrek, and the Mazda CX-5, and none could compare pricepoint and features.Reliability and comfort have been fantastic!! The dark charcoal-colored material in the door panels and the dashboard show dirt and dust easily.I would prefer a one-tone lighter color like the gray that is used as the complementary color in my vehicle.I also do not care for the orange glow that Toyota has incorporated into the instrument panel on the dashboard.My 2006 Corolla has all white colored lights which is easy on the eyes, but the orange in the 2012 RAV4 is very distracting at night.The leg room and storage in the RAV4 is good.I especially like the storage bin under the back floorboard.I would like a couple more cubby hole type storage compartments in the front for the driver.My cell phone does not fit in the cell phone holder so I have to put it in the cup holder.The headrests are not adjustable.They can go only up or down and not in between.The back seat adjustment handles are VERY inconvenient....located on the top side of the seat back.Would prefer them to be located on the bottom side of the seat like most all car seats I have sat in.If you are already sitting in the seat and need to adjust the back up or down, then it is impossible to reach the handle without getting out of the seat.There are no adjustment handles for the seat height like in my Corolla.Wish there were.We got good gas mileage on our trip....27-28 mpg.The RAV4 handles easily and rides pretty smooth.But, like I said before, the uncomfortable seats outweigh any positive characteristics in this vehicle.Going on a long trip at the end of the summer in our RAV4 and not looking forward to it. The Pros: It is a Toyota with great resale value, 0 mechanical problems than regular maintenance (oil changes, brakes and tires), comfortable interior for the entire family, LOTS of cubby hole storage hidden all over this car, handles great on sunny/rainy/snowy days (I feel very comfortable with my wife taking a drive in the snow with the kiddos in this SUV).",
+            "Toyota Corolla": "I recently purchased a 2014 Toyota Corolla.I really like the car, except for 2 concerns:1.the average mile/gallon on the sticker (highway & local) is inflated.I've checked the web and apparently there is no federal oversight to ensure the correct mileage is posted.2.the car has 2 plastic \"rods\" that are on both sides of the car (vertically) clipped to the under-carriage.Last winter during the snow, I was driving out of an icy spot an to my surprise, there was a long gray plastic rod on the road.It was from my new car.I have submitted a complaint to Toyota...poor quality and engineering. In the past 6 years, the only repairs I've ever had to do, besides regular oil changes (every 3-4,000 miles, full synthetic), brake pads (just once!), and tires (just once!), is 1) fix an exhaust hole (likely caused by my not-so-gentle driving habits on terrible roads), 2) replace the brake and fuel lines that were rusted (thanks to salty snowy roads), 3) replace the window motor on the driver's side window, and 4) the only time I actually had to get towed was when the grommet that holds the shift cable broke - but this was my bad, the car had given me (gentle and then more insistent) hints for a month that something was wrong with the shifter cable (e.g. The car's looks are boring and there are small cosmetic and non-essential-mechanical things that haven't aged well: the automatic locks don't work as well as they used to (now I have to manually lock and unlock the rear driver's side door), the cassette player is no longer accepting my cassette adaptor and so I have to use an FM transmitter to play music off my phone, the trim on the inside of the car near the doors is peeling off, the trunk is starting to be a little misshapen from my constant towing of multiple bicycles on a rear rack over bad roads, the coffee-cup holder is in the worst place (blocks access to the cigarette lighter port) and is shallow - I've had multiple drinks tip over - and -the weirdest thing - if I don't park the car straight, with the steering wheel straight, then when I try to turn the car back on, the key won't turn unless I grab the top of the steering wheel and pull it towards me. Pros:- great gas mileage (I'm getting 35MPG with mostly highway miles)- entertainment console is easy to use even while in motion- small, sporty family carCons:- way too small for anyone 6' or taller (I fit but commonly have to bend my legs and constantly be moving or my legs go numb, and a hard time getting in/out of the car)- also way too small for a family size larger than 2 (with my infant in her rear facing carseat behind the passenger seat my wife cannot fit due to height, she still has to sit behind the drivers seat to have any room)- this car's steering/handling is worst of any car I have ever owned (driving at highway speeds the car floats, it drives in a straight line but the body/suspension/frame are constantly pulling to the left or right.",
+            "BMW 5 Series": "Just to start, this is not my first car or my second.I understand there are no guarantees in life and cars are finnicky.Sometimes you just get a bad apple.But for the $$$ a 550i costs those apples should be fixed properly and the owner satisfied.I have owned quite a few vehicles in my now 17 years of driving.2 of which were a 2003 325xi and a 2006 330i sport.Both of which had no problems.I purchased the 550i in 2010 with 33k miles.It was a CPO, which gave me comfort purchasing a used car.Not any more!!!I seriously doubt this car was properly inspected.Which is what I told BMW, and they passed the buck to the dealer who basically told me F off.Consistent problems! This was the car I thought I always wanted-500xi with Msport package--what a mistake.This car can not handle a single small road defects without the Goodyear LS2 run flats getting a bubble in the sidewall.I have less than 2500miles and have gone through four tire and two rims.Thisall wheel drive car was not properly tested to handle the roads in the USA. I purchsed my 08 BMW XI used 60k miles on it, for the first 6 mos it was all good, while driving out of town the veh completely shut down (water pump), and since this happened there has been one repair after the other, I've always wanted a BMW, after repeated breakdowns and countless repairs, uless the veh is leased, do not waste your money you will end up spending more than anticipated. If you ignore BMW and change the ATF every 30,000 ~ 60,000 miles, this too would not be an issue.BMW handles so great because they figured out decades ago, if you achieve even weight distribution be tween the front and rear axle, the center of gravity will be as perfect as it can be, which makes the car hug the road much better under any condition.",
+            "Nissan Maxima": "I already owned a TL, so I didn't want to do that again;-)        The Maxima also does a great job at the little stuff like a strong A/C system, large glove box, great iPOD integration, large map and cup holders, and easy to read owners manual. A week after buying this car in July '12, I took it back, since it had beendriving badly.After about 15 minutes of driving, the engine would rev to over 4k RPM's and then jerk hard,even slamming me back into my seat.When it did it for my husband, he insisted there was definitely a problem with the tranny.Not slipping, but rather shifting hard. With the 2002 Nissan Maxima what I like is, it provides a back seat big enough for adults, deep cushions, electronic adjustable seats, all seats accommodate most body types well, cargo net for storage on the sides of the doors, A/C as cold as ice when you start the car, cruise control great for traveling, power steering, front reading lights, and very spacious throughout the car. The 2002 Nissan Maxima is great on gas mileage being a little bit more expensive didn\u2019t set me back, I love all the comfort features the car has to offer it is more than enough, everyone can rely on this car it is great as long as you take care of it, and the performance is good many owners of this same model loves their car and it has lasted them for many years and more to come."
+          }
+        },
+        "figures": [
+          "results/figures/sentiment_vs_rating_confusion.png",
+          "results/figures/brand_sentiment_ranking.png",
+          "results/figures/model_sentiment_ranking.png",
+          "results/figures/aspect_sentiment_heatmap.png",
+          "results/figures/topics_prevalence.png"
+        ]
+      },
+      "repoPath": "07-applied-nlp/p1-car-reviews"
+    },
+    {
+      "id": "08-ml-depth__p1-causal-inference",
+      "track": "08-ml-depth",
+      "trackName": "ML Depth",
+      "slug": "p1-causal-inference",
+      "name": "Causal inference \u2014 recover a known treatment effect on CPU",
+      "shortName": "p1-causal-inference",
+      "summary": "True ATE 2.00. Naive (confounded) = 6.29 (bias +4.29); doubly-robust AIPW = 2.00 (bias -0.00). AIPW 95% CI covers the truth 94% of the time vs 0% for naive. IPW weighting cuts mean |SMD| from 0.47 to 0.03.",
+      "kind": "project",
+      "metrics": [
+        {
+          "k": "data_source",
+          "v": "synthetic SCM (known ATE)"
+        },
+        {
+          "k": "n",
+          "v": "3000"
+        },
+        {
+          "k": "p",
+          "v": "5"
+        },
+        {
+          "k": "true_ate",
+          "v": "2"
+        },
+        {
+          "k": "aipw_se",
+          "v": "0.0483029"
+        }
+      ],
+      "figures": [
+        {
+          "name": "ate by method",
+          "url": "figures/08-ml-depth__p1-causal-inference/ate_by_method.png"
+        },
+        {
+          "name": "covariate balance",
+          "url": "figures/08-ml-depth__p1-causal-inference/covariate_balance.png"
+        }
+      ],
+      "raw": {
+        "project": "p1-causal-inference",
+        "summary": "True ATE 2.00. Naive (confounded) = 6.29 (bias +4.29); doubly-robust AIPW = 2.00 (bias -0.00). AIPW 95% CI covers the truth 94% of the time vs 0% for naive. IPW weighting cuts mean |SMD| from 0.47 to 0.03.",
+        "data_source": "synthetic SCM (known ATE)",
+        "seed": 42,
+        "n": 3000,
+        "p": 5,
+        "true_ate": 2.0,
+        "estimates": {
+          "naive": 6.294357856912536,
+          "regression": 2.0354865243283427,
+          "ipw": 2.200489866988778,
+          "aipw": 1.9971951351740542
+        },
+        "bias": {
+          "naive": 4.294357856912536,
+          "regression": 0.03548652432834265,
+          "ipw": 0.2004898669887778,
+          "aipw": -0.0028048648259457742
+        },
+        "aipw_se": 0.048302949477855045,
+        "aipw_ci": [
+          1.9025230938504005,
+          2.0918671764977077
+        ],
+        "coverage": {
+          "n_sims": 200,
+          "naive_coverage": 0.0,
+          "aipw_coverage": 0.94
+        },
+        "balance": {
+          "smd_before": [
+            0.6083068207030986,
+            0.43317902436285327,
+            0.5533657278798896,
+            0.32111654677723606,
+            0.45723527964855853
+          ],
+          "smd_after": [
+            0.05186143500035982,
+            0.03840985596740974,
+            -0.0035605661653751786,
+            0.029165802774077317,
+            -0.010325979296517006
+          ],
+          "mean_abs_smd_before": 0.4746406798743272,
+          "mean_abs_smd_after": 0.026664727840747814
+        },
+        "figures": [
+          "results/figures/ate_by_method.png",
+          "results/figures/covariate_balance.png"
+        ]
+      },
+      "repoPath": "08-ml-depth/p1-causal-inference"
+    },
+    {
+      "id": "08-ml-depth__p2-bayesian-probabilistic",
+      "track": "08-ml-depth",
+      "trackName": "ML Depth",
+      "slug": "p2-bayesian-probabilistic",
+      "name": "Bayesian hierarchical modeling \u2014 a Gibbs sampler from scratch on CPU",
+      "shortName": "p2-bayesian-probabilistic",
+      "summary": "Averaged over 200 datasets, partial pooling cuts RMSE on the true group means from 3.38 (no pooling) to 2.44 and wins 94% of the time. Chains mixed (max R-hat 1.001). Across 200 datasets the credible intervals are well calibrated (mean |calibration error| 0.092).",
+      "kind": "project",
+      "metrics": [
+        {
+          "k": "n_groups",
+          "v": "16"
+        },
+        {
+          "k": "n_per_group",
+          "v": "4"
+        },
+        {
+          "k": "true_mu",
+          "v": "5"
+        },
+        {
+          "k": "true_tau",
+          "v": "3"
+        }
+      ],
+      "figures": [
+        {
+          "name": "calibration",
+          "url": "figures/08-ml-depth__p2-bayesian-probabilistic/calibration.png"
+        },
+        {
+          "name": "posterior vs true",
+          "url": "figures/08-ml-depth__p2-bayesian-probabilistic/posterior_vs_true.png"
+        },
+        {
+          "name": "shrinkage",
+          "url": "figures/08-ml-depth__p2-bayesian-probabilistic/shrinkage.png"
+        }
+      ],
+      "raw": {
+        "project": "p2-bayesian-probabilistic",
+        "summary": "Averaged over 200 datasets, partial pooling cuts RMSE on the true group means from 3.38 (no pooling) to 2.44 and wins 94% of the time. Chains mixed (max R-hat 1.001). Across 200 datasets the credible intervals are well calibrated (mean |calibration error| 0.092).",
+        "data_source": "synthetic hierarchical (known group means)",
+        "seed": 42,
+        "n_groups": 16,
+        "n_per_group": 4,
+        "true_mu": 5.0,
+        "true_tau": 3.0,
+        "posterior": {
+          "mu_mean": 5.157948428187129,
+          "mu_ci": [
+            3.5453486805632264,
+            6.719405170281093
+          ],
+          "tau_mean": 1.8331563736767134,
+          "tau_ci": [
+            1.0471276522901356,
+            3.0559993654471063
+          ],
+          "theta_mean": [
+            5.4340180506247515,
+            4.562071099823575,
+            5.662121905950018,
+            6.699499894532098,
+            3.9815198741889386,
+            3.8541872958607524,
+            5.522214092287364,
+            5.466546310865248,
+            5.747886460119063,
+            3.454507103171863,
+            6.142664504381194,
+            5.169110168661909,
+            5.415071468003013,
+            5.204896098004753,
+            5.591298052885213,
+            4.594890716842524
+          ],
+          "theta_true": [
+            5.914151239263294,
+            1.8800476812785134,
+            7.251353587419372,
+            7.821694149173641,
+            -0.853105565961509,
+            1.0934614794130457,
+            5.383521209501856,
+            4.051272222969254,
+            4.949596527487134,
+            2.44086821727926,
+            7.638193924588485,
+            7.3333758062868455,
+            5.198092092683648,
+            8.381723620904099,
+            6.402528026756137,
+            2.4221226113502854
+          ]
+        },
+        "shrinkage_single_dataset": {
+          "partial_pooling_rmse": 2.066547762778379,
+          "no_pooling_rmse": 2.3615601689955183,
+          "complete_pooling_rmse": 2.674299603614835
+        },
+        "shrinkage_study": {
+          "n_sims": 200,
+          "mean_partial_pooling_rmse": 2.4439295960035943,
+          "mean_no_pooling_rmse": 3.3791674595328685,
+          "mean_complete_pooling_rmse": 3.009708200791841,
+          "partial_win_rate": 0.935
+        },
+        "convergence": {
+          "rhat_theta_max": 1.0014200647632037,
+          "rhat_mu": 1.0007420768297204,
+          "rhat_tau": 0.9999632384202202
+        },
+        "posterior_predictive": {
+          "bayes_p_values": [
+            0.588,
+            0.594,
+            0.864,
+            0.34,
+            0.468,
+            0.672,
+            0.736,
+            0.954,
+            0.97,
+            0.846,
+            0.288,
+            0.4,
+            0.702,
+            0.406,
+            0.678,
+            0.87
+          ],
+          "mean_bayes_p": 0.6485000000000001
+        },
+        "calibration": {
+          "levels": [
+            0.5,
+            0.7,
+            0.8,
+            0.9,
+            0.95
+          ],
+          "empirical_coverage": [
+            0.4025,
+            0.5853125,
+            0.7003125,
+            0.810625,
+            0.8890625
+          ],
+          "n_sims": 200,
+          "mean_abs_calibration_error": 0.09243749999999998
+        },
+        "figures": [
+          "results/figures/posterior_vs_true.png",
+          "results/figures/shrinkage.png",
+          "results/figures/calibration.png"
+        ]
+      },
+      "repoPath": "08-ml-depth/p2-bayesian-probabilistic"
+    },
+    {
+      "id": "08-ml-depth__p3-graph-neural-networks",
+      "track": "08-ml-depth",
+      "trackName": "ML Depth",
+      "slug": "p3-graph-neural-networks",
+      "name": "Graph neural networks \u2014 a 2-layer GCN from scratch on CPU",
+      "shortName": "p3-graph-neural-networks",
+      "summary": "On a synthetic SBM (300 nodes, 1770 edges, 3 planted communities) where node features alone are only weakly informative, a 2-layer GCN reaches 0.95 test accuracy versus 0.72 for a graph-blind MLP of identical shape \u2014 a 23-point lift from message passing over the graph structure.",
+      "kind": "project",
+      "metrics": [
+        {
+          "k": "gcn_test_acc",
+          "v": "95%"
+        },
+        {
+          "k": "mlp_test_acc",
+          "v": "72%"
+        },
+        {
+          "k": "n_nodes",
+          "v": "300"
+        },
+        {
+          "k": "n_edges",
+          "v": "1770"
+        },
+        {
+          "k": "n_classes",
+          "v": "3"
+        }
+      ],
+      "figures": [
+        {
+          "name": "accuracy gcn vs mlp",
+          "url": "figures/08-ml-depth__p3-graph-neural-networks/accuracy_gcn_vs_mlp.png"
+        },
+        {
+          "name": "embedding tsne",
+          "url": "figures/08-ml-depth__p3-graph-neural-networks/embedding_tsne.png"
+        }
+      ],
+      "raw": {
+        "project": "p3-graph-neural-networks",
+        "summary": "On a synthetic SBM (300 nodes, 1770 edges, 3 planted communities) where node features alone are only weakly informative, a 2-layer GCN reaches 0.95 test accuracy versus 0.72 for a graph-blind MLP of identical shape \u2014 a 23-point lift from message passing over the graph structure.",
+        "data_source": "synthetic SBM (N=300, C=3, p_in=0.08, p_out=0.02, snr=0.45)",
+        "seed": 42,
+        "gcn_test_acc": 0.9538461565971375,
+        "mlp_test_acc": 0.7230769395828247,
+        "n_nodes": 300,
+        "n_edges": 1770,
+        "n_classes": 3,
+        "figures": [
+          "results/figures/accuracy_gcn_vs_mlp.png",
+          "results/figures/embedding_tsne.png"
+        ]
+      },
+      "repoPath": "08-ml-depth/p3-graph-neural-networks"
+    },
+    {
+      "id": "09-deep-learning__p1-transformer-interp",
+      "track": "09-deep-learning",
+      "trackName": "Deep Learning",
+      "slug": "p1-transformer-interp",
+      "name": "Transformer internals & mechanistic interpretability \u2014 a tiny model from scratch on CPU",
+      "shortName": "p1-transformer-interp",
+      "summary": "A 2-layer transformer trained from scratch on the induction task reaches val loss 0.002; an induction head emerged at layer 0 head 3 with attention mass 0.77 on the previous-occurrence+1 token. The logit lens shows next-token accuracy rising from 0.02 (embedding) to 1.00 (final layer), and activation patching recovers up to 100% of the clean-vs-corrupt logit gap \u2014 localizing where the induction computation lives.",
+      "kind": "project",
+      "metrics": [
+        {
+          "k": "val_loss",
+          "v": "0.0017879"
+        },
+        {
+          "k": "final_train_loss",
+          "v": "0.00180733"
+        }
+      ],
+      "figures": [
+        {
+          "name": "activation patching",
+          "url": "figures/09-deep-learning__p1-transformer-interp/activation_patching.png"
+        },
+        {
+          "name": "attention induction",
+          "url": "figures/09-deep-learning__p1-transformer-interp/attention_induction.png"
+        },
+        {
+          "name": "logit lens",
+          "url": "figures/09-deep-learning__p1-transformer-interp/logit_lens.png"
+        }
+      ],
+      "raw": {
+        "project": "p1-transformer-interp",
+        "summary": "A 2-layer transformer trained from scratch on the induction task reaches val loss 0.002; an induction head emerged at layer 0 head 3 with attention mass 0.77 on the previous-occurrence+1 token. The logit lens shows next-token accuracy rising from 0.02 (embedding) to 1.00 (final layer), and activation patching recovers up to 100% of the clean-vs-corrupt logit gap \u2014 localizing where the induction computation lives.",
+        "data_source": "synthetic induction task (repeated random subsequences)",
+        "seed": 42,
+        "val_loss": 0.0017878954531624913,
+        "final_train_loss": 0.0018073272658511996,
+        "induction_head_score": {
+          "max_score": 0.7692092061042786,
+          "best_layer": 0,
+          "best_head": 3,
+          "per_head": [
+            [
+              0.7277825474739075,
+              0.7230327725410461,
+              0.7291187047958374,
+              0.7692092061042786
+            ],
+            [
+              0.7068957686424255,
+              0.6842273473739624,
+              0.6931992769241333,
+              0.6857575178146362
+            ]
+          ]
+        },
+        "logit_lens_by_layer": {
+          "accuracy": [
+            0.015104166232049465,
+            0.9994791746139526,
+            1.0
+          ],
+          "correct_logit": [
+            0.0038052559830248356,
+            9.251290321350098,
+            12.138176918029785
+          ]
+        },
+        "patching_effect": {
+          "position": 30,
+          "effect_by_layer": [
+            0.00372968427836895,
+            0.7274016737937927,
+            1.0
+          ]
+        },
+        "figures": [
+          "results/figures/attention_induction.png",
+          "results/figures/logit_lens.png",
+          "results/figures/activation_patching.png"
+        ]
+      },
+      "repoPath": "09-deep-learning/p1-transformer-interp"
+    },
+    {
+      "id": "09-deep-learning__p2-rl-rlhf",
+      "track": "09-deep-learning",
+      "trackName": "Deep Learning",
+      "slug": "p2-rl-rlhf",
+      "name": "Reinforcement learning + RLHF \u2014 policy gradients and a reward model from scratch on CPU",
+      "shortName": "p2-rl-rlhf",
+      "summary": "REINFORCE with a baseline reaches an average return of 0.60 on a 5x5 gridworld, far above the random policy's -1.98. The RLHF reward model, trained only on Bradley-Terry preference labels, hits 95% held-out preference accuracy (corr 0.82 with the hidden true reward); optimising a policy against the learned reward beats the base policy under the TRUE reward on 83% of contexts.",
+      "kind": "project",
+      "metrics": [
+        {
+          "k": "final_return",
+          "v": "0.6"
+        },
+        {
+          "k": "random_return",
+          "v": "-1.98475"
+        },
+        {
+          "k": "rlhf_winrate",
+          "v": "83%"
+        },
+        {
+          "k": "reward_model_acc",
+          "v": "95%"
+        }
+      ],
+      "figures": [
+        {
+          "name": "reward model fit",
+          "url": "figures/09-deep-learning__p2-rl-rlhf/reward_model_fit.png"
+        },
+        {
+          "name": "rlhf winrate",
+          "url": "figures/09-deep-learning__p2-rl-rlhf/rlhf_winrate.png"
+        },
+        {
+          "name": "training return",
+          "url": "figures/09-deep-learning__p2-rl-rlhf/training_return.png"
+        }
+      ],
+      "raw": {
+        "project": "p2-rl-rlhf",
+        "summary": "REINFORCE with a baseline reaches an average return of 0.60 on a 5x5 gridworld, far above the random policy's -1.98. The RLHF reward model, trained only on Bradley-Terry preference labels, hits 95% held-out preference accuracy (corr 0.82 with the hidden true reward); optimising a policy against the learned reward beats the base policy under the TRUE reward on 83% of contexts.",
+        "data_source": "synthetic gridworld MDP + synthetic Bradley-Terry preferences (offline)",
+        "seed": 42,
+        "final_return": 0.6,
+        "random_return": -1.9847499999999996,
+        "rlhf_winrate": 0.8333333333333334,
+        "reward_model_acc": 0.9487500190734863,
+        "rl": {
+          "grid_size": 5,
+          "episodes": 400,
+          "final_return": 0.6,
+          "random_return": -1.9847499999999996,
+          "return_improvement": 2.5847499999999997
+        },
+        "rlhf": {
+          "n_pairs": 4000,
+          "reward_model_acc": 0.9487500190734863,
+          "reward_corr": 0.8228659195976401,
+          "winrate_vs_base_true_reward": 0.8333333333333334,
+          "base_true_reward": 0.037069786339998245,
+          "rlhf_true_reward": 2.0247676372528076,
+          "optimal_true_reward": 2.0247676372528076
+        },
+        "figures": [
+          "results/figures/training_return.png",
+          "results/figures/rlhf_winrate.png",
+          "results/figures/reward_model_fit.png"
+        ]
+      },
+      "repoPath": "09-deep-learning/p2-rl-rlhf"
+    },
+    {
+      "id": "09-deep-learning__p3-model-compression",
+      "track": "09-deep-learning",
+      "trackName": "Deep Learning",
+      "slug": "p3-model-compression",
+      "name": "Model compression \u2014 pruning, quantization & distillation on CPU",
+      "shortName": "p3-model-compression",
+      "summary": "A 78,858-param teacher hits 96.4% accuracy at 0.30 MB. Magnitude pruning to 80% sparsity keeps 91.5% accuracy; dynamic int8 quantization shrinks the model to 0.08 MB (3.7x smaller); and a 1,642-param distilled student (48x fewer params) reaches 96.7% at 0.008 MB and 0.04 ms/forward.",
+      "kind": "project",
+      "metrics": [
+        {
+          "k": "data_source",
+          "v": "synthetic blobs (d=40, k=10)"
+        },
+        {
+          "k": "teacher_params",
+          "v": "78858"
+        },
+        {
+          "k": "student_params",
+          "v": "1642"
+        },
+        {
+          "k": "prune_fraction",
+          "v": "80%"
+        }
+      ],
+      "figures": [
+        {
+          "name": "latency vs variant",
+          "url": "figures/09-deep-learning__p3-model-compression/latency_vs_variant.png"
+        },
+        {
+          "name": "pareto accuracy vs size",
+          "url": "figures/09-deep-learning__p3-model-compression/pareto_accuracy_vs_size.png"
+        }
+      ],
+      "raw": {
+        "project": "p3-model-compression",
+        "summary": "A 78,858-param teacher hits 96.4% accuracy at 0.30 MB. Magnitude pruning to 80% sparsity keeps 91.5% accuracy; dynamic int8 quantization shrinks the model to 0.08 MB (3.7x smaller); and a 1,642-param distilled student (48x fewer params) reaches 96.7% at 0.008 MB and 0.04 ms/forward.",
+        "data_source": "synthetic blobs (d=40, k=10)",
+        "seed": 42,
+        "teacher_params": 78858,
+        "student_params": 1642,
+        "prune_fraction": 0.8,
+        "variants": {
+          "baseline": {
+            "accuracy": 0.9639999866485596,
+            "size_mb": 0.30304718017578125,
+            "latency_ms": 0.15201699716271833,
+            "sparsity": 0.0
+          },
+          "pruned": {
+            "accuracy": 0.9146666526794434,
+            "size_mb": 0.30310821533203125,
+            "latency_ms": 0.14503499551210552,
+            "sparsity": 0.8000025531045751
+          },
+          "quantized": {
+            "accuracy": 0.9646666646003723,
+            "size_mb": 0.08085823059082031,
+            "latency_ms": 1.04055800329661,
+            "sparsity": 0.0
+          },
+          "distilled": {
+            "accuracy": 0.9673333168029785,
+            "size_mb": 0.0080718994140625,
+            "latency_ms": 0.04333499964559451,
+            "sparsity": 0.0
+          }
+        },
+        "figures": [
+          "results/figures/pareto_accuracy_vs_size.png",
+          "results/figures/latency_vs_variant.png"
+        ]
+      },
+      "repoPath": "09-deep-learning/p3-model-compression"
+    },
+    {
+      "id": "10-simulation__p1-wargaming-simulator",
+      "track": "10-simulation",
+      "trackName": "Simulation",
+      "slug": "p1-wargaming-simulator",
+      "name": "DOW - Tactical War-Gaming Simulator",
+      "shortName": "p1-wargaming-simulator",
+      "summary": "Over 1000 battles/scenario: with identical policies the mirror-symmetric meeting engagement is a near-even 52% for BLUE (95% CI 49-55%), confirming no side bias. An aggressive assault on the fortified ridge succeeds 54% of the time. Each extra RED unit drops BLUE's win rate from 100% to 58%. On combined arms the cautious payoff policy shifts BLUE's win rate by -6pp vs aggression (common random numbers).",
+      "kind": "project",
+      "metrics": [
+        {
+          "k": "n_simulations",
+          "v": "1000"
+        },
+        {
+          "k": "combat_model",
+          "v": "crt"
+        }
+      ],
+      "figures": [
+        {
+          "name": "casualty dist",
+          "url": "figures/10-simulation__p1-wargaming-simulator/casualty_dist.png"
+        },
+        {
+          "name": "policy ab",
+          "url": "figures/10-simulation__p1-wargaming-simulator/policy_ab.png"
+        },
+        {
+          "name": "sensitivity red count",
+          "url": "figures/10-simulation__p1-wargaming-simulator/sensitivity_red_count.png"
+        },
+        {
+          "name": "winprob by scenario",
+          "url": "figures/10-simulation__p1-wargaming-simulator/winprob_by_scenario.png"
+        }
+      ],
+      "raw": {
+        "project": "p1-wargaming-simulator",
+        "summary": "Over 1000 battles/scenario: with identical policies the mirror-symmetric meeting engagement is a near-even 52% for BLUE (95% CI 49-55%), confirming no side bias. An aggressive assault on the fortified ridge succeeds 54% of the time. Each extra RED unit drops BLUE's win rate from 100% to 58%. On combined arms the cautious payoff policy shifts BLUE's win rate by -6pp vs aggression (common random numbers).",
+        "data_source": "self-contained hex-grid battle simulation (no external data)",
+        "seed": 42,
+        "n_simulations": 1000,
+        "combat_model": "crt",
+        "fairness_check": {
+          "scenario": "meeting_engagement",
+          "policies": "aggressive vs aggressive (symmetric)",
+          "blue_winrate": 0.516,
+          "ci": [
+            0.48502358387647304,
+            0.5468539553687625
+          ]
+        },
+        "scenarios": {
+          "meeting_engagement": {
+            "blue_policy": "aggressive",
+            "red_policy": "defensive",
+            "blue_winrate": 0.586,
+            "ci": [
+              0.5551991092840345,
+              0.6161426641591063
+            ],
+            "draws": 40,
+            "mean_turns": 6.52,
+            "blue_losses": {
+              "mean": 2.023,
+              "std": 0.9222098459678253,
+              "p10": 1.0,
+              "p50": 2.0,
+              "p90": 3.0
+            },
+            "red_losses": {
+              "mean": 2.545,
+              "std": 0.6541979822653078,
+              "p10": 2.0,
+              "p50": 3.0,
+              "p90": 3.0
+            }
+          },
+          "seize_the_ridge": {
+            "blue_policy": "aggressive",
+            "red_policy": "defensive",
+            "blue_winrate": 0.539,
+            "ci": [
+              0.508013659504653,
+              0.5696878424056085
+            ],
+            "draws": 22,
+            "mean_turns": 6.215,
+            "blue_losses": {
+              "mean": 3.142,
+              "std": 0.9908763797770134,
+              "p10": 2.0,
+              "p50": 3.0,
+              "p90": 4.0
+            },
+            "red_losses": {
+              "mean": 2.655,
+              "std": 1.2263665846719731,
+              "p10": 1.0,
+              "p50": 3.0,
+              "p90": 4.0
+            }
+          },
+          "combined_arms": {
+            "blue_policy": "aggressive",
+            "red_policy": "defensive",
+            "blue_winrate": 0.643,
+            "ci": [
+              0.6128087342717188,
+              0.6720967727325735
+            ],
+            "draws": 174,
+            "mean_turns": 9.974,
+            "blue_losses": {
+              "mean": 2.567,
+              "std": 0.9314027056005366,
+              "p10": 2.0,
+              "p50": 2.0,
+              "p90": 4.0
+            },
+            "red_losses": {
+              "mean": 3.531,
+              "std": 0.7287242276746396,
+              "p10": 2.0,
+              "p50": 4.0,
+              "p90": 4.0
+            }
+          }
+        },
+        "sensitivity": {
+          "param": "red_count",
+          "values": [
+            1,
+            2,
+            3
+          ],
+          "winrate": [
+            1.0,
+            0.975,
+            0.5825
+          ],
+          "ci_low": [
+            0.9904873594003194,
+            0.9545979351700657,
+            0.5336108347956647
+          ],
+          "ci_high": [
+            1.0,
+            0.9863650562602375,
+            0.629819579505388
+          ]
+        },
+        "policy_ab": {
+          "arm_a": {
+            "policies": [
+              "payoff",
+              "defensive"
+            ],
+            "winrate": 0.582,
+            "ci": [
+              0.5511724096520939,
+              0.612199978979738
+            ]
+          },
+          "arm_b": {
+            "policies": [
+              "aggressive",
+              "defensive"
+            ],
+            "winrate": 0.643,
+            "ci": [
+              0.6128087342717188,
+              0.6720967727325735
+            ]
+          },
+          "delta": -0.061000000000000054,
+          "common_random_numbers": true
+        },
+        "figures": [
+          "results/figures/winprob_by_scenario.png",
+          "results/figures/casualty_dist.png",
+          "results/figures/sensitivity_red_count.png",
+          "results/figures/policy_ab.png"
+        ]
+      },
+      "repoPath": "10-simulation/p1-wargaming-simulator"
     }
   ],
   "highlights": [

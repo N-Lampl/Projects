@@ -34,6 +34,14 @@ TRACKS = [
      "Securing the model supply chain: pickle-RCE, safetensors, scanning, Sigstore signing, CI gates."),
     ("06-financial-ml", "Financial Crime & Risk",
      "ML for financial crime and risk: fraud, anomaly detection, AML typologies, credit risk, market manipulation."),
+    ("07-applied-nlp", "Applied NLP",
+     "The ML/data-science strength the security half builds on: HuggingFace sentiment over 36k car reviews, validated vs. star ratings."),
+    ("08-ml-depth", "ML Depth",
+     "Classical-but-deep ML scored vs. known ground truth: causal inference (doubly-robust ATE), Bayesian hierarchical modeling, graph neural networks."),
+    ("09-deep-learning", "Deep Learning",
+     "Modern DL depth: transformer mechanistic interpretability, reinforcement learning / RLHF, and model compression & efficient inference."),
+    ("10-simulation", "Simulation",
+     "Agent-based simulation: a tactical war-gaming engine running thousands of battles to stress-test strategies and quantify outcomes."),
 ]
 
 FLAGSHIPS = {
