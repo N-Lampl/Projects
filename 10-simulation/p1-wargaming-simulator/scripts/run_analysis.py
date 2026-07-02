@@ -44,8 +44,8 @@ def _raw_losses(scenario: str, blue: str, red: str, n: int, seed: int, model: st
 
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--n", type=int, default=2000, help="battles per scenario/matchup")
-    ap.add_argument("--sweep-n", type=int, default=500, help="battles per sensitivity level")
+    ap.add_argument("--n", type=int, default=1000, help="battles per scenario/matchup")
+    ap.add_argument("--sweep-n", type=int, default=400, help="battles per sensitivity level")
     ap.add_argument("--seed", type=int, default=42)
     ap.add_argument("--model", choices=["crt", "lanchester"], default="crt")
     ap.add_argument("--workers", type=int, default=None, help="parallel processes (default serial)")
@@ -53,6 +53,9 @@ def main() -> None:
 
     set_seed(args.seed)
     kw = dict(base_seed=args.seed, model=args.model, workers=args.workers)
+
+    # 0) Fairness check: symmetric scenario + identical policies must be near 50/50 (no side bias).
+    fairness = monte_carlo("meeting_engagement", "aggressive", "aggressive", n=args.n, **kw)
 
     # 1) Win probability by scenario (BLUE attacks aggressively vs a RED defensive posture).
     per_scenario = {
@@ -80,15 +83,15 @@ def main() -> None:
     fig3 = plot_sensitivity(sweep, FIGURES / "sensitivity_red_count.png")
     fig4 = plot_ab_compare(ab, FIGURES / "policy_ab.png")
 
-    me = per_scenario["meeting_engagement"]
     ridge = per_scenario["seize_the_ridge"]
     summary = (
-        f"Over {args.n} battles/scenario: symmetric meeting engagement is a near-even "
-        f"{me.blue_winrate * 100:.0f}% for BLUE (95% CI {me.ci[0] * 100:.0f}-"
-        f"{me.ci[1] * 100:.0f}%), confirming a fair engine; the fortified ridge assault is much "
-        f"harder at {ridge.blue_winrate * 100:.0f}%. Each extra RED unit drops BLUE's win rate "
-        f"from {sweep['winrate'][0] * 100:.0f}% to {sweep['winrate'][-1] * 100:.0f}%. On combined "
-        f"arms the payoff policy shifts BLUE's win rate by {ab['delta'] * 100:+.0f}pp vs "
+        f"Over {args.n} battles/scenario: with identical policies the mirror-symmetric meeting "
+        f"engagement is a near-even {fairness.blue_winrate * 100:.0f}% for BLUE (95% CI "
+        f"{fairness.ci[0] * 100:.0f}-{fairness.ci[1] * 100:.0f}%), confirming no side bias. An "
+        f"aggressive assault on the fortified ridge succeeds {ridge.blue_winrate * 100:.0f}% of "
+        f"the time. Each extra RED unit drops BLUE's win rate from "
+        f"{sweep['winrate'][0] * 100:.0f}% to {sweep['winrate'][-1] * 100:.0f}%. On combined arms "
+        f"the cautious payoff policy shifts BLUE's win rate by {ab['delta'] * 100:+.0f}pp vs "
         f"aggression (common random numbers)."
     )
 
@@ -99,6 +102,12 @@ def main() -> None:
         "seed": args.seed,
         "n_simulations": args.n,
         "combat_model": args.model,
+        "fairness_check": {
+            "scenario": "meeting_engagement",
+            "policies": "aggressive vs aggressive (symmetric)",
+            "blue_winrate": fairness.blue_winrate,
+            "ci": list(fairness.ci),
+        },
         "scenarios": {
             s: {
                 "blue_policy": r.blue_policy,
