@@ -13,13 +13,15 @@ import { IconSearch, IconShield } from "./components/icons.jsx";
 
 // Framework tags per track (client-side; keeps the data file lean).
 const TRACK_TAGS = {
-  "00-foundations": ["MITRE ATT&CK", "MITRE ATLAS"],
-  "01-detection-engineering": ["MITRE ATT&CK", "detection-as-code"],
+  "01-detection-engineering": ["MITRE ATT&CK", "drift monitoring"],
   "02-adversarial-robustness": ["MITRE ATLAS", "evasion"],
-  "03-ml-privacy": ["MITRE ATLAS", "differential privacy"],
-  "04-llm-security": ["OWASP LLM Top 10"],
+  "03-ml-privacy": ["MITRE ATLAS", "membership inference"],
+  "04-llm-security": ["OWASP LLM Top 10", "interpretability"],
   "05-ml-supply-chain": ["MITRE ATLAS", "MLSecOps"],
-  "06-financial-ml": ["fraud", "AML", "anomaly detection"],
+  "06-financial-ml": ["fraud", "adversarial ML"],
+  "07-applied-nlp": ["applied NLP", "sentiment"],
+  "08-ml-depth": ["ML depth", "graph neural nets"],
+  "09-deep-learning": ["interpretability", "model compression"],
 };
 const tagsFor = (p) => TRACK_TAGS[p.track] || [];
 
@@ -86,7 +88,7 @@ export default function App() {
             <div className="section-head">
               <span className="kicker">// breadth</span>
               <h2 className="section-title">Coverage across the field</h2>
-              <p className="section-sub">Balanced from foundations to flagship capstones — not just the flashy attacks.</p>
+              <p className="section-sub">Ten focused projects spanning detection, adversarial ML, privacy, LLM security, and ML depth — not just the flashy attacks.</p>
             </div>
             <TrackChart tracks={data.tracks} max={maxCount} />
           </Reveal>

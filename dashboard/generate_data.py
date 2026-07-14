@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Aggregate every project's results into one JSON the dashboard renders.
 
-Walks the six tracks, reads each project's results/metrics.json + README title,
+Walks the tracks, reads each project's results/metrics.json + README title,
 copies its figures into the dashboard's public/ assets, and writes
 src/data/projects.json. Re-run any time projects change:  python3 generate_data.py
 """
@@ -20,34 +20,27 @@ PUBLIC_FIG = DASH / "public" / "figures"
 OUT = DASH / "src" / "data" / "projects.json"
 
 TRACKS = [
-    ("00-foundations", "Foundations",
-     "Security fundamentals as artifacts: ATT&CK/ATLAS, threat modeling, networking, web/appsec, crypto."),
     ("01-detection-engineering", "Detection Engineering",
-     "ML on security telemetry: intrusion / malware / phishing / DGA detection, UEBA, detection-as-code."),
+     "ML on security telemetry, taken to production: monitoring a deployed detector for data/concept drift so it degrades safely."),
     ("02-adversarial-robustness", "Adversarial Robustness",
-     "Evasion attacks and defenses: FGSM/PGD/C&W, black-box, adversarial training, certified robustness."),
+     "Evasion attacks on ML: FGSM adversarial examples that collapse a 99% MNIST classifier with an imperceptible perturbation."),
     ("03-ml-privacy", "ML Privacy",
-     "Stealing models and training data, and defending with differential privacy."),
+     "Attacks that leak training data: a likelihood-ratio (LiRA) membership-inference attack that tells whether a record was in the training set."),
     ("04-llm-security", "LLM Security",
-     "Prompt injection, RAG/agent attacks, guardrails, CI red-team, alignment-robustness interpretability."),
+     "LLM safety & interpretability: abliteration — locating and ablating the single 'refusal direction' — plus the in-browser prompt-injection detector demo."),
     ("05-ml-supply-chain", "ML Supply Chain",
      "Securing the model supply chain: pickle-RCE, safetensors, scanning, Sigstore signing, CI gates."),
     ("06-financial-ml", "Financial Crime & Risk",
-     "ML for financial crime and risk: fraud, anomaly detection, AML typologies, credit risk, market manipulation."),
+     "Adversarial ML for financial crime: evade my own fraud model under feasibility constraints, then adversarially harden it and re-measure."),
     ("07-applied-nlp", "Applied NLP",
      "The ML/data-science strength the security half builds on: HuggingFace sentiment over 36k car reviews, validated vs. star ratings."),
     ("08-ml-depth", "ML Depth",
-     "Classical-but-deep ML scored vs. known ground truth: causal inference (doubly-robust ATE), Bayesian hierarchical modeling, graph neural networks."),
+     "Classical-but-deep ML scored vs. known ground truth: a from-scratch, pure-PyTorch graph neural network."),
     ("09-deep-learning", "Deep Learning",
-     "Modern DL depth: transformer mechanistic interpretability, reinforcement learning / RLHF, and model compression & efficient inference."),
-    ("10-simulation", "Simulation",
-     "Agent-based simulation: a tactical war-gaming engine running thousands of battles to stress-test strategies and quantify outcomes."),
+     "Modern DL depth: transformer mechanistic interpretability (induction heads, logit lens, activation patching) and model compression / efficient inference."),
 ]
 
-FLAGSHIPS = {
-    "CAPSTONE-adversarial-ids", "CAPSTONE-appsec-ci", "CAPSTONE-dp-defenses",
-    "p7-defend-rag", "secure-ml-pipeline",
-}
+FLAGSHIPS = {"secure-ml-pipeline", "CAPSTONE-adversarial-fraud"}
 SEED = {"p1-fgsm-mnist"}
 
 NOISE_KEYS = {"project", "summary", "figures", "seed", "note", "source", "track",
@@ -160,22 +153,6 @@ def build_highlights(by_id: dict) -> list[dict]:
                   "label": "accuracy", "project": "02-adversarial-robustness__p1-fgsm-mnist",
                   "blurb": "A tiny imperceptible perturbation collapses accuracy."})
 
-    asr_b = g("04-llm-security__p7-defend-rag", "asr_before")
-    asr_a = g("04-llm-security__p7-defend-rag", "asr_after")
-    if asr_b is not None and asr_a is not None:
-        H.append({"title": "Guardrails kill RAG prompt-injection",
-                  "before": pct(asr_b), "after": pct(asr_a),
-                  "label": "attack success", "project": "04-llm-security__p7-defend-rag",
-                  "blurb": "Layered guardrails + a from-scratch injection detector."})
-
-    ids_b = g("01-detection-engineering__CAPSTONE-adversarial-ids", "attack_before", "attack_success_rate")
-    ids_a = g("01-detection-engineering__CAPSTONE-adversarial-ids", "attack_after", "attack_success_rate")
-    if ids_b is not None and ids_a is not None:
-        H.append({"title": "Harden your own IDS against evasion",
-                  "before": pct(ids_b), "after": pct(ids_a),
-                  "label": "evasion rate", "project": "01-detection-engineering__CAPSTONE-adversarial-ids",
-                  "blurb": "Constrained adversarial flows, then adversarial training."})
-
     p8 = "04-llm-security__p8-refusal-direction-interp"
     ref_b = g(p8, "refusal_rate_harmful_before")
     ref_a = g(p8, "refusal_rate_harmful_after")
@@ -210,8 +187,8 @@ ROADMAP = [
      "detail": "Drop your API key (or local Ollama) into .env and re-run the LLM-security attacks/defenses on a real model."},
     {"title": "Abliterate a real open-weight model",
      "detail": "Enable the p8 real-model path (transformers + a small Qwen/Llama) on a free Colab/Kaggle GPU."},
-    {"title": "Ship the CI-gated red-team",
-     "detail": "Turn on the appsec-ci GitHub Action so every commit runs a red-team and fails on ASR regressions."},
+    {"title": "Gate drift in CI",
+     "detail": "Wire the drift monitor into GitHub Actions so a shift in live data fails the build before a stale model ships."},
     {"title": "Deploy this dashboard",
      "detail": "Publish to GitHub Pages for a shareable 'click this link' portfolio artifact."},
     {"title": "Deepen a flagship",

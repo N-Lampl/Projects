@@ -1,5 +1,9 @@
 # Roadmap
 
+> **Note:** the repository has since been curated down to **10 flagship projects**. The plan below
+> reflects the original, broader roadmap and references projects that are no longer in the repo; it's
+> kept as a record of the intended learning arc, not the current contents.
+
 A ~30-week, phase-by-phase build order. Lead with the data-science strength (detection), build to the
 attack-and-defend flagships, finish the most market-aligned work (LLM security) to highest polish.
 

@@ -22,8 +22,8 @@ The top "Playground" section runs two **real trained models entirely client-side
 no API. Model weights are exported to JSON and the scoring math is reproduced in plain JavaScript
 (see [`src/playground/`](src/playground/)), matching the Python originals to ~1e-6:
 
-- **Prompt-injection detector** — the TF-IDF + LogisticRegression guard from
-  `04-llm-security/p7-defend-rag`.
+- **Prompt-injection detector** — a TF-IDF + LogisticRegression guard trained in the LLM-security
+  track; weights committed at `src/data/injection_model.json`.
 - **Fraud-evasion sandbox** — the logistic baseline + adversarially-trained gradient boosting from
   `06-financial-ml/CAPSTONE-adversarial-fraud`, with the greedy evasion ported to JS.
 

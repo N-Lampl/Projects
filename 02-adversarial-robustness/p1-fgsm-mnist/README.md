@@ -49,8 +49,7 @@ Outputs land in [results/](results/):
 
 Clean accuracy is ~99%. By ε≈0.2–0.3 (a perturbation that's barely visible) the model is wrong on the
 large majority of images — a vivid demonstration that high test accuracy says **nothing** about
-robustness. That gap is the entire reason the rest of track 02 (and the adversarial-IDS capstone in
-track 01) exists.
+robustness. That gap is the whole reason adversarial robustness is its own problem.
 
 ## Interview story (3 sentences)
 

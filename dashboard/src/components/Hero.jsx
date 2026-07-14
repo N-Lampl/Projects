@@ -22,10 +22,10 @@ export default function Hero({ data }) {
             I break and harden <span className="grad">machine-learning systems</span>.
           </h1>
           <p className="hero-lead">
-            A data-scientist's pivot into ML security — {t.projects} self-contained, reproducible
-            projects spanning detection engineering, adversarial robustness, model privacy, LLM
-            red-teaming, and ML supply-chain. Each one runs offline and is grounded in MITRE
-            ATLAS / OWASP. The results below are generated from real runs, not mocked up.
+            I'm a data scientist moving into ML security. {t.projects} focused projects covering
+            detection, adversarial robustness, model privacy, LLM security, and the ML supply
+            chain. Everything runs offline, maps to MITRE ATLAS / OWASP, and every number below
+            comes from a real run — not a mockup.
           </p>
           <div className="hero-cta">
             <a className="btn btn-primary" href="#playground">Try the live demos <IconArrow /></a>

@@ -1,9 +1,0 @@
-numpy==1.26.4
-scipy==1.13.0
-matplotlib==3.9.0
-# dev:
-# pytest==8.2.0
-# ruff==0.5.6
-# optional probabilistic-programming cross-check (not needed for the default run):
-# pymc==5.16.2
-# arviz==0.18.0

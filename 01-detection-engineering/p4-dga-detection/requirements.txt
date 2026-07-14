@@ -1,8 +1,0 @@
-# Default path uses only these (all in the portfolio base env):
-scikit-learn==1.5.2
-numpy==1.26.4
-pandas==2.2.3
-matplotlib==3.9.2
-
-# Optional enhanced path (char-LSTM, imported lazily inside src/dga_detection/lstm.py):
-torch==2.4.1

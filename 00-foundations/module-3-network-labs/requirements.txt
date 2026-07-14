@@ -1,7 +1,0 @@
-# Default offline path needs only matplotlib (plus the Python stdlib).
-matplotlib==3.9.2
-
-# --- optional enhanced path (craft/parse with scapy instead of pure-python) ---
-# Install explicitly to enable `--engine scapy`:
-#   pip install scapy==2.5.0
-# scapy==2.5.0

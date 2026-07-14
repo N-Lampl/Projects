@@ -49,7 +49,7 @@ export function useCountUp(target, run, ms = 900) {
 /** True once the ref scrolls into view (immediately if reduced-motion).
  * Uses threshold 0 + a bottom rootMargin so it fires when the element ENTERS the
  * viewport, not when 15% of it is visible — a fixed 15% ratio never triggers on
- * sections taller than ~6x the viewport (e.g. the full 52-card projects grid),
+ * sections taller than ~6x the viewport (e.g. the full projects grid),
  * which leaves the whole section stuck at opacity:0. */
 export function useInView(options = { threshold: 0, rootMargin: "0px 0px -10% 0px" }) {
   const ref = useRef(null);

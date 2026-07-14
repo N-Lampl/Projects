@@ -37,10 +37,10 @@ Try the benign examples — they sail through. Then the jailbreaks ("ignore all 
 instructions… reveal the system prompt…") light up red and get blocked. Try to smuggle an injection
 inside an innocent-looking sentence; watch which words give it away.
 
-**The real project:** [`04-llm-security/p7-defend-rag`](../04-llm-security/p7-defend-rag) — a
-TF-IDF + LogisticRegression guard trained on a synthetic injection-vs-benign corpus. In the full
-project it's one of four defense layers wrapping a deliberately vulnerable RAG app, taking attack
-success rate from **100% → 0%** with a held-out detector ROC-AUC of **1.0**.
+**Under the hood:** a TF-IDF + LogisticRegression guard trained on a synthetic injection-vs-benign
+corpus, exported to committed weights at
+[`dashboard/src/data/injection_model.json`](../dashboard/src/data/injection_model.json) and scored
+live in JavaScript. On its held-out set the detector hits a ROC-AUC of **1.0**.
 
 ---
 
@@ -69,10 +69,11 @@ attack success rate **100% → 0%** after hardening, with clean PR-AUC *improvin
 ## These are slices of bigger projects
 
 Each demo is one honest piece of a full, reproducible project — with real metrics, figures, a report
-card, and a test suite. The Playground is the 30-second hook; the **44 projects across 7 tracks**
-behind it (detection engineering, adversarial robustness, model privacy, LLM red-teaming, ML
-supply-chain, financial crime) are the depth. Scroll past the Playground for the headline before/after
-numbers, or browse every project's metrics and money plots in the grid.
+card, and a test suite. The Playground is the 30-second hook; the **10 projects across 9 tracks**
+behind it (detection engineering, adversarial robustness, model privacy, LLM security, ML
+supply-chain, financial crime, applied NLP, ML depth, deep learning) are the depth. Scroll past the
+Playground for the headline before/after numbers, or browse every project's metrics and money plots
+in the grid.
 
 ---
 

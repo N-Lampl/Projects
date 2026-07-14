@@ -1,7 +1,0 @@
-# Pinned fallback deps for the default (offline) run path.
-# The coverage script needs only the standard library + matplotlib.
-matplotlib==3.9.2
-
-# Dev / lint / test (optional)
-pytest==8.3.3
-ruff==0.6.9

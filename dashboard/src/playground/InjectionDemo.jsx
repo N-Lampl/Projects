@@ -37,8 +37,8 @@ export default function InjectionDemo() {
           <h3 className="pg-demo-title">Prompt-injection detector</h3>
           <div className="pg-demo-tag">
             real TF-IDF + LogisticRegression ·{" "}
-            <a href="https://github.com/N-Lampl/Projects/tree/main/ml-security-portfolio/04-llm-security/p7-defend-rag" target="_blank" rel="noreferrer">
-              04-llm-security/p7-defend-rag
+            <a href="https://github.com/N-Lampl/Projects/blob/main/ml-security-portfolio/dashboard/src/data/injection_model.json" target="_blank" rel="noreferrer">
+              exported weights
             </a>
           </div>
         </div>

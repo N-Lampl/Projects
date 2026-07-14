@@ -1,9 +1,9 @@
 # ml-security-portfolio
 
 > A data scientist's pivot into ML security: a CPU-only monorepo that **attacks _and_ defends** real
-> ML systems — detection engineering, adversarial evasion, model privacy, LLM red-teaming, and ML
-> supply-chain security — every project self-contained, reproducible, and grounded in
-> **MITRE ATLAS / ATT&CK** and the **OWASP LLM Top 10**.
+> ML systems — drift monitoring, adversarial evasion, model-privacy attacks, LLM interpretability &
+> prompt-injection defense, and ML supply-chain security — every project self-contained, reproducible,
+> and grounded in **MITRE ATLAS / ATT&CK** and the **OWASP LLM Top 10**.
 
 **Authorized use only.** Every technique here runs against models, data, and apps I own or am
 licensed to test. See **[ETHICS.md](ETHICS.md)**.
@@ -30,31 +30,29 @@ for LLMs).
 
 ## Project index
 
-**51 projects across 10 tracks — all built, every one passing its fast test suite.** Each runs
+**10 flagship projects across 9 tracks — all built, every one passing its fast test suite.** Each runs
 **offline & deterministically** out of the box (synthetic data / mock LLM fallbacks); real datasets,
-LLM API keys, or a GPU *enhance* specific projects but are never required to see them work.
+LLM API keys, or a GPU *enhance* specific projects but are never required to see them work. This is a
+deliberately curated cut of a larger body of work — one strong, fully-owned piece per theme.
 
-Legend: built & tested · flagship = interview pieces
+| Track | Project | What it demonstrates | Maps to |
+|---|---|---|---|
+| **01 detection** | [p7-drift-monitoring](01-detection-engineering/p7-drift-monitoring) | Monitoring a deployed detector for data/concept drift (PSI/KS) and alerting before it silently degrades | MLOps · ATT&CK |
+| **02 adversarial** | [p1-fgsm-mnist](02-adversarial-robustness/p1-fgsm-mnist) | FGSM adversarial examples collapse a 99% MNIST CNN with an imperceptible perturbation | ATLAS AML.T0043 |
+| **03 privacy** | [p3-membership-inference](03-ml-privacy/p3-membership-inference) | LiRA likelihood-ratio membership inference: was this record in the training set? | ATLAS AML.T0024 |
+| **04 llm-security** | [p8-refusal-direction-interp](04-llm-security/p8-refusal-direction-interp) | **Abliteration** — refusal lives on one direction; locate it, ablate it, keep capability | interp · LLM safety |
+| **05 supply-chain** | [secure-ml-pipeline](05-ml-supply-chain/secure-ml-pipeline) | pickle-RCE PoC → safetensors → ModelScan → Sigstore signing → CI gate | ATLAS AML.T0010 |
+| **06 financial** | [CAPSTONE-adversarial-fraud](06-financial-ml/CAPSTONE-adversarial-fraud) | Evade my **own** fraud model under feature-mutability constraints → harden → re-measure | ATLAS AML.T0015 |
+| **07 applied-nlp** | [p1-car-reviews](07-applied-nlp/p1-car-reviews) | HuggingFace sentiment over 36,984 car reviews **by brand & model**, validated vs. 1-5 star ratings | applied NLP · sentiment |
+| **08 ml-depth** | [p3-graph-neural-networks](08-ml-depth/p3-graph-neural-networks) | A from-scratch, pure-PyTorch GCN scored vs. known ground truth | ML depth |
+| **09 deep-learning** | [p1-transformer-interp](09-deep-learning/p1-transformer-interp) | Mechanistic interpretability: induction heads + logit lens + activation patching | interp · modern DL |
+| **09 deep-learning** | [p3-model-compression](09-deep-learning/p3-model-compression) | Pruning / quantization / distillation Pareto — size vs. accuracy trade-offs | efficient DL |
 
-| Track | Projects | What it demonstrates | Maps to | Status |
-|---|---|---|---|---|
-| **00 foundations** | attack-atlas, stride-ml, network-labs, web-appsec, crypto-lab, certpath | Security vocabulary, threat modeling, the frameworks every track references | ATT&CK · ATLAS | done |
-| **01 detection** | ids_pipeline, nids-baseline, malware-ember, phishing-url, dga, log-ueba, threat-informed, drift | ML on security telemetry; detection-as-code (Sigma) | ATT&CK | done |
-| **01 detection** | CAPSTONE-adversarial-ids | Evade my **own** IDS under feature-mutability constraints → harden → re-measure | ATLAS AML.T0015 | done |
-| **02 adversarial** | p1-fgsm-mnist, attack-zoo, pretrained-foolbox, transfer-blackbox, adv-input-detector, adv-training, randomized-smoothing | FGSM/PGD/C&W/DeepFool, black-box, defenses, certified robustness | ATLAS AML.T0043 | done |
-| **03 privacy** | api-threat-model, model-extraction, membership-inference (LiRA), inversion, llm-privacy, DP-defenses | Stealing models & training data; differential privacy | ATLAS AML.T0024/T0048 | done |
-| **04 llm-security** | owasp-lab, garak-scan, promptfoo, vulnerable-rag, attack-rag-pyrit, agent-tool-abuse, p8-refusal-interp | Prompt injection, jailbreaks, RAG/agent attacks, alignment-robustness interp | OWASP LLM Top 10 | done |
-| **04 llm-security** | p7-defend-rag, CAPSTONE-appsec-ci | Guardrails + ML injection detector; CI-gated red-team with ASR thresholds | OWASP LLM01/02 | done |
-| **05 supply-chain** | secure-ml-pipeline | pickle-RCE PoC → safetensors → ModelScan → Sigstore signing → CI gate | ATLAS AML.T0010 | done |
-| **06 financial** | fraud-detection, transaction-anomaly, aml-typologies, credit-risk-scoring, market-manipulation | Financial-crime & risk ML: imbalanced fraud, anomaly detection, AML graphs, calibration | fraud · AML · risk | done |
-| **06 financial** | CAPSTONE-adversarial-fraud | Evade my **own** fraud model under feature-mutability constraints → harden → re-measure | ATLAS AML.T0015 | done |
-| **07 applied-nlp** | p1-car-reviews | HuggingFace sentiment over 36,984 car reviews **by brand & model**, validated vs. 1-5 star ratings; aspects, keywords, topics, summaries | applied NLP · sentiment | done |
-| **08 ml-depth** | causal-inference, bayesian-probabilistic, graph-neural-networks | Causal ATE (IPW / doubly-robust AIPW), a from-scratch Bayesian Gibbs sampler with calibration, a pure-PyTorch GCN — each scored vs known ground truth | ML depth · inference | done |
-| **09 deep-learning** | transformer-interp, rl-rlhf, model-compression | Induction heads + logit lens + activation patching, policy gradients + RLHF-from-preferences, pruning/quantization/distillation Pareto | ML depth · modern DL | done |
-
-The full rationale, 30-week learning roadmap, and scope decisions live in
-[`docs/ROADMAP.md`](docs/ROADMAP.md). The interactive showcase **dashboard** (React/Vite) is the planned
-final deliverable.
+The interactive **dashboard** (React/Vite) opens with two live in-browser demos: a **prompt-injection
+detector** you can try to sneak past (real TF-IDF + LogisticRegression weights exported from the
+LLM-security work) and the **adversarial-fraud** model you can watch a fraudster evade before the
+hardened version shuts it down. The original 30-week learning roadmap lives in
+[`docs/ROADMAP.md`](docs/ROADMAP.md).
 
 ## Quickstart
 
@@ -73,17 +71,16 @@ git-ignored `data/` + `models/`), so once you've read one you can read them all.
 ## Repo layout
 
 ```
-00-foundations/        # security fundamentals as artifacts; every track links back here
-01-detection-engineering/
-02-adversarial-robustness/
-03-ml-privacy/
-04-llm-security/
-05-ml-supply-chain/
-06-financial-ml/
-07-applied-nlp/        # applied NLP / data science (the ML strength the security half builds on)
-08-ml-depth/           # causal inference, Bayesian modeling, graph neural networks
-09-deep-learning/      # transformer interpretability, RL/RLHF, model compression
-docs/                  # ROADMAP.md, shared ATLAS/ATT&CK navigator layers, top-level plots
+01-detection-engineering/   # ML on security telemetry → drift monitoring in production
+02-adversarial-robustness/  # evasion attacks (FGSM)
+03-ml-privacy/              # training-data leakage (membership inference / LiRA)
+04-llm-security/            # LLM interpretability (abliteration) + the prompt-injection detector demo
+05-ml-supply-chain/         # pickle-RCE → safetensors → signing → CI gate
+06-financial-ml/            # adversarial fraud: evade my own model, then harden it
+07-applied-nlp/             # applied NLP / data science (the ML strength the security half builds on)
+08-ml-depth/               # graph neural networks (from scratch)
+09-deep-learning/          # transformer interpretability, model compression
+docs/                       # ROADMAP.md, shared ATLAS/ATT&CK navigator layers, top-level plots
 ```
 
 ## Conventions

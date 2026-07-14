@@ -1,9 +1,0 @@
-# Default run path needs only these four (all CPU, no GPU):
-numpy==2.1.3
-pandas==2.2.3
-scikit-learn==1.5.2
-matplotlib==3.9.2
-
-# Optional: nicer cycle detection + ring graph viz. The code falls back to a
-# pure-python SCC implementation + adjacency heatmap if this is absent.
-networkx==3.4.2
