@@ -41,7 +41,7 @@ export default function Lightbox({ figures, index, onClose, onMove }) {
           <IconChevron />
         </button>
       )}
-      <div className="cap">{fig.name} — {index + 1}/{figures.length}</div>
+      <div className="cap">{fig.name} · {index + 1}/{figures.length}</div>
     </div>
   );
 }

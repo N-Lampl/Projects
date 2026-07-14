@@ -10,7 +10,7 @@ export function useTheme() {
     if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
       return localStorage.getItem("theme");
     }
-    return "dark";
+    return "light";
   });
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);

@@ -182,7 +182,7 @@ export default function FraudDemo() {
                 <div className="pg-feat locked" key={f.name}>
                   <div className="pg-feat-row">
                     <span className="pg-feat-label">
-                      {f.label} <span className="pg-lock">🔒 locked</span>
+                      {f.label} <span className="pg-lock">locked</span>
                     </span>
                     <span className="pg-feat-val locked">{fmt(f, x[i])}</span>
                   </div>
@@ -209,12 +209,12 @@ export default function FraudDemo() {
             <div className="pg-status">
               {outcome === "held" && (
                 <>
-                  <b className="broke">Baseline fooled</b> — the fraud now scores below the alert
+                  <b className="broke">Baseline fooled</b>: the fraud now scores below the alert
                   line and slips through. The <b className="win">hardened model still flags it.</b>
                 </>
               )}
               {outcome === "broke" && (
-                <>Both models evaded on this one — try another seed (transfer is rare: ~13%).</>
+                <>Both models evaded on this one. Try another seed (transfer is rare: ~13%).</>
               )}
               {outcome === "failed" && (
                 <>The attack couldn’t push this transaction under the line within the budget.</>
@@ -241,8 +241,8 @@ export default function FraudDemo() {
             </ul>
             <p>
               Against the linear baseline this hits a <b>100% attack success rate</b>. Three rounds
-              of adversarial training with a non-linear gradient-boosting head — which can carve out
-              the bounded fraud region a single hyperplane can’t — cut it to <b>0%</b>, while clean
+              of adversarial training with a non-linear gradient-boosting head (which can carve out
+              the bounded fraud region a single hyperplane can’t) cut it to <b>0%</b>, while clean
               PR-AUC actually <em>improved</em> from {HEADLINE.prAucBefore} to 0.65. Both models run
               here exactly as exported from Python.
             </p>

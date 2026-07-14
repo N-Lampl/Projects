@@ -4,7 +4,6 @@ import { useInView, useTheme } from "./hooks.js";
 import Nav from "./components/Nav.jsx";
 import Hero from "./components/Hero.jsx";
 import Highlights from "./components/Highlights.jsx";
-import TrackChart from "./components/TrackChart.jsx";
 import ProjectCard from "./components/ProjectCard.jsx";
 import ProjectModal from "./components/ProjectModal.jsx";
 import Lightbox from "./components/Lightbox.jsx";
@@ -37,8 +36,6 @@ export default function App() {
   const [selected, setSelected] = useState(null);
   const [lb, setLb] = useState({ figures: null, index: null });
 
-  const maxCount = Math.max(...data.tracks.map((t) => t.projectIds.length));
-
   const visible = useMemo(() => {
     const q = query.trim().toLowerCase();
     return data.projects.filter((p) => {
@@ -64,9 +61,9 @@ export default function App() {
         <section className="section" id="playground">
           <Reveal>
             <div className="section-head">
-              <span className="kicker">// try it yourself</span>
+              <span className="kicker">Try it yourself</span>
               <h2 className="section-title">Live attack &amp; defense playground</h2>
-              <p className="section-sub">Real trained models running client-side — attack them, then watch the hardened versions hold.</p>
+              <p className="section-sub">Real trained models running client-side. Attack them, then watch the hardened versions hold.</p>
             </div>
             <Playground />
           </Reveal>
@@ -75,7 +72,7 @@ export default function App() {
         <section className="section" id="results">
           <Reveal>
             <div className="section-head">
-              <span className="kicker">// headline results</span>
+              <span className="kicker">Headline results</span>
               <h2 className="section-title">What the attacks &amp; defenses prove</h2>
               <p className="section-sub">Real before/after numbers pulled straight from each project's metrics.json.</p>
             </div>
@@ -83,21 +80,10 @@ export default function App() {
           </Reveal>
         </section>
 
-        <section className="section" id="coverage">
-          <Reveal>
-            <div className="section-head">
-              <span className="kicker">// breadth</span>
-              <h2 className="section-title">Coverage across the field</h2>
-              <p className="section-sub">Ten focused projects spanning detection, adversarial ML, privacy, LLM security, and ML depth — not just the flashy attacks.</p>
-            </div>
-            <TrackChart tracks={data.tracks} max={maxCount} />
-          </Reveal>
-        </section>
-
         <section className="section" id="projects">
           <Reveal>
             <div className="section-head">
-              <span className="kicker">// {data.projects.length} projects</span>
+              <span className="kicker">{data.projects.length} projects</span>
               <h2 className="section-title">Every project</h2>
               <p className="section-sub">Filter by track or search. Click any card for full metrics and figures.</p>
             </div>

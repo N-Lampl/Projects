@@ -15,7 +15,7 @@ function tokenStyle(contribution, maxAbs) {
   const alpha = (0.12 + 0.55 * intensity).toFixed(2);
   const color = contribution > 0
     ? `rgba(248, 113, 113, ${alpha})` // danger
-    : `rgba(34, 197, 94, ${alpha})`; // accent
+    : `rgba(43, 124, 240, ${alpha})`; // accent (blue)
   return { background: color };
 }
 
@@ -82,7 +82,7 @@ export default function InjectionDemo() {
 
         {result.tokens.length > 0 && (
           <div className="pg-tokens">
-            <span className="pg-tokens-cap">tokens the model sees — red pushed toward “injection”</span>
+            <span className="pg-tokens-cap">tokens the model sees, red pushed toward “injection”</span>
             {result.tokens.map((t, i) => (
               <span key={i} className="pg-tok" style={tokenStyle(t.contribution, maxAbs)}>
                 {t.text}{" "}
@@ -95,12 +95,12 @@ export default function InjectionDemo() {
           <summary>How this works</summary>
           <div className="pg-details-body">
             <p>
-              This is the actual first-line guard from the <em>defend-RAG</em> project: a{" "}
+              This is the actual first-line guard I built to catch RAG prompt injection: a{" "}
               <code>TfidfVectorizer</code> (word 1–2grams) feeding a{" "}
               <code>LogisticRegression</code>, trained on a synthetic corpus of injection vs.
               benign text. The exact weights were exported to JSON and the scoring math
               (sublinear TF, IDF, L2-norm, sigmoid) is reproduced here in ~40 lines of
-              JavaScript — so this verdict matches the Python model to ~1e-6.
+              JavaScript, so this verdict matches the Python model to ~1e-6.
             </p>
             <p>
               In the full project it’s one of four defense layers wrapping a deliberately

@@ -15,44 +15,22 @@ export default function Hero({ data }) {
   const t = data.totals;
   return (
     <header className="hero wrap" id="overview">
-      <div className="hero-grid">
-        <div>
-          <span className="eyebrow"><IconTerminal width={15} height={15} /> attack &amp; defend ML</span>
-          <h1>
-            I break and harden <span className="grad">machine-learning systems</span>.
-          </h1>
-          <p className="hero-lead">
-            I'm a data scientist moving into ML security. {t.projects} focused projects covering
-            detection, adversarial robustness, model privacy, LLM security, and the ML supply
-            chain. Everything runs offline, maps to MITRE ATLAS / OWASP, and every number below
-            comes from a real run — not a mockup.
-          </p>
-          <div className="hero-cta">
-            <a className="btn btn-primary" href="#playground">Try the live demos <IconArrow /></a>
-            <a className="btn" href="#results">See the results</a>
-            <a className="btn" href={data.repoUrl} target="_blank" rel="noreferrer">
-              <IconGithub /> Source code
-            </a>
-          </div>
-          <p className="byline">Built &amp; maintained by Nick Lampl · data refreshed {data.generatedAt}</p>
-        </div>
-
-        <div className="hero-side">
-          <div className="term" aria-hidden="true">
-            <div className="term-bar">
-              <span className="term-dot" style={{ background: "#f87171" }} />
-              <span className="term-dot" style={{ background: "#f0b429" }} />
-              <span className="term-dot" style={{ background: "#22c55e" }} />
-              <span className="term-title">~/p1-fgsm-mnist — make attack</span>
-            </div>
-            <div className="term-body">
-              <div className="cmd">make attack</div>
-              <div className="out">training SmallCNN on MNIST (2 epochs, CPU)…</div>
-              <div className="out">clean test accuracy: <span className="ok">98.7%</span></div>
-              <div className="out">FGSM eps=0.30 → accuracy: <span className="warn">9.3%</span></div>
-              <div className="ok">OK wrote results/metrics.json + figures</div>
-            </div>
-          </div>
+      <div>
+        <span className="eyebrow"><IconTerminal width={15} height={15} /> attack &amp; defend ML</span>
+        <h1>
+          I break and harden <span className="grad">machine-learning systems</span>.
+        </h1>
+        <p className="hero-lead">
+          I'm a data scientist moving into ML security. {t.projects} focused projects covering
+          detection, adversarial robustness, model privacy, LLM security, and the ML supply
+          chain. Everything runs offline and maps to MITRE ATLAS / OWASP.
+        </p>
+        <div className="hero-cta">
+          <a className="btn btn-primary" href="#playground">Try the live demos <IconArrow /></a>
+          <a className="btn" href="#results">See the results</a>
+          <a className="btn" href={data.repoUrl} target="_blank" rel="noreferrer">
+            <IconGithub /> Source code
+          </a>
         </div>
       </div>
 
