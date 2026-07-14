@@ -20,7 +20,7 @@ function scalars(raw) {
   return out;
 }
 
-export default function ProjectModal({ project, tags, repoUrl, onClose, onOpenFig }) {
+export default function ProjectModal({ project, repoUrl, onClose, onOpenFig }) {
   useBodyLock(!!project);
   useEffect(() => {
     const onKey = (e) => e.key === "Escape" && onClose();
@@ -42,11 +42,12 @@ export default function ProjectModal({ project, tags, repoUrl, onClose, onOpenFi
           <button className="icon-btn" onClick={onClose} aria-label="Close details"><IconClose /></button>
         </div>
         <div className="modal-body">
-          <div className="tags">
-            {project.kind === "flagship" && <span className="tag flag">flagship</span>}
-            {project.kind === "seed" && <span className="tag seed">seed</span>}
-            {tags.map((t) => <span className="tag" key={t}>{t}</span>)}
-          </div>
+          {(project.kind === "flagship" || project.kind === "seed") && (
+            <div className="tags">
+              {project.kind === "flagship" && <span className="tag flag">flagship</span>}
+              {project.kind === "seed" && <span className="tag seed">seed</span>}
+            </div>
+          )}
 
           {project.summary && <p className="lead">{project.summary}</p>}
 

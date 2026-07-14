@@ -4,12 +4,12 @@ export default function Hero({ data }) {
   const t = data.totals;
   return (
     <header className="hero wrap" id="overview">
-      <span className="eyebrow">attack &amp; defend ML</span>
-      <h1>I break and harden machine-learning systems.</h1>
+      <span className="eyebrow">learning ML security</span>
+      <h1>Learning to break and harden machine-learning systems.</h1>
       <p className="hero-lead">
-        I'm a data scientist moving into ML security. {t.projects} focused projects covering
-        detection, adversarial robustness, model privacy, LLM security, and the ML supply
-        chain. Everything runs offline and maps to MITRE ATLAS / OWASP.
+        I'm a data scientist moving into ML security, learning it one project at a time.
+        {t.projects} focused projects across detection, adversarial robustness, model privacy,
+        LLM security, and the ML supply chain. Each one runs offline.
       </p>
       <div className="hero-cta">
         <a className="btn btn-primary" href="#playground">Try the live demos <IconArrow /></a>

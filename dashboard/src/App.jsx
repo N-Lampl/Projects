@@ -10,19 +10,6 @@ import Lightbox from "./components/Lightbox.jsx";
 import Playground from "./components/Playground.jsx";
 import { IconSearch, IconShield } from "./components/icons.jsx";
 
-// Framework tags per track (client-side; keeps the data file lean).
-const TRACK_TAGS = {
-  "01-detection-engineering": ["MITRE ATT&CK", "drift monitoring"],
-  "02-adversarial-robustness": ["MITRE ATLAS", "evasion"],
-  "03-ml-privacy": ["MITRE ATLAS", "membership inference"],
-  "04-llm-security": ["OWASP LLM Top 10", "interpretability"],
-  "05-ml-supply-chain": ["MITRE ATLAS", "MLSecOps"],
-  "06-financial-ml": ["fraud", "adversarial ML"],
-  "07-applied-nlp": ["applied NLP", "sentiment"],
-  "08-ml-depth": ["ML depth", "graph neural nets"],
-  "09-deep-learning": ["interpretability", "model compression"],
-};
-const tagsFor = (p) => TRACK_TAGS[p.track] || [];
 
 function Reveal({ children }) {
   const [ref, inView] = useInView();
@@ -73,7 +60,7 @@ export default function App() {
           <Reveal>
             <div className="section-head">
               <span className="kicker">Headline results</span>
-              <h2 className="section-title">What the attacks &amp; defenses prove</h2>
+              <h2 className="section-title">What the attacks &amp; defenses show</h2>
               <p className="section-sub">Real before/after numbers pulled straight from each project's metrics.json.</p>
             </div>
             <Highlights highlights={data.highlights} />
@@ -119,7 +106,7 @@ export default function App() {
             ) : (
               <div className="grid">
                 {visible.map((p) => (
-                  <ProjectCard key={p.id} project={p} tags={tagsFor(p)} repoUrl={data.repoUrl} onOpen={setSelected} />
+                  <ProjectCard key={p.id} project={p} repoUrl={data.repoUrl} onOpen={setSelected} />
                 ))}
               </div>
             )}
@@ -138,7 +125,6 @@ export default function App() {
 
       <ProjectModal
         project={selected}
-        tags={selected ? tagsFor(selected) : []}
         repoUrl={data.repoUrl}
         onClose={() => setSelected(null)}
         onOpenFig={(figures, index) => setLb({ figures, index })}

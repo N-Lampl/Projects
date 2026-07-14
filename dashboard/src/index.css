@@ -78,6 +78,12 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; text-decoratio
 .btn:active { transform: translateY(1px); }
 .btn-primary { background: var(--accent); color: var(--paper); border-color: var(--accent); }
 .btn-primary:hover { background: var(--accent-2); color: var(--paper); }
+.icon-btn {
+  display: grid; place-items: center; width: 34px; height: 34px; border-radius: 2px;
+  background: transparent; border: 1px solid var(--line); color: var(--muted); cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+.icon-btn:hover { color: var(--ink); border-color: var(--ink); }
 @media (max-width: 720px) { .nav-links { display: none; } }
 
 /* ============================ hero ============================ */

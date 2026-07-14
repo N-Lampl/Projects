@@ -2,7 +2,7 @@ import { IconArrow, IconExternal, IconStar } from "./icons.jsx";
 
 const asset = (u) => `${import.meta.env.BASE_URL}${u}`;
 
-export default function ProjectCard({ project, tags, repoUrl, onOpen }) {
+export default function ProjectCard({ project, repoUrl, onOpen }) {
   const { name, trackName, kind, summary, figures, repoPath } = project;
   const open = () => onOpen(project);
   return (
@@ -21,10 +21,6 @@ export default function ProjectCard({ project, tags, repoUrl, onOpen }) {
         </div>
         {kind === "flagship" && <span className="tag flag"><IconStar width={12} height={12} /> flagship</span>}
         {kind === "seed" && <span className="tag seed">seed</span>}
-      </div>
-
-      <div className="tags">
-        {tags.map((t) => <span className="tag" key={t}>{t}</span>)}
       </div>
 
       {summary && <p className="card-sum">{summary}</p>}
