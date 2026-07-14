@@ -1,4 +1,4 @@
-import { IconGithub, IconMoon, IconSun } from "./icons.jsx";
+import { IconGithub } from "./icons.jsx";
 
 const LINKS = [
   ["#playground", "Playground"],
@@ -6,12 +6,11 @@ const LINKS = [
   ["#projects", "Projects"],
 ];
 
-export default function Nav({ theme, onToggleTheme, repoUrl }) {
+export default function Nav({ repoUrl }) {
   return (
     <nav className="nav">
       <div className="wrap nav-inner">
         <a className="brand" href="#overview" aria-label="Home">
-          <span className="brand-mark">NL</span>
           <span>
             <span className="brand-name">Nick&nbsp;Lampl</span>
             <br />
@@ -24,13 +23,6 @@ export default function Nav({ theme, onToggleTheme, repoUrl }) {
           ))}
         </div>
         <div className="nav-right">
-          <button
-            className="icon-btn"
-            onClick={onToggleTheme}
-            aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
-          >
-            {theme === "dark" ? <IconSun /> : <IconMoon />}
-          </button>
           <a className="btn" href={repoUrl} target="_blank" rel="noreferrer">
             <IconGithub /> GitHub
           </a>

@@ -14,8 +14,8 @@ function tokenStyle(contribution, maxAbs) {
   const intensity = Math.min(1, Math.abs(contribution) / maxAbs);
   const alpha = (0.12 + 0.55 * intensity).toFixed(2);
   const color = contribution > 0
-    ? `rgba(248, 113, 113, ${alpha})` // danger
-    : `rgba(43, 124, 240, ${alpha})`; // accent (blue)
+    ? `rgba(192, 54, 28, ${alpha})` // pushes toward injection (accent)
+    : `rgba(150, 145, 130, ${alpha})`; // pushes toward benign (neutral)
   return { background: color };
 }
 
