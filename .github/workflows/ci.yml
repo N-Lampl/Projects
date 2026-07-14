@@ -1,7 +1,7 @@
 name: ci
 
 # Lint + FAST smoke tests only. Heavy work (training, attacks, dataset downloads)
-# is marked @pytest.mark.slow and excluded here — CI must never train a model.
+# is marked @pytest.mark.slow and excluded here - CI must never train a model.
 on:
   push:
     branches: [main]

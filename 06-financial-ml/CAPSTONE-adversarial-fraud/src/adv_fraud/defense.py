@@ -7,7 +7,7 @@ run for several rounds (a tabular analogue of Madry et al.'s min-max training):
   2. Craft evasions for the fraud rows the *current* model still catches, under
      the same mutability / feasibility threat model used at test time.
   3. Append those evasions back into the training set, *still labelled fraud*
-     (they are — only the model's belief changed), then refit.
+     (they are - only the model's belief changed), then refit.
   4. Repeat: each round attacks the freshly hardened model, so the defender keeps
      chasing the region the attacker keeps walking into.
 

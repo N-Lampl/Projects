@@ -1,6 +1,6 @@
 {
   "project": "p1-car-reviews",
-  "task": "model improvement \u2014 baseline vs. calibrated vs. fine-tuned",
+  "task": "model improvement - baseline vs. calibrated vs. fine-tuned",
   "test_n": 5000,
   "seed": 42,
   "results": {

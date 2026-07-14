@@ -16,9 +16,9 @@ wrong. One step, one equation:
 x_adv = clip( x + ε · sign( ∇_x  L(f(x), y) ), 0, 1 )
 ```
 
-- `∇_x L` — gradient of the loss w.r.t. the **input pixels** (not the weights).
-- `sign(...)` — take only the direction per pixel ⇒ an **L∞** attack: every pixel moves by exactly ε.
-- `clip(0,1)` — keep it a valid image.
+- `∇_x L` - gradient of the loss w.r.t. the **input pixels** (not the weights).
+- `sign(...)` - take only the direction per pixel ⇒ an **L∞** attack: every pixel moves by exactly ε.
+- `clip(0,1)` - keep it a valid image.
 
 The whole attack ([src/fgsm_mnist/attack.py](src/fgsm_mnist/attack.py)):
 
@@ -41,20 +41,20 @@ make attack ARGS=--full   # evaluate on the full 10k test set (slower)
 ```
 
 Outputs land in [results/](results/):
-- `figures/accuracy_vs_epsilon.png` — the **money plot**: accuracy collapsing as ε grows.
-- `figures/clean_vs_adversarial.png` — same digits, tiny perturbation, flipped predictions.
-- `metrics.json` — clean accuracy + accuracy at each ε (committed as evidence).
+- `figures/accuracy_vs_epsilon.png` - the **money plot**: accuracy collapsing as ε grows.
+- `figures/clean_vs_adversarial.png` - same digits, tiny perturbation, flipped predictions.
+- `metrics.json` - clean accuracy + accuracy at each ε (committed as evidence).
 
 ## What the result shows
 
 Clean accuracy is ~99%. By ε≈0.2–0.3 (a perturbation that's barely visible) the model is wrong on the
-large majority of images — a vivid demonstration that high test accuracy says **nothing** about
+large majority of images - a vivid demonstration that high test accuracy says **nothing** about
 robustness. That gap is the whole reason adversarial robustness is its own problem.
 
 ## Interview story (3 sentences)
 
 > I implemented FGSM from scratch to show that a 99%-accurate MNIST CNN can be driven to near-random
-> accuracy by an L∞ perturbation too small to see — using the model's own input gradients. It made
+> accuracy by an L∞ perturbation too small to see - using the model's own input gradients. It made
 > concrete *why* standard accuracy is a misleading security metric and motivated the defense work
 > (adversarial training, detectors) in the rest of the repo. The same gradient idea generalizes
 > straight to evading a tabular intrusion detector, which is my capstone.

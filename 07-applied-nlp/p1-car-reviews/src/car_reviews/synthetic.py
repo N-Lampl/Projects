@@ -1,4 +1,4 @@
-"""Seeded synthetic car-review generator — the DEFAULT offline / CI data path.
+"""Seeded synthetic car-review generator - the DEFAULT offline / CI data path.
 
 Real-world drop-in: the HuggingFace dataset ``florentgbelidji/car-reviews`` (see
 ``data.py`` / ``data/README.md``). This module fabricates a small review table

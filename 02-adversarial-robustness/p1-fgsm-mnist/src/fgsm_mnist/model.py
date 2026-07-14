@@ -1,4 +1,4 @@
-"""A small MNIST CNN — the target classifier we attack.
+"""A small MNIST CNN - the target classifier we attack.
 
 Deliberately tiny so it trains to ~99% in 2-3 epochs on CPU in a couple of minutes.
 """

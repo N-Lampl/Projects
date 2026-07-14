@@ -1,7 +1,7 @@
 """Distinctive keywords per model via TF-IDF (offline, scikit-learn).
 
 For each model with enough reviews, we surface the terms whose mean TF-IDF weight
-in *that model's* reviews most exceeds their weight across the whole corpus — i.e.
+in *that model's* reviews most exceeds their weight across the whole corpus - i.e.
 what reviewers say about this model that they don't say about cars in general.
 An optional KeyBERT path (``method="keybert"``) is available behind an extra.
 """

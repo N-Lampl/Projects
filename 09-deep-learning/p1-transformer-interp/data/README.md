@@ -9,7 +9,7 @@ README).
 [`../src/transformer_interp/task.py`](../src/transformer_interp/task.py) draws a
 random sequence over a small vocab and then **duplicates** it: `[a b c ... | a b
 c ...]`. In the repeated half the only reliable way to predict the next token is
-the **induction rule** — look back to the previous occurrence of the current
+the **induction rule** - look back to the previous occurrence of the current
 token and copy whatever followed it. A large vocab makes accidental repeats rare
 so the previous occurrence is unique and the induction signal is clean. The task
 also exposes next-token targets and a `repeat_mask`, so heads are scored only

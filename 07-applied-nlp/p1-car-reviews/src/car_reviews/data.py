@@ -1,7 +1,7 @@
-"""Load the car-review dataset — real HuggingFace data by default, with a
+"""Load the car-review dataset - real HuggingFace data by default, with a
 deterministic offline fallback so tests / CI never touch the network.
 
-Default (real) source: ``florentgbelidji/car-reviews`` on the HuggingFace Hub —
+Default (real) source: ``florentgbelidji/car-reviews`` on the HuggingFace Hub -
 36,984 Edmunds reviews, single ``train`` CSV split. Columns we use:
 ``Vehicle_Title`` (year+make+model+trim), ``Review`` (text), ``Review_Title``,
 ``Rating`` (1-5, the ground-truth label), ``Review_Date``, ``Author_Name``.

@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Run the compression study -> results/metrics.json + figures.
 
-Trains a baseline teacher MLP, then produces three compressed variants —
-magnitude pruning, post-training dynamic quantization, and a distilled student —
+Trains a baseline teacher MLP, then produces three compressed variants -
+magnitude pruning, post-training dynamic quantization, and a distilled student -
 benchmarks each on accuracy / size / latency / sparsity, and draws the
 accuracy-vs-size Pareto scatter plus the per-variant latency bar chart.
 """

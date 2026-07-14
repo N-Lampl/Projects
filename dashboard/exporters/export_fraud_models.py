@@ -173,7 +173,7 @@ def main() -> None:
         )
 
     payload = {
-        "_comment": "Exported by dashboard/exporters/export_fraud_models.py — real models from 06-financial-ml/CAPSTONE-adversarial-fraud.",
+        "_comment": "Exported by dashboard/exporters/export_fraud_models.py - real models from 06-financial-ml/CAPSTONE-adversarial-fraud.",
         "features": features,
         "threshold": float(thr),
         "attack": {

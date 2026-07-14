@@ -1,5 +1,5 @@
 # Run with:  pre-commit install  &&  pre-commit run --all-files
-# (pip install pre-commit  — or  uv tool install pre-commit)
+# (pip install pre-commit  - or  uv tool install pre-commit)
 minimum_pre_commit_version: "3.5.0"
 repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit

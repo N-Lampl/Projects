@@ -30,7 +30,7 @@ def get_device() -> str:
 
 
 def configure_torch_threads() -> int:
-    """Let torch use every core — the single biggest CPU inference lever.
+    """Let torch use every core - the single biggest CPU inference lever.
 
     Returns the thread count set (0 if torch is unavailable).
     """

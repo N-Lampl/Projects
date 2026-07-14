@@ -2,7 +2,7 @@
 """Detonate the benign pickle PoC INSIDE the sandbox container only.
 
 This is the one place that actually calls pickle.load() on untrusted bytes.
-It must NEVER be run on the host directly — that is what run_in_docker.sh and the
+It must NEVER be run on the host directly - that is what run_in_docker.sh and the
 container hardening (--network none --read-only --cap-drop ALL) exist to enforce.
 
 It prints whether the benign payload executed (i.e. the marker file appeared),

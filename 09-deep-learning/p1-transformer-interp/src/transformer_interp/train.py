@@ -52,8 +52,8 @@ def train_induction(
 ) -> TrainResult:
     """Train on freshly drawn induction batches; score the induction half only.
 
-    We only ask the model to predict the *repeated* half — that is where the
-    induction rule holds — so the loss pressure produces an induction head.
+    We only ask the model to predict the *repeated* half - that is where the
+    induction rule holds - so the loss pressure produces an induction head.
     """
     set_seed(seed)
     if cfg is None:

@@ -1,4 +1,4 @@
-# CAPSTONE · Adversarial Fraud — attack AND defend a fraud model
+# CAPSTONE · Adversarial Fraud - attack AND defend a fraud model
 
 <!-- realdata-banner -->
 > **Why synthetic here (on purpose).** The feature-mutability attack needs interpretable features (a fraudster changing *amount/timing* but not account age). Real fraud data (ULB) is anonymized PCA components that can't express that, so this capstone uses a realistic synthetic generator.
@@ -11,7 +11,7 @@ attack-success-rate, then **harden** the model with adversarial training and
 re-measure. The deliverable is a one-page *Fraud Model Robustness Report Card*.
 
 **Authorized use only.** Everything here is synthetic data and models I trained
-myself — no real cardholders, no production systems. See [../../ETHICS.md](../../ETHICS.md).
+myself - no real cardholders, no production systems. See [../../ETHICS.md](../../ETHICS.md).
 
 ## The idea
 
@@ -27,10 +27,10 @@ image attack:
 On top of mutability the attack enforces **plausibility bounds** (e.g. amount in
 `[$1, $5000]`), **integer fields** (`hour`, `n_items` are rounded), and a
 **consistency** rule (amount can't collapse below 5% of the account's own 30-day
-average — a $0.01 "big purchase" isn't realistic fraud).
+average - a $0.01 "big purchase" isn't realistic fraud).
 
 The attack itself ([src/adv_fraud/attack.py](src/adv_fraud/attack.py)) is a
-hand-rolled, numpy-only **greedy finite-difference descent** — the tabular
+hand-rolled, numpy-only **greedy finite-difference descent** - the tabular
 analogue of FGSM/PGD with no attack library. The sklearn pipeline isn't
 differentiable, so each step estimates `d(score)/d(feature)` by central finite
 differences over the *mutable* features only, steps downhill in fraud-score
@@ -61,19 +61,19 @@ python scripts/run_capstone.py --linear-defense   # keep the hardened model line
 ```
 
 Outputs land in [results/](results/):
-- `figures/robustness_before_after.png` — the **money plot**: ASR collapses while clean PR-AUC rises.
-- `figures/score_shift.png` — the attack pushing caught-fraud scores below the alert threshold.
-- `metrics.json` — clean PR-AUC/ROC-AUC, ASR_before, ASR_after, feasibility & consistency rates.
-- `REPORT_CARD.md` — the one-page robustness report card.
+- `figures/robustness_before_after.png` - the **money plot**: ASR collapses while clean PR-AUC rises.
+- `figures/score_shift.png` - the attack pushing caught-fraud scores below the alert threshold.
+- `metrics.json` - clean PR-AUC/ROC-AUC, ASR_before, ASR_after, feasibility & consistency rates.
+- `REPORT_CARD.md` - the one-page robustness report card.
 
 ## What the result shows
 
 With the default seed: the baseline logistic model has clean **PR-AUC ≈ 0.42 /
 ROC-AUC ≈ 0.92**, yet the feasibility-constrained attack reaches **ASR = 100%**
-on the frauds it caught — every counted evasion is feasible (feasibility = 1.0),
+on the frauds it caught - every counted evasion is feasible (feasibility = 1.0),
 i.e. realizable by an actual fraudster. After 3 rounds of adversarial training
 the hardened (gradient-boosted) model drops **ASR to 0%** *and* improves clean
-**PR-AUC to ≈ 0.65** with recall-at-budget rising from 0.63 to 0.85 — robustness
+**PR-AUC to ≈ 0.65** with recall-at-budget rising from 0.63 to 0.85 - robustness
 and detection both go up. The honest caveat printed on the card: ~13% of the
 *old* baseline-crafted evasions still slip past the hardened model, so this is
 not a clean sweep.
@@ -82,11 +82,11 @@ not a clean sweep.
 
 > I trained a fraud classifier and then attacked it with a hand-rolled,
 > numpy-only evasion search that only perturbs the fields a real fraudster
-> controls — amount, timing, merchant — within plausibility and consistency
+> controls - amount, timing, merchant - within plausibility and consistency
 > bounds, and drove its attack-success-rate to 100%. I then closed the gap with
 > iterative adversarial training, cutting ASR to 0% while *raising* clean PR-AUC,
 > and reported the residual transfer risk honestly on a one-page report card.
-> It's a min-max story — model the adversary, then train against them — with finance's
+> It's a min-max story - model the adversary, then train against them - with finance's
 > feature-mutability constraints that make the threat model realistic.
 
 ## Layout
@@ -106,4 +106,4 @@ data/ models/    git-ignored (synthetic data is generated in-memory at runtime)
 - Goodfellow, Shlens, Szegedy. *Explaining and Harnessing Adversarial Examples.* ICLR 2015. [arXiv:1412.6572](https://arxiv.org/abs/1412.6572)
 - Madry et al. *Towards Deep Learning Models Resistant to Adversarial Attacks.* ICLR 2018. [arXiv:1706.06083](https://arxiv.org/abs/1706.06083)
 - Ballet et al. *Imperceptible Adversarial Attacks on Tabular Data.* 2019. [arXiv:1911.03274](https://arxiv.org/abs/1911.03274) (feature-mutability for tabular attacks)
-- Optional real benchmark: ULB/Worldline *Credit Card Fraud Detection* (Kaggle, DbCL v1.0) — see [data/README.md](data/README.md).
+- Optional real benchmark: ULB/Worldline *Credit Card Fraud Detection* (Kaggle, DbCL v1.0) - see [data/README.md](data/README.md).

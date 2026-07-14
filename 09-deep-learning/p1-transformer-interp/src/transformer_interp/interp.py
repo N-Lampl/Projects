@@ -1,10 +1,10 @@
 """Three classic mechanistic-interpretability analyses on the tiny model.
 
-1. ``induction_head_score`` — how much attention mass each head puts on the
+1. ``induction_head_score`` - how much attention mass each head puts on the
    ``prev-occurrence + 1`` position (the induction source) in the repeated half.
-2. ``logit_lens`` — project each layer's residual stream through the unembedding
+2. ``logit_lens`` - project each layer's residual stream through the unembedding
    and measure next-token accuracy; it should sharpen with depth.
-3. ``activation_patching`` — splice a clean residual activation into a corrupted
+3. ``activation_patching`` - splice a clean residual activation into a corrupted
    run and measure how much of the correct-token logit is recovered.
 """
 
@@ -97,7 +97,7 @@ def activation_patching(
     We measure the correct-token logit at ``position`` (target = the clean
     next token) in three conditions: clean run, corrupt run, and corrupt run
     with the clean residual spliced in. The patching effect is the fraction of
-    the clean-minus-corrupt gap recovered by the splice — near 1.0 when that
+    the clean-minus-corrupt gap recovered by the splice - near 1.0 when that
     activation carries the information the model needs.
     """
     model.eval()

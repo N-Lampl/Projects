@@ -1,16 +1,16 @@
 # 02 · Adversarial Robustness (evasion & defenses)
 
-Attacking and defending models at inference time — start with the **quick win**: implement the
+Attacking and defending models at inference time - start with the **quick win**: implement the
 gradient-sign attack by hand and watch it flip a 99%-accurate classifier.
 
-Authorized use only — see [../ETHICS.md](../ETHICS.md). All targets are self-trained or public
+Authorized use only - see [../ETHICS.md](../ETHICS.md). All targets are self-trained or public
 pretrained weights.
 
 ## Project
 
 | Project | Build | Status |
 |---|---|---|
-| **`p1-fgsm-mnist/`** | **SEED** — FGSM from scratch (~30 lines); accuracy-vs-ε curve | done |
+| **`p1-fgsm-mnist/`** | **SEED** - FGSM from scratch (~30 lines); accuracy-vs-ε curve | done |
 
 ## Start with `p1-fgsm-mnist`
 

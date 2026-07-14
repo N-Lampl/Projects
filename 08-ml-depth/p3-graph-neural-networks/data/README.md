@@ -13,7 +13,7 @@ is **only weakly correlated** with its community (a small per-class signal burie
 Gaussian noise). Because the true community labels are stored on the dataset, every
 prediction is scored against ground truth. The weak features are deliberate: a
 graph-blind model struggles, so message passing over the edges has something real to
-fix — that is the whole point of the GCN-vs-MLP comparison.
+fix - that is the whole point of the GCN-vs-MLP comparison.
 
 ## Optional: real Cora citation graph
 

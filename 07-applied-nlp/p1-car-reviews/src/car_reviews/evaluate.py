@@ -2,7 +2,7 @@
 
 The ``Rating`` is a real label, so this is an honest check that the model's
 sentiment tracks what reviewers actually scored. The headline (nlptown / stub,
-1-5 scale) is exact accuracy, **±1 accuracy**, MAE, and Spearman ρ — car reviews
+1-5 scale) is exact accuracy, **±1 accuracy**, MAE, and Spearman ρ - car reviews
 skew positive, so ±1 and ρ tell the story better than exact match alone.
 Binary (SST-2) and 3-class (cardiff) mappings are provided for the other models.
 """

@@ -1,4 +1,4 @@
-"""Data for the compression study — offline synthetic by default.
+"""Data for the compression study - offline synthetic by default.
 
 The default path draws a deterministic multi-class Gaussian-blob problem in
 moderate dimension, so the fast tests need no network. ``load_mnist`` is an

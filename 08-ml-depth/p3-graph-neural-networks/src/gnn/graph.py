@@ -1,10 +1,10 @@
-"""Synthetic graph data — a stochastic block model (SBM) with planted communities.
+"""Synthetic graph data - a stochastic block model (SBM) with planted communities.
 
 The default path is fully offline. An SBM draws ``n_classes`` communities; a pair of
 nodes in the *same* community is connected with probability ``p_in`` and a pair in
 *different* communities with ``p_out < p_in``. Each node also gets a feature vector
 that is *weakly* correlated with its community (so features alone don't solve the
-task) — that is the whole point: message passing over the edges is what closes the
+task) - that is the whole point: message passing over the edges is what closes the
 gap. Because the community labels are stored on the dataset, every prediction is
 scored against ground truth.
 """
@@ -62,7 +62,7 @@ def make_sbm(
 
     ``p_in`` / ``p_out`` control how block-structured the graph is; the larger the
     gap, the more the edges reveal. ``feature_snr`` scales a per-class mean signal
-    added on top of unit Gaussian noise — small enough that a graph-blind model
+    added on top of unit Gaussian noise - small enough that a graph-blind model
     struggles, so message passing has room to help.
     """
     rng = np.random.default_rng(seed)

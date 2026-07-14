@@ -251,8 +251,8 @@ def main() -> None:
 | Metric | Value |
 |---|---|
 | Frauds attacked (baseline) | {len(X_attack)} |
-| **Attack Success Rate — before** | **{atk_before['asr']:.1%}** |
-| **Attack Success Rate — after hardening** | **{atk_after['asr']:.1%}** |
+| **Attack Success Rate - before** | **{atk_before['asr']:.1%}** |
+| **Attack Success Rate - after hardening** | **{atk_after['asr']:.1%}** |
 | ASR reduction | {atk_before['asr'] - atk_after['asr']:+.1%} |
 | Evasion feasibility rate | {atk_before['feasibility_rate']:.1%} |
 | Mean P(fraud) drop under attack | {atk_before['mean_score_drop']:.3f} |
@@ -269,7 +269,7 @@ def main() -> None:
 - `results/figures/robustness_before_after.png`
 - `results/figures/score_shift.png`
 
-*Synthetic data and self-trained models only. Authorized use only — see ../../ETHICS.md.*
+*Synthetic data and self-trained models only. Authorized use only - see ../../ETHICS.md.*
 """
     (results_dir / "REPORT_CARD.md").write_text(report)
 

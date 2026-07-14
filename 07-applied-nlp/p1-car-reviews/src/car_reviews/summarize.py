@@ -1,7 +1,7 @@
 """Per-model review summaries.
 
-Default is **extractive** (TF-IDF sentence ranking with light redundancy control)
-— offline, instant, deterministic. An optional **abstractive** path uses a small
+Default is **extractive** (TF-IDF sentence ranking with light redundancy control) -
+offline, instant, deterministic. An optional **abstractive** path uses a small
 CPU-runnable HF summarizer (``sshleifer/distilbart-cnn-12-6``); it is slow on CPU,
 so it only ever runs over the top-N most-reviewed models.
 """

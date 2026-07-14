@@ -24,7 +24,7 @@ def plot_attention_induction(
     im = ax.imshow(attn, cmap="viridis", vmin=0.0, vmax=1.0)
     ax.set_xlabel("key position (attended to)")
     ax.set_ylabel("query position")
-    ax.set_title(f"Induction head attention — layer {layer}, head {head}")
+    ax.set_title(f"Induction head attention - layer {layer}, head {head}")
     ax.set_xticks(range(t))
     ax.set_yticks(range(t))
     ax.set_xticklabels([str(int(x)) for x in tokens], fontsize=6)

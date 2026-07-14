@@ -2,7 +2,7 @@
 
 The teacher is a wide two-hidden-layer MLP; the student is a much narrower,
 single-hidden-layer MLP with far fewer parameters. Keeping both as stacks of
-``nn.Linear`` layers is deliberate — it is exactly what magnitude pruning and
+``nn.Linear`` layers is deliberate - it is exactly what magnitude pruning and
 dynamic quantization operate on.
 """
 

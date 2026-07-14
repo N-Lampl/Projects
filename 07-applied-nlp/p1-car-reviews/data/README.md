@@ -6,8 +6,8 @@ synthetic fallback so tests and CI need no network. Nothing here is committed
 
 ## Default: `florentgbelidji/car-reviews` (HuggingFace Hub)
 
-- **Dataset:** [`florentgbelidji/car-reviews`](https://huggingface.co/datasets/florentgbelidji/car-reviews)
-  — 36,984 consumer car reviews scraped from Edmunds.
+- **Dataset:** [`florentgbelidji/car-reviews`](https://huggingface.co/datasets/florentgbelidji/car-reviews) -
+  36,984 consumer car reviews scraped from Edmunds.
 - **Columns used:** `Vehicle_Title` (year + make + model + trim, e.g.
   `"1997 Toyota Previa Minivan LE 3dr Minivan AWD"`), `Review` (full text),
   `Review_Title`, `Rating` (1-5, the ground-truth label), `Review_Date`,
@@ -32,7 +32,7 @@ stub` use, so the whole pipeline is demonstrable with **zero downloads**.
 
 ## Sentiment models (HuggingFace, downloaded on first use)
 
-Also git-ignored (cached by `transformers`, not stored here) — see
+Also git-ignored (cached by `transformers`, not stored here) - see
 [`../models/README.md`](../models/README.md).
 
 > Authorized use only. The dataset is a public dataset used for research/education

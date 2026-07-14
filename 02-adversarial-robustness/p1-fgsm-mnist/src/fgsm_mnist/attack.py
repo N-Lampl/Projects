@@ -1,4 +1,4 @@
-"""The Fast Gradient Sign Method (FGSM), from scratch — no attack library.
+"""The Fast Gradient Sign Method (FGSM), from scratch - no attack library.
 
 FGSM (Goodfellow, Shlens, Szegedy 2015, arXiv:1412.6572) is a single-step,
 L-infinity evasion attack. The whole idea is one line:
@@ -6,7 +6,7 @@ L-infinity evasion attack. The whole idea is one line:
     x_adv = clip( x + epsilon * sign( grad_x L(model(x), y) ), 0, 1 )
 
 We nudge every pixel by a fixed step `epsilon` in the direction that *increases*
-the model's loss — i.e. toward being wrong. `sign(...)` makes it an L-infinity
+the model's loss - i.e. toward being wrong. `sign(...)` makes it an L-infinity
 attack (each pixel moves by at most epsilon); `clip(..., 0, 1)` keeps the result
 a valid image. That's it: the model's own gradient is the weapon.
 """
@@ -53,7 +53,7 @@ def accuracy_under_attack(
 ) -> dict[float, float]:
     """Top-1 accuracy at each epsilon (epsilon=0 is the clean baseline).
 
-    Note we must NOT use torch.no_grad() around the attack itself — FGSM needs the
+    Note we must NOT use torch.no_grad() around the attack itself - FGSM needs the
     input gradient. We only disable grad for the final accuracy count.
     """
     device = device or torch.device("cpu")

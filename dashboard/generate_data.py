@@ -27,7 +27,7 @@ TRACKS = [
     ("03-ml-privacy", "ML Privacy",
      "Attacks that leak training data: a likelihood-ratio (LiRA) membership-inference attack that tells whether a record was in the training set."),
     ("04-llm-security", "LLM Security",
-     "LLM safety & interpretability: abliteration — locating and ablating the single 'refusal direction' — plus the in-browser prompt-injection detector demo."),
+     "LLM safety & interpretability: abliteration - locating and ablating the single 'refusal direction' - plus the in-browser prompt-injection detector demo."),
     ("05-ml-supply-chain", "ML Supply Chain",
      "Securing the model supply chain: pickle-RCE, safetensors, scanning, Sigstore signing, CI gates."),
     ("06-financial-ml", "Financial Crime & Risk",

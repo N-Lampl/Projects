@@ -77,7 +77,7 @@ def main() -> None:
     ]
 
     payload = {
-        "_comment": "Exported by dashboard/exporters/export_injection_detector.py — real TF-IDF+LogReg from 04-llm-security/p7-defend-rag.",
+        "_comment": "Exported by dashboard/exporters/export_injection_detector.py - real TF-IDF+LogReg from 04-llm-security/p7-defend-rag.",
         "ngramRange": [1, 2],
         "tokenPattern": "[a-z0-9_]{2,}",  # sklearn default \\b\\w\\w+\\b on lowercased text
         "sublinearTf": True,

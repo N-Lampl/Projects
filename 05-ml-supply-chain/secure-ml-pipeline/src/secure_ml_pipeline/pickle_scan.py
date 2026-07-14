@@ -1,4 +1,4 @@
-"""A pure-Python pickle-opcode scanner — the offline stand-in for modelscan.
+"""A pure-Python pickle-opcode scanner - the offline stand-in for modelscan.
 
 Pickle is a tiny stack VM. The ability to run arbitrary code at load time comes
 from a small set of opcodes that import/look-up and then *call* Python objects:
@@ -9,7 +9,7 @@ from a small set of opcodes that import/look-up and then *call* Python objects:
 
 We never *unpickle* the file (that would be the very thing we are defending
 against). Instead we walk the opcode stream with the stdlib `pickletools`
-disassembler — read-only — and flag the dangerous opcodes and the global
+disassembler - read-only - and flag the dangerous opcodes and the global
 references they resolve. This is the same idea modelscan/picklescan use; it runs
 with zero extra dependencies so the project always has a working detector.
 """

@@ -52,7 +52,6 @@ body {
   line-height: 1.6;
   color: var(--text);
   background:
-    linear-gradient(var(--bg-grid) 1px, transparent 1px) 0 0 / 100% 34px,
     radial-gradient(1100px 540px at 78% -8%, rgba(18, 117, 224, 0.06), transparent 60%),
     var(--bg);
   -webkit-font-smoothing: antialiased;
@@ -116,44 +115,22 @@ a:hover { text-decoration: underline; }
 @media (max-width: 720px) { .nav-links { display: none; } }
 
 /* ============================ hero ============================ */
-.hero { padding: 64px 0 34px; }
-.hero-grid { display: grid; grid-template-columns: 1.35fr 1fr; gap: 40px; align-items: center; }
+.hero { padding: 64px 0 44px; }
 .eyebrow {
-  display: inline-flex; align-items: center; gap: 8px; color: var(--accent);
+  display: inline-block; color: var(--accent);
   font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em;
   text-transform: uppercase; margin-bottom: 14px;
 }
 .hero h1 { font-size: clamp(2rem, 4.4vw, 3.05rem); line-height: 1.08; margin: 0 0 16px; }
-.hero h1 .grad {
-  background: linear-gradient(95deg, var(--accent), var(--info));
-  -webkit-background-clip: text; background-clip: text; color: transparent;
-}
-.hero-lead { color: var(--muted); font-size: 1.04rem; max-width: 60ch; margin: 0 0 22px; }
+.hero-lead { color: var(--muted); font-size: 1.04rem; max-width: 62ch; margin: 0 0 24px; }
 .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
-.byline { margin-top: 18px; color: var(--faint); font-size: 0.82rem; }
-
-/* terminal card */
-.term {
-  background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
-  box-shadow: var(--shadow); overflow: hidden; font-family: "Fira Code", monospace; font-size: 0.82rem;
+.hero-meta {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--border-soft);
+  color: var(--muted); font-size: 0.9rem;
 }
-.term-bar { display: flex; align-items: center; gap: 7px; padding: 11px 14px; border-bottom: 1px solid var(--border-soft); background: var(--surface-2); }
-.term-dot { width: 11px; height: 11px; border-radius: 50%; }
-.term-title { color: var(--faint); margin-left: 8px; font-size: 0.76rem; }
-.term-body { padding: 16px; line-height: 1.85; }
-.term-body .cmd { color: var(--text); } .term-body .cmd::before { content: "$ "; color: var(--accent); }
-.term-body .out { color: var(--muted); }
-.term-body .ok { color: var(--accent); }
-.term-body .warn { color: var(--gold); }
-@media (max-width: 860px) { .hero-grid { grid-template-columns: 1fr; } .hero-side { display: none; } }
-
-/* ============================ stats ============================ */
-.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 30px; }
-.stat { background: var(--surface); border: 1px solid var(--border); border-radius: 13px; padding: 16px 18px; }
-.stat-num { font-family: "Fira Code", monospace; font-size: 1.85rem; font-weight: 700; line-height: 1; }
-.stat-num.accent { color: var(--accent); }
-.stat-lab { color: var(--faint); font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 7px; }
-@media (max-width: 560px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+.hero-meta strong { color: var(--text); font-weight: 600; }
+.hero-meta .dot { color: var(--faint); }
 
 /* ============================ sections ============================ */
 .section { padding: 46px 0; scroll-margin-top: 76px; }

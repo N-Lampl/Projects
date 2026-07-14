@@ -22,7 +22,7 @@ import numpy as np
 import torch
 
 # safetensors ships in the default env here, but import lazily so the module
-# imports even if it is missing — the pure-python fallback covers that case.
+# imports even if it is missing - the pure-python fallback covers that case.
 try:  # optional, preferred
     from safetensors.torch import load_file as _st_load
     from safetensors.torch import save_file as _st_save
@@ -98,7 +98,7 @@ def load_safetensors(path: str | Path) -> dict[str, torch.Tensor]:
 
 
 def sha256_file(path: str | Path) -> str:
-    """Content hash — the basis for tamper detection / signing."""
+    """Content hash - the basis for tamper detection / signing."""
     h = hashlib.sha256()
     with open(path, "rb") as f:
         for chunk in iter(lambda: f.read(65536), b""):

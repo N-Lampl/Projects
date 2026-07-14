@@ -3,7 +3,7 @@
 The baseline models are general-domain; this learns car-review representations
 directly from the 1-5 ``Rating`` labels. Weights are saved under ``models/``
 (git-ignored) with ``id2label`` set to ``"1".."5"``, so the fine-tuned model plugs
-straight into the SAME :class:`~car_reviews.sentiment.HFBackend` (kind ``star5``) —
+straight into the SAME :class:`~car_reviews.sentiment.HFBackend` (kind ``star5``) -
 identical ``predict`` / ``predict_proba`` and the same validation + aggregation code.
 """
 

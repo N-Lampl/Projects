@@ -3,7 +3,7 @@
 Logistic regression is deliberately chosen as the *default* because it gives the
 hand-rolled evasion search a clean, smooth decision surface (the attack uses the
 model's predicted probability as its objective and exploits the local gradient
-of that surface — see ``attack.py``). ``class_weight="balanced"`` handles the
+of that surface - see ``attack.py``). ``class_weight="balanced"`` handles the
 ~4% fraud imbalance honestly instead of resampling.
 
 A GradientBoosting variant is available for the "harder, non-linear target"

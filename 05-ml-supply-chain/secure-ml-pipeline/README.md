@@ -1,12 +1,12 @@
 # secure-ml-pipeline · pickle PoC → safetensors + scan + sign + CI gate
 
 A flagship **ML supply-chain** project: show that loading a model file can run
-arbitrary code, then build the pipeline that makes that impossible — serialize as
+arbitrary code, then build the pipeline that makes that impossible - serialize as
 **safetensors**, **statically scan** for dangerous pickle opcodes, **sign +
 verify** the artifact, and gate it all in **GitHub Actions that fails closed** on
 an unsigned or tampered model.
 
-> **Authorized use only — dual-use.** The "attack" here is a *benign* PoC: the
+> **Authorized use only - dual-use.** The "attack" here is a *benign* PoC: the
 > payload only writes a marker file (`/tmp/PWNED_DEMO`), and it is only ever
 > executed inside a locked-down Docker container (`--network none --read-only`).
 > No weaponized pickle is ever committed. Targets are a model I trained myself on
@@ -14,8 +14,8 @@ an unsigned or tampered model.
 
 ## The problem
 
-`torch.load(...)`, `joblib.load(...)`, `pickle.load(...)` — the default way the ML
-world ships models — all run a **pickle**. Pickle is a tiny stack VM, and a few of
+`torch.load(...)`, `joblib.load(...)`, `pickle.load(...)` - the default way the ML
+world ships models - all run a **pickle**. Pickle is a tiny stack VM, and a few of
 its opcodes can import and *call* arbitrary Python at load time:
 
 ```
@@ -53,16 +53,16 @@ class MaliciousModel:
                                                        unsigned OR tampered artifact
 ```
 
-1. **safetensors** — a data-only format (8-byte header length + JSON header + raw
+1. **safetensors** - a data-only format (8-byte header length + JSON header + raw
    tensor bytes). There is no opcode for "call a function", so loading cannot
    execute code. This alone removes the attack surface.
-2. **Static opcode scan** (`pickle_scan.py`) — disassembles pickle bytes with the
+2. **Static opcode scan** (`pickle_scan.py`) - disassembles pickle bytes with the
    stdlib `pickletools` **without unpickling them** and flags dangerous opcodes /
-   known-bad globals. Pure-python, zero deps — the offline stand-in for
+   known-bad globals. Pure-python, zero deps - the offline stand-in for
    protectai/`modelscan`.
-3. **Sign + verify** — Sigstore **cosign** (keyless) if installed; otherwise a
+3. **Sign + verify** - Sigstore **cosign** (keyless) if installed; otherwise a
    local HMAC-over-sha256 demo so the *fail-closed* gate still runs offline.
-4. **CI gate** (`.github/workflows/model-supply-chain-gate.yml`) — blocks any
+4. **CI gate** (`.github/workflows/model-supply-chain-gate.yml`) - blocks any
    pickled model with exec opcodes and refuses to ship an artifact whose
    signature is missing or invalid.
 
@@ -77,7 +77,7 @@ make gate       # run the CI gate locally (scan pickles + verify signature)
 make test       # fast smoke tests (-m "not slow")
 ```
 
-**The default `make run` path is fully offline** — it needs only torch, numpy,
+**The default `make run` path is fully offline** - it needs only torch, numpy,
 scikit-learn, matplotlib (safetensors is used if present, else a pure-python
 fallback writes the identical file layout). `modelscan`, `cosign`, and `docker`
 are **optional**; each is wired with a graceful, logged SKIP so something always
@@ -87,26 +87,26 @@ runs.
 > data trains in ~1s). Nothing here is GPU-preferred.
 
 Outputs land in [results/](results/):
-- `figures/scanner_verdicts.png` — pickle PoC (MALICIOUS, REDUCE/GLOBAL) vs safetensors (clean).
-- `figures/integrity_gate.png` — genuine PASS, tampered & unsigned BLOCKED.
-- `metrics.json` — committed evidence (scan verdicts, gate correctness, tools present).
+- `figures/scanner_verdicts.png` - pickle PoC (MALICIOUS, REDUCE/GLOBAL) vs safetensors (clean).
+- `figures/integrity_gate.png` - genuine PASS, tampered & unsigned BLOCKED.
+- `metrics.json` - committed evidence (scan verdicts, gate correctness, tools present).
 
 ## What the result shows
 
 The opcode scanner flags the runtime PoC as **MALICIOUS** (it resolves a `GLOBAL`
-and calls it via `REDUCE`) while the safetensors artifact scans **clean** — and
+and calls it via `REDUCE`) while the safetensors artifact scans **clean** - and
 the safetensors round-trip reproduces the weights exactly. The integrity gate is
 **correct**: it admits the genuine signed artifact and **fails closed** on both a
 byte-flipped (tampered) artifact and a missing signature. In the sandbox,
-`pickle.load` on the PoC writes `/tmp/PWNED_DEMO`, proving load == code execution
-— which is exactly why the rest of the pipeline ships safetensors and gates on a
+`pickle.load` on the PoC writes `/tmp/PWNED_DEMO`, proving load == code execution -
+which is exactly why the rest of the pipeline ships safetensors and gates on a
 signature.
 
 ## Interview story (3 sentences)
 
 > I built an end-to-end ML supply-chain demo: a benign pickle PoC whose
 > `__reduce__` runs code on load (detonated only inside a `--network none
-> --read-only` container), and the fix — safetensors serialization, a stdlib
+> --read-only` container), and the fix - safetensors serialization, a stdlib
 > pickle-opcode scanner, and a sign/verify CI gate that fails closed on
 > unsigned/tampered artifacts. The scanner statically flags `REDUCE`/`GLOBAL`
 > without ever unpickling the file, so detection itself isn't an attack surface.
@@ -137,9 +137,9 @@ data/ models/           git-ignored (synthetic data / produced artifacts)
 
 ## References
 
-- Trail of Bits — *Never a dill moment: Exploiting machine learning pickle files.*
-- protectai/**modelscan** — static scanner for serialized model files.
-- Hugging Face — *Pickle scanning* + the **safetensors** format spec.
-- **Sigstore cosign** — keyless signing & `sign-blob` / `verify-blob`.
-- **SLSA** — Supply-chain Levels for Software Artifacts (provenance / integrity).
-- Python docs — `pickle`, `pickletools` (the opcode disassembler we scan with).
+- Trail of Bits - *Never a dill moment: Exploiting machine learning pickle files.*
+- protectai/**modelscan** - static scanner for serialized model files.
+- Hugging Face - *Pickle scanning* + the **safetensors** format spec.
+- **Sigstore cosign** - keyless signing & `sign-blob` / `verify-blob`.
+- **SLSA** - Supply-chain Levels for Software Artifacts (provenance / integrity).
+- Python docs - `pickle`, `pickletools` (the opcode disassembler we scan with).

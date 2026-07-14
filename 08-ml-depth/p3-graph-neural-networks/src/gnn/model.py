@@ -1,4 +1,4 @@
-"""Two-layer GCN and a graph-blind MLP baseline — pure PyTorch, no torch-geometric.
+"""Two-layer GCN and a graph-blind MLP baseline - pure PyTorch, no torch-geometric.
 
 The GCN and the MLP have the *identical* architecture (two linear layers, one ReLU,
 same widths); the ONLY difference is whether the normalized adjacency ``Â`` is
@@ -38,7 +38,7 @@ class GCN(nn.Module):
 
 
 class MLP(nn.Module):
-    """Same shape as the GCN but WITHOUT Â — a graph-blind baseline.
+    """Same shape as the GCN but WITHOUT Â - a graph-blind baseline.
 
     ``forward`` accepts the same ``(x, a_hat)`` signature as :class:`GCN` so the
     training loop is shared; ``a_hat`` is simply ignored.

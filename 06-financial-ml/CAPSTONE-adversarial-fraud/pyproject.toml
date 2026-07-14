@@ -1,7 +1,7 @@
 [project]
 name = "adv-fraud"
 version = "0.1.0"
-description = "Attack AND defend a tabular fraud classifier — feasibility-constrained evasion + adversarial training."
+description = "Attack AND defend a tabular fraud classifier - feasibility-constrained evasion + adversarial training."
 requires-python = ">=3.10"
 dependencies = [
     "numpy>=1.24",

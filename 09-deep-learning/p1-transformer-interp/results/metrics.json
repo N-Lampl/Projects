@@ -1,6 +1,6 @@
 {
   "project": "p1-transformer-interp",
-  "summary": "A 2-layer transformer trained from scratch on the induction task reaches val loss 0.002; an induction head emerged at layer 0 head 3 with attention mass 0.77 on the previous-occurrence+1 token. The logit lens shows next-token accuracy rising from 0.02 (embedding) to 1.00 (final layer), and activation patching recovers up to 100% of the clean-vs-corrupt logit gap \u2014 localizing where the induction computation lives.",
+  "summary": "A 2-layer transformer trained from scratch on the induction task reaches val loss 0.002; an induction head emerged at layer 0 head 3 with attention mass 0.77 on the previous-occurrence+1 token. The logit lens shows next-token accuracy rising from 0.02 (embedding) to 1.00 (final layer), and activation patching recovers up to 100% of the clean-vs-corrupt logit gap - localizing where the induction computation lives.",
   "data_source": "synthetic induction task (repeated random subsequences)",
   "seed": 42,
   "val_loss": 0.0017878954531624913,

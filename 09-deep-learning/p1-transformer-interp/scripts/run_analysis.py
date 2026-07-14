@@ -92,7 +92,7 @@ def main() -> None:
         f"{head['max_score']:.2f} on the previous-occurrence+1 token. The logit lens "
         f"shows next-token accuracy rising from {first_acc:.2f} (embedding) to "
         f"{last_layer_acc:.2f} (final layer), and activation patching recovers up to "
-        f"{best_patch * 100:.0f}% of the clean-vs-corrupt logit gap — localizing where "
+        f"{best_patch * 100:.0f}% of the clean-vs-corrupt logit gap - localizing where "
         f"the induction computation lives."
     )
 

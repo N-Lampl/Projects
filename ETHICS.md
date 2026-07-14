@@ -36,6 +36,6 @@ coordinated-disclosure process. See `SECURITY.md`.
 
 ## Frameworks this repo maps to
 
-- **MITRE ATLAS** — adversarial threats against AI systems.
-- **MITRE ATT&CK** — adversary tactics & techniques (for the detection-engineering track).
-- **OWASP Top 10 for LLM Applications (2025)** — for the LLM-security track.
+- **MITRE ATLAS** - adversarial threats against AI systems.
+- **MITRE ATT&CK** - adversary tactics & techniques (for the detection-engineering track).
+- **OWASP Top 10 for LLM Applications (2025)** - for the LLM-security track.

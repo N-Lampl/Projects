@@ -8,7 +8,7 @@ interpretability needs:
 * the residual-stream activation after the embedding and after each layer.
 
 ``forward`` also accepts a ``resid_patch`` argument so interp code can *overwrite*
-the residual stream at a chosen ``(layer, position)`` — the write side of the
+the residual stream at a chosen ``(layer, position)`` - the write side of the
 read/patch pair used by activation patching.
 """
 

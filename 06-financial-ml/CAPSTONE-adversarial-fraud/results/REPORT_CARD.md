@@ -21,8 +21,8 @@ Logistic fraud model (PR-AUC=0.415). A feasibility-constrained greedy evasion (o
 | Metric | Value |
 |---|---|
 | Frauds attacked (baseline) | 90 |
-| **Attack Success Rate — before** | **100.0%** |
-| **Attack Success Rate — after hardening** | **0.0%** |
+| **Attack Success Rate - before** | **100.0%** |
+| **Attack Success Rate - after hardening** | **0.0%** |
 | ASR reduction | +100.0% |
 | Evasion feasibility rate | 100.0% |
 | Mean P(fraud) drop under attack | 0.160 |
@@ -39,4 +39,4 @@ Logistic fraud model (PR-AUC=0.415). A feasibility-constrained greedy evasion (o
 - `results/figures/robustness_before_after.png`
 - `results/figures/score_shift.png`
 
-*Synthetic data and self-trained models only. Authorized use only — see ../../ETHICS.md.*
+*Synthetic data and self-trained models only. Authorized use only - see ../../ETHICS.md.*

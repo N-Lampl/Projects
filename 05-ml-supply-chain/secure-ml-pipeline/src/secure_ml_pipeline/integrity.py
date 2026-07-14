@@ -1,11 +1,11 @@
 """Optional external integrity tools (modelscan, Sigstore cosign) with graceful,
 logged fallbacks. Every wrapper returns a structured dict and NEVER raises if the
-tool is absent — it returns {"available": False, "skipped": True, ...} so the
+tool is absent - it returns {"available": False, "skipped": True, ...} so the
 pipeline keeps running offline.
 
 The offline fallback for signing is a local HMAC over the artifact's sha256
 (`local_sign` / `local_verify`). It is NOT a substitute for Sigstore's
-keyless, transparency-logged signatures — it only demonstrates the
+keyless, transparency-logged signatures - it only demonstrates the
 "fail closed on tampered/unsigned artifact" gate without network or cosign.
 """
 
@@ -22,7 +22,7 @@ from pathlib import Path
 log = logging.getLogger("secure_ml_pipeline.integrity")
 
 # Demo-only HMAC key. In a real pipeline this would be a Sigstore keyless
-# identity (OIDC) — never a hardcoded secret. Kept here purely so the offline
+# identity (OIDC) - never a hardcoded secret. Kept here purely so the offline
 # "verify" gate is self-contained.
 _DEMO_HMAC_KEY = b"secure-ml-pipeline-demo-key-not-a-real-secret"
 
@@ -32,7 +32,7 @@ def have_tool(name: str) -> bool:
 
 
 # --------------------------------------------------------------------------- #
-# modelscan (protectai) — optional static scanner for model files
+# modelscan (protectai) - optional static scanner for model files
 # --------------------------------------------------------------------------- #
 def run_modelscan(path: str | Path) -> dict:
     """Invoke `modelscan -p <path>` if installed; else skip with a warning."""
@@ -67,7 +67,7 @@ def run_modelscan(path: str | Path) -> dict:
 
 
 # --------------------------------------------------------------------------- #
-# Sigstore cosign — optional keyless sign/verify
+# Sigstore cosign - optional keyless sign/verify
 # --------------------------------------------------------------------------- #
 def cosign_sign_blob(path: str | Path, sig_out: str | Path) -> dict:
     """Sign a blob with `cosign sign-blob` if installed; else skip."""

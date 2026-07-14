@@ -2,15 +2,15 @@
 
 The other half of the portfolio (alongside 07-08): **modern deep-learning depth**.
 Two topics that sit at the center of how contemporary neural networks are
-understood and shipped — **transformer internals & mechanistic
+understood and shipped - **transformer internals & mechanistic
 interpretability** and **model compression & efficient inference**.
 
 Same engineering bar as the rest of the monorepo: each project is self-contained,
 has a reproducible `make run`, commits figures + `metrics.json`, ships an offline
 synthetic fallback, and runs **CPU-only** (tiny models, short training, few steps).
-No forced security framing — honest DL depth pieces.
+No forced security framing - honest DL depth pieces.
 
-Authorized use only — see [../ETHICS.md](../ETHICS.md). Model weights are not
+Authorized use only - see [../ETHICS.md](../ETHICS.md). Model weights are not
 committed; the default path trains tiny models in memory with no downloads.
 
 ## Projects
@@ -22,7 +22,7 @@ committed; the default path trains tiny models in memory with no downloads.
 
 ## Notes
 
-- **Tiny by design.** Everything trains on CPU in seconds-to-minutes — a 2-layer
+- **Tiny by design.** Everything trains on CPU in seconds-to-minutes - a 2-layer
   transformer on a toy induction task, a compact MLP for compression. The mechanisms
   (induction heads, quantization trade-offs) are the point, not scale.
 - **From scratch where it teaches.** The transformer and its interpretability

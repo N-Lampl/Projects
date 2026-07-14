@@ -5,7 +5,7 @@ data**. This project treats *concept/data drift* as a first-class security
 signal: it simulates a tabular detector's input stream, injects a distribution
 shift partway through (the kind an attacker causes while probing/evading, or that
 a silently-broken pipeline causes), and raises **thresholded alerts** using two
-classic drift statistics — **PSI** and **KS**.
+classic drift statistics - **PSI** and **KS**.
 
 **Authorized use only.** Targets are synthetic data and self-trained models;
 no real systems or third-party data are touched. See [../../ETHICS.md](../../ETHICS.md).
@@ -15,7 +15,7 @@ no real systems or third-party data are touched. See [../../ETHICS.md](../../ETH
 For each monitoring window (say, one hour of traffic) and each feature, compare
 the live distribution against the training-time **reference** distribution.
 
-**PSI — Population Stability Index** (bin the reference into deciles, measure how
+**PSI - Population Stability Index** (bin the reference into deciles, measure how
 much probability mass moved):
 
 ```
@@ -24,14 +24,14 @@ PSI = Σ_i ( cur_i − ref_i ) · ln( cur_i / ref_i )
 
 Convention: `< 0.10` stable · `0.10–0.25` moderate shift · `≥ 0.25` major shift.
 
-**KS — Kolmogorov–Smirnov** (binning-free max gap between the two empirical CDFs):
+**KS - Kolmogorov–Smirnov** (binning-free max gap between the two empirical CDFs):
 
 ```
 KS = sup_x | F_ref(x) − F_cur(x) |        (two-sample, with a p-value)
 ```
 
 A feature **alerts** only when PSI crosses its threshold **and** the KS evidence
-agrees (statistic large *and* p-value significant) — requiring both cuts noise.
+agrees (statistic large *and* p-value significant) - requiring both cuts noise.
 A window alerts if any feature alerts. One feature (`session_len`) is never
 drifted, so the monitor must *avoid* false-alarming on it.
 
@@ -55,15 +55,15 @@ Default path needs only **numpy / scikit-learn / pandas / matplotlib** (scipy
 optional, for the exact KS p-value) and runs fully offline.
 
 Outputs land in [results/](results/):
-- `figures/drift_over_time.png` — the **money plot**: PSI per feature over time vs. the alert line.
-- `figures/psi_heatmap.png` — feature × window PSI heatmap.
-- `metrics.json` — first-alert window, detection latency, false alarms, per-window PSI (committed).
+- `figures/drift_over_time.png` - the **money plot**: PSI per feature over time vs. the alert line.
+- `figures/psi_heatmap.png` - feature × window PSI heatmap.
+- `metrics.json` - first-alert window, detection latency, false alarms, per-window PSI (committed).
 
 ## What the result shows
 
 Before the injected drift, every feature sits well below threshold and **zero
 alerts** fire. Once drift begins, PSI on the affected features climbs past the
-alert line within a couple of windows — giving a small **detection latency** with
+alert line within a couple of windows - giving a small **detection latency** with
 **no pre-drift false alarms**, while the deliberately-stable control feature
 never alarms. That's exactly the behavior you want from a monitoring control:
 quiet until something actually changes, then loud.
@@ -91,8 +91,8 @@ data/ models/          git-ignored; no external data needed (synthetic stream)
 
 ## References
 
-- B. Siddiqi. *Credit Risk Scorecards* — the PSI bins-and-deciles convention and
+- B. Siddiqi. *Credit Risk Scorecards* - the PSI bins-and-deciles convention and
   the 0.1 / 0.25 thresholds.
-- Kolmogorov–Smirnov two-sample test — `scipy.stats.ks_2samp`.
-- NannyML / Evidently AI docs — PSI & KS as standard tabular drift detectors for
+- Kolmogorov–Smirnov two-sample test - `scipy.stats.ks_2samp`.
+- NannyML / Evidently AI docs - PSI & KS as standard tabular drift detectors for
   production model monitoring.

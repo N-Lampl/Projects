@@ -12,12 +12,12 @@ below are downloaded by `transformers` on first use and cached under
 | `sst2` | `distilbert-base-uncased-finetuned-sst-2-english` | binary | ~260 MB, ~2× faster on CPU. Used by the `@slow` test. |
 | `cardiff` | `cardiffnlp/twitter-roberta-base-sentiment-latest` | 3-class | ~500 MB. Adds a neutral class. |
 
-`--backend stub` uses a deterministic lexicon scorer (no weights, no network) —
+`--backend stub` uses a deterministic lexicon scorer (no weights, no network) -
 the offline/CI path.
 
 ## Optional summarizer (`--summaries abstractive`)
 
-`sshleifer/distilbart-cnn-12-6` (~1.2 GB) — CPU-runnable but slow, so it only ever
+`sshleifer/distilbart-cnn-12-6` (~1.2 GB) - CPU-runnable but slow, so it only ever
 summarizes the top-N most-reviewed models. The default `--summaries extractive`
 needs no model at all.
 

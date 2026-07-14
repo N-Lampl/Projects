@@ -40,7 +40,7 @@ class _MaliciousModel:
 
     `os.system` here only runs an `echo > marker` style write. We use a Python
     function reference (`_run_marker`) instead of a shell to keep it portable and
-    obviously benign — no shell, no network, no file deletion.
+    obviously benign - no shell, no network, no file deletion.
     """
 
     def __init__(self, marker_path: str = DEFAULT_MARKER) -> None:

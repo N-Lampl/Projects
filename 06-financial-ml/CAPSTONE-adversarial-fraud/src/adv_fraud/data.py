@@ -3,8 +3,8 @@
 No download required. The generator produces a tabular dataset that looks like a
 payments feed and bakes in a *learnable* fraud signal so a classifier reaches a
 realistic (not perfect) PR-AUC. Crucially, every feature is tagged with an
-adversarial **mutability profile** — what a fraudster can actually control at
-transaction time vs. immutable account history — which the evasion attack in
+adversarial **mutability profile** - what a fraudster can actually control at
+transaction time vs. immutable account history - which the evasion attack in
 ``attack.py`` is forced to respect.
 
 Feature dictionary (10 features):

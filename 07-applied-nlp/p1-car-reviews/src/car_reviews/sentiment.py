@@ -1,7 +1,7 @@
 """Pluggable sentiment backends.
 
-Default (tests / CI): a deterministic **stub** lexicon scorer — no torch, no
-transformers, no network — so the whole pipeline runs offline. The real run
+Default (tests / CI): a deterministic **stub** lexicon scorer - no torch, no
+transformers, no network - so the whole pipeline runs offline. The real run
 uses the **HF** backend: a HuggingFace ``transformers`` sentiment pipeline loaded
 lazily (weights download on first use), selected with ``--backend hf``.
 
@@ -205,7 +205,7 @@ _WORD_RE = re.compile(r"[a-z']+")
 
 
 class StubBackend:
-    """Deterministic lexicon scorer. No torch/transformers/network — the CI path."""
+    """Deterministic lexicon scorer. No torch/transformers/network - the CI path."""
 
     name = "stub"
     scale = "1-5"

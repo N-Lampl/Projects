@@ -2,7 +2,7 @@
 
 An interactive showcase of the whole portfolio: headline before/after results, per-track coverage,
 every project with its metrics + figures, and a "how to build on this" roadmap. It reads each project's
-`results/metrics.json` + figures — so as you extend the repo, re-run the generator and the dashboard
+`results/metrics.json` + figures - so as you extend the repo, re-run the generator and the dashboard
 updates itself.
 
 ## Run it locally
@@ -18,13 +18,13 @@ npm run dev       # http://localhost:5173
 
 ## Live Playground (interactive demos)
 
-The top "Playground" section runs two **real trained models entirely client-side** — no backend,
+The top "Playground" section runs two **real trained models entirely client-side** - no backend,
 no API. Model weights are exported to JSON and the scoring math is reproduced in plain JavaScript
 (see [`src/playground/`](src/playground/)), matching the Python originals to ~1e-6:
 
-- **Prompt-injection detector** — a TF-IDF + LogisticRegression guard trained in the LLM-security
+- **Prompt-injection detector** - a TF-IDF + LogisticRegression guard trained in the LLM-security
   track; weights committed at `src/data/injection_model.json`.
-- **Fraud-evasion sandbox** — the logistic baseline + adversarially-trained gradient boosting from
+- **Fraud-evasion sandbox** - the logistic baseline + adversarially-trained gradient boosting from
   `06-financial-ml/CAPSTONE-adversarial-fraud`, with the greedy evasion ported to JS.
 
 Re-export the model JSON only when those underlying models change:
@@ -42,7 +42,7 @@ node exporters/parity_check.mjs        # asserts JS↔Python parity (Δ ≤ 1e-6
   writes [`src/data/projects.json`](src/data/projects.json) (committed, so the app works on a fresh
   clone without Python). Headline numbers are pulled from real metrics, not hardcoded.
 - The React app ([`src/App.jsx`](src/App.jsx)) renders highlights, a track-coverage chart, a
-  filterable/searchable project grid with a figure lightbox, and the roadmap. No chart library —
+  filterable/searchable project grid with a figure lightbox, and the roadmap. No chart library -
   lightweight CSS/SVG to keep the build robust.
 - `vite.config.js` uses `base: "./"` so the build works locally **and** under any GitHub Pages subpath.
 

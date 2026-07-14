@@ -19,7 +19,7 @@ def set_seed(seed: int = SEED) -> None:
     os.environ["PYTHONHASHSEED"] = str(seed)
     random.seed(seed)
     np.random.seed(seed)
-    try:  # optional — never required for the default run path
+    try:  # optional - never required for the default run path
         import torch
 
         torch.manual_seed(seed)

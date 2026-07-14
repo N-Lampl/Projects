@@ -13,7 +13,7 @@ pip install torchvision        # ~optional dependency
 make attack ARGS='--dataset fashion_mnist'
 ```
 
-- **Dataset:** Fashion-MNIST (Zalando Research) — 28x28 grayscale clothing images,
+- **Dataset:** Fashion-MNIST (Zalando Research) - 28x28 grayscale clothing images,
   10 classes. License: MIT. https://github.com/zalandoresearch/fashion-mnist
 - **Download:** automatic via `torchvision.datasets.FashionMNIST(download=True)`
   into this folder (~30 MB). Git-ignored, never committed.

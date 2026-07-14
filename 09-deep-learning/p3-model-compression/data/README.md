@@ -10,7 +10,7 @@ README).
 random centroids in a moderate-dimensional space, then Gaussian-noised points
 around each centroid, and splits deterministically into train / test. The problem
 is hard enough that a small student can under-fit but a trained teacher clears
-chance by a wide margin — which is what makes the accuracy-vs-size trade-off real.
+chance by a wide margin - which is what makes the accuracy-vs-size trade-off real.
 
 ## Optional: MNIST via torchvision
 

@@ -58,7 +58,7 @@ METRICS = PROJECT / "results" / "metrics.json"
 
 
 def _sentiment_texts(df: pd.DataFrame) -> list[str]:
-    """Review title + body (title first — it is short and strongly polar)."""
+    """Review title + body (title first - it is short and strongly polar)."""
     titles = df["Review_Title"].fillna("").astype(str).str.strip()
     reviews = df["Review"].astype(str).str.strip()
     return [f"{t}. {r}" if t else r for t, r in zip(titles, reviews, strict=False)]

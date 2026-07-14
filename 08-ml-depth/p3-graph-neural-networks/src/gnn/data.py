@@ -2,7 +2,7 @@
 
 The default path is fully offline (:func:`gnn.graph.make_sbm`) so tests and CI never
 touch the network. :func:`load_cora` pulls the standard **Cora** citation network
-(2708 papers, 7 classes, bag-of-words features) from a stable mirror and parses it —
+(2708 papers, 7 classes, bag-of-words features) from a stable mirror and parses it -
 it is exercised only by the ``@slow`` test, which skips on any failure.
 """
 
@@ -22,7 +22,7 @@ CORA_URL = "https://linqs-data.soe.ucsc.edu/public/lbc/cora.tgz"
 def load_cora(url: str = CORA_URL, seed: int = 42) -> GraphDataset:
     """Download Cora and return it as a :class:`GraphDataset`.
 
-    Raises on any network/parse failure — the ``@slow`` test catches and skips.
+    Raises on any network/parse failure - the ``@slow`` test catches and skips.
     """
     from urllib.request import urlopen
 

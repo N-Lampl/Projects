@@ -1,7 +1,7 @@
 """Parse the free-text ``Vehicle_Title`` into year / make / model / trim.
 
 The dataset's ``Vehicle_Title`` looks like ``"1997 Toyota Previa Minivan LE 3dr
-Minivan AWD"`` — i.e. ``<year> <make> <model...> <trim...>``. The two reliable
+Minivan AWD"`` - i.e. ``<year> <make> <model...> <trim...>``. The two reliable
 anchors are (a) the leading 4-digit year and (b) a curated, multi-word-aware
 list of car makes. We do NOT rely on "first token after the year is the make",
 because that breaks on ``Land Rover``, ``Alfa Romeo``, ``Mercedes-Benz``, etc.
@@ -9,7 +9,7 @@ because that breaks on ``Land Rover``, ``Alfa Romeo``, ``Mercedes-Benz``, etc.
 Grouping keys the rest of the project uses:
     * brand-level stats  -> ``make``      (canonical spelling)
     * model-level stats  -> ``model_key`` = ``"{make} {model}"`` (e.g. "Toyota
-      Previa") — the bare model token collides across makes ("S", "GT", "3"),
+      Previa") - the bare model token collides across makes ("S", "GT", "3"),
       so it is always namespaced by the make.
 """
 
@@ -269,7 +269,7 @@ def make_coverage(df: pd.DataFrame, make_col: str = "make") -> float:
 def unmatched_make_examples(
     df: pd.DataFrame, title_col: str = "Vehicle_Title", make_col: str = "make", k: int = 15
 ) -> list[str]:
-    """Top leading tokens (after the year) for rows we could NOT map to a make —
+    """Top leading tokens (after the year) for rows we could NOT map to a make -
     an auditable list for extending :data:`CANONICAL_MAKES`.
     """
     unmatched = df.loc[df[make_col] == UNKNOWN, title_col].astype(str)

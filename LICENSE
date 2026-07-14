@@ -21,5 +21,5 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 NOTE: This license covers the CODE in this repository only. Datasets and
-pretrained model weights downloaded by this code retain their own licenses —
+pretrained model weights downloaded by this code retain their own licenses -
 see each project's data/README.md. See ETHICS.md for authorized-use rules.

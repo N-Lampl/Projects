@@ -1,9 +1,9 @@
 # 05 · ML Supply-Chain Security
 
-Securing the model supply chain — disproportionately hireable for **MLSecOps / AI-security-engineer**
+Securing the model supply chain - disproportionately hireable for **MLSecOps / AI-security-engineer**
 titles, and a project almost no candidates have built.
 
-Authorized use only — see [../ETHICS.md](../ETHICS.md).
+Authorized use only - see [../ETHICS.md](../ETHICS.md).
 
 ## Project
 

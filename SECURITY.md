@@ -3,7 +3,7 @@
 ## Scope of this repository
 
 This is a personal research & learning portfolio. The code here is for **education and authorized
-testing only** — see [ETHICS.md](ETHICS.md) for the authorized-use rules.
+testing only** - see [ETHICS.md](ETHICS.md) for the authorized-use rules.
 
 ## Reporting a vulnerability
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""Compare the baseline sentiment model against two improvements — calibration and
-(if present) a fine-tuned DistilBERT — on the SAME held-out test set, and write
+"""Compare the baseline sentiment model against two improvements - calibration and
+(if present) a fine-tuned DistilBERT - on the SAME held-out test set, and write
 results/improvement.json + results/figures/baseline_vs_improved.png.
 
 Run via `make improve`. Before `make finetune` it reports baseline vs. calibrated;
@@ -96,7 +96,7 @@ def main() -> None:
     summary = " | ".join(_line(k, v) for k, v in results.items())
     payload = {
         "project": "p1-car-reviews",
-        "task": "model improvement — baseline vs. calibrated vs. fine-tuned",
+        "task": "model improvement - baseline vs. calibrated vs. fine-tuned",
         "test_n": int(len(test)),
         "seed": args.seed,
         "results": results,

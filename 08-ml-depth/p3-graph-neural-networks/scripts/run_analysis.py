@@ -49,7 +49,7 @@ def main() -> None:
         f"On a synthetic SBM ({ds.n_nodes} nodes, {ds.n_edges} edges, "
         f"{ds.n_classes} planted communities) where node features alone are only "
         f"weakly informative, a 2-layer GCN reaches {gcn.test_acc:.2f} test accuracy "
-        f"versus {mlp.test_acc:.2f} for a graph-blind MLP of identical shape — a "
+        f"versus {mlp.test_acc:.2f} for a graph-blind MLP of identical shape - a "
         f"{lift * 100:.0f}-point lift from message passing over the graph structure."
     )
 

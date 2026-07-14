@@ -18,7 +18,7 @@ _COLORS = {
 
 
 def plot_pareto_accuracy_vs_size(variants: dict, out: Path) -> Path:
-    """Accuracy vs serialized size (MB) scatter — the compression Pareto view."""
+    """Accuracy vs serialized size (MB) scatter - the compression Pareto view."""
     fig, ax = plt.subplots(figsize=(6.5, 4.5))
     for name, m in variants.items():
         color = _COLORS.get(name, "#7f8c8d")

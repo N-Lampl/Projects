@@ -1,11 +1,11 @@
 # p8 · Refusal direction (mechanistic interp of "abliteration")
 
 Refusal in aligned LLMs is, empirically, mediated by **a single linear direction** in the residual
-stream (Arditi et al., 2024). This project reproduces the *methodology* — extract that direction,
-ablate it at inference time, and measure what happens to refusals vs capability — as **safety /
+stream (Arditi et al., 2024). This project reproduces the *methodology* - extract that direction,
+ablate it at inference time, and measure what happens to refusals vs capability - as **safety /
 interpretability research**, entirely on CPU, with **no model weights downloaded** by default.
 
-> **Authorized use only — analysis, not a jailbreak release.** The committed artifact is an
+> **Authorized use only - analysis, not a jailbreak release.** The committed artifact is an
 > *analysis* (a direction vector, metrics, figures). This project **never** writes out or
 > redistributes a modified ("abliterated") model. The default path runs against a **synthetic**
 > self-built model; the optional real-model path runs only against an open-weight model **you** load
@@ -18,18 +18,18 @@ Treat the last-token residual activation `h ∈ ℝ^d` as the model's "state of 
 Across many prompts, the difference between *will-refuse* and *will-answer* states concentrates on one
 axis. Three steps:
 
-**1. Extract** — difference-in-means refusal direction:
+**1. Extract** - difference-in-means refusal direction:
 ```
 r = mean(h | harmful)  −  mean(h | harmless)        r̂ = r / ‖r‖
 ```
 
-**2. Ablate** — remove that axis from every activation (orthogonal projection), applied live via a
+**2. Ablate** - remove that axis from every activation (orthogonal projection), applied live via a
 forward hook on the residual stream ("abliteration"):
 ```
 h' = h − (h · r̂) r̂
 ```
 
-**3. Measure** — refusal rate before vs after, **plus a capability-retention proxy**, to show the
+**3. Measure** - refusal rate before vs after, **plus a capability-retention proxy**, to show the
 intervention is *surgical*: refusals collapse while general capability is largely preserved.
 
 The whole method is ~15 lines ([src/refusal_interp/direction.py](src/refusal_interp/direction.py)):
@@ -45,7 +45,7 @@ Downloading + running an instruct model to harvest activations is GPU-preferred 
 default path simulates it. [src/refusal_interp/synthetic.py](src/refusal_interp/synthetic.py) builds a
 frozen toy model whose residual stream contains a **planted** refusal axis `r_true` (orthogonal to a
 separate "content/capability" subspace) plus noise. The experiment is honest, not circular:
-- difference-in-means must **recover** `r_true` from data alone — we report `|cos(r̂, r_true)|`;
+- difference-in-means must **recover** `r_true` from data alone - we report `|cos(r̂, r_true)|`;
 - a frozen behaviour head computes `P(refuse)` (keyed on the refusal axis) and `P(capable)` (keyed on
   the orthogonal content subspace), so we can show ablation is surgical rather than asserting it.
 
@@ -62,10 +62,10 @@ The **committed `results/` come from `make abliterate`** (the real run). `make a
 optional extras: `pip install transformers accelerate`.
 
 Outputs in [results/](results/):
-- `figures/refusal_vs_capability.png` — the **money plot**: harmful-prompt refusal collapses, benign
+- `figures/refusal_vs_capability.png` - the **money plot**: harmful-prompt refusal collapses, benign
   behaviour + perplexity barely move.
-- `figures/projection_histograms.png` — harmful vs harmless activations on the recovered axis.
-- `metrics.json` — refusal/capability before & after; `refusal_direction.json` — the extracted vector.
+- `figures/projection_histograms.png` - harmful vs harmless activations on the recovered axis.
+- `metrics.json` - refusal/capability before & after; `refusal_direction.json` - the extracted vector.
 
 ## Real-model result (verified on CPU)
 
@@ -83,7 +83,7 @@ behaviour intact and capability **~87% retained** (perplexity rose modestly). Th
 activations separate cleanly on that single axis (mean projection 5.2 vs 0.6).
 
 Responsible-execution details: cyber-themed stimuli; we generate only a short prefix and classify
-*refuse vs comply* — the model's completions for harmful prompts are **never stored or printed**; no
+*refuse vs comply* - the model's completions for harmful prompts are **never stored or printed**; no
 modified weights are written. Larger models (`--model Qwen/Qwen2.5-1.5B-Instruct`) work too but are
 slower on CPU; a GPU (free Colab/Kaggle) handles 1–3B comfortably.
 
@@ -98,8 +98,8 @@ with zero downloads. (Running `make run` overwrites `results/` with the syntheti
 ## What the result shows
 
 Refusal in an aligned model concentrates on a single linear feature: project it out and refusals
-vanish while general capability is largely preserved. The security takeaway — **safety alignment that
-lives in one direction is brittle to weight/activation edits** — is the core argument for caution
+vanish while general capability is largely preserved. The security takeaway - **safety alignment that
+lives in one direction is brittle to weight/activation edits** - is the core argument for caution
 around open-weight release and for building guardrails that don't depend on a single fragile feature.
 
 ## Interview story (3 sentences)
@@ -109,7 +109,7 @@ around open-weight release and for building guardrails that don't depend on a si
 > hook, and measure that refusals collapse while a capability proxy is retained. I built it on a
 > synthetic model with a *planted* direction so the whole extract→ablate→measure pipeline runs offline
 > on CPU and I can verify the extractor actually recovers the ground-truth axis. The point is
-> defensive — if a safety behaviour is one rank-1 feature, it's fragile, which tells you where to
+> defensive - if a safety behaviour is one rank-1 feature, it's fragile, which tells you where to
 > harden alignment.
 
 ## Layout

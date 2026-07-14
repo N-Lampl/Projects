@@ -1,16 +1,16 @@
 # 07 · Applied NLP
 
 The security tracks (00-06) are the pivot; this track is the other half of the
-story — **applied NLP / data science**, the strength I'm building the security
+story - **applied NLP / data science**, the strength I'm building the security
 half on top of. Same engineering bar as everywhere else: a self-contained
 project, a reproducible `make run`, committed figures + `metrics.json`, an offline
 fallback, and a short interview story.
 
-Authorized use only — see [../ETHICS.md](../ETHICS.md). Datasets and model weights
+Authorized use only - see [../ETHICS.md](../ETHICS.md). Datasets and model weights
 are NOT committed; they're downloaded by code. Each project also ships an offline
 synthetic fallback so tests / CI need no network.
 
-## Projects — and what each runs on
+## Projects - and what each runs on
 
 | Project | What it does | Data |
 |---|---|---|

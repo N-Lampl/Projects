@@ -8,7 +8,7 @@ Two levers, cheap -> heavy:
      We fit a multinomial logistic model that maps nlptown's 5 class-probabilities to
      the actual ``Rating`` on a TRAIN split, then evaluate on a held-out TEST split.
      Near-zero compute; fixes the systematic bias (exact accuracy, MAE). It re-weights
-     the model's own signal, so it can't lift rank-correlation (Spearman) much — for
+     the model's own signal, so it can't lift rank-correlation (Spearman) much - for
      that you need new representations.
 
   2. **Fine-tuning (``finetune.py``).** Learn car-domain representations end-to-end.
@@ -87,7 +87,7 @@ def predictions_from_star_probs(probs: np.ndarray, star_labels=STAR_LABELS) -> l
 class Calibrator:
     """Multinomial-logistic recalibration of a 5-class sentiment head to the Rating.
 
-    Learns ``P(Rating | model_class_probs)`` — i.e. it stacks a light classifier on
+    Learns ``P(Rating | model_class_probs)`` - i.e. it stacks a light classifier on
     top of the frozen sentiment model to undo its domain bias.
     """
 

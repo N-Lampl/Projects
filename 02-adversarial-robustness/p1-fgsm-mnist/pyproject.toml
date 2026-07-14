@@ -1,7 +1,7 @@
 [project]
 name = "fgsm-mnist"
 version = "0.1.0"
-description = "FGSM-on-MNIST from scratch — the gradient-sign evasion attack."
+description = "FGSM-on-MNIST from scratch - the gradient-sign evasion attack."
 requires-python = ">=3.10"
 dependencies = [
     "torch>=2.2,<2.5",

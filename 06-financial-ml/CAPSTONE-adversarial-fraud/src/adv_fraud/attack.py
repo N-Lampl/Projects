@@ -1,8 +1,8 @@
 """Hand-rolled evasion attack against a tabular fraud model (numpy only).
 
 Goal: take transactions the model *correctly flags as fraud* and minimally
-perturb them so the model scores them **below its operating threshold** — i.e.
-the fraud slips through — while respecting what a real fraudster can actually do:
+perturb them so the model scores them **below its operating threshold** - i.e.
+the fraud slips through - while respecting what a real fraudster can actually do:
 
   1. MUTABILITY     only ``amount / hour / merchant_risk / distance_from_home /
                     n_items`` may change; account history is server-side and
@@ -15,7 +15,7 @@ the fraud slips through — while respecting what a real fraudster can actually 
 
 The search is a **greedy coordinate / finite-difference descent**: at each step
 we numerically estimate d(score)/d(feature) for every mutable feature (the
-sklearn pipeline is not differentiable, so we use central finite differences —
+sklearn pipeline is not differentiable, so we use central finite differences -
 the "gradient-style" part), take a normalized step downhill in score space,
 project back into the feasible set, and repeat. This is a faithful tabular
 analogue of FGSM/PGD without any attack library.

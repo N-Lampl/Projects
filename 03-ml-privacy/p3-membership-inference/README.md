@@ -1,7 +1,7 @@
 # p3 · Membership inference with a small online LiRA
 
 Given a single example, can you tell whether it was in a model's **training set**?
-That's *membership inference* — the canonical privacy attack on ML. This project
+That's *membership inference* - the canonical privacy attack on ML. This project
 implements the **Likelihood Ratio Attack (LiRA)** of Carlini et al. (S&P 2022) in
 the **online, warm-started-shadows** flavour, against a model I trained myself, and
 reports the metrics that actually matter for privacy: **TPR @ 1% FPR**, **AUC**, and
@@ -15,7 +15,7 @@ a log-log **ROC**.
 
 A model that **memorises** its training data behaves differently on members vs
 non-members: it is *more confident* on examples it has seen. A naive attack just
-thresholds that confidence globally — but "confident" means different things for an
+thresholds that confidence globally - but "confident" means different things for an
 easy example vs a hard one. LiRA fixes this with a **per-example, calibrated
 hypothesis test**.
 
@@ -23,7 +23,7 @@ For each query `z = (x, y)`:
 
 1. Train many **shadow models** on random halves of a population pool. By
    construction `z` is IN ~half of them and OUT of the other half (this is the
-   *online* variant — both worlds are estimated empirically, no analytic OUT model).
+   *online* variant - both worlds are estimated empirically, no analytic OUT model).
 2. Record each shadow's **logit-scaled confidence** on `z`'s true label
    (`φ = log(p_y / (1 − p_y))`), which is ~Gaussian, and split it into
    IN ~ `N(μ_in, σ_in²)` and OUT ~ `N(μ_out, σ_out²)`.
@@ -57,10 +57,10 @@ make test                                # fast smoke tests
 ```
 
 Outputs land in [results/](results/):
-- `figures/lira_roc.png` — ROC (linear **and** log-log), LiRA vs the confidence
+- `figures/lira_roc.png` - ROC (linear **and** log-log), LiRA vs the confidence
   baseline, annotated with AUC and TPR@1%FPR. The **money plot**.
-- `figures/lira_score_hist.png` — member vs non-member LiRA score distributions.
-- `metrics.json` — AUC, TPR@1%FPR, the target's train/test gap (committed as evidence).
+- `figures/lira_score_hist.png` - member vs non-member LiRA score distributions.
+- `metrics.json` - AUC, TPR@1%FPR, the target's train/test gap (committed as evidence).
 
 ## What the result shows
 
@@ -72,23 +72,23 @@ On the default synthetic run (3000-example pool, a deliberately over-fit MLP tar
 | **LiRA (online)**    | 0.870 | **0.112**    |
 | confidence baseline  | 0.705 | 0.028        |
 
-The target hits **train acc 1.00 / test acc 0.60** — a 0.40 generalisation gap, i.e.
+The target hits **train acc 1.00 / test acc 0.60** - a 0.40 generalisation gap, i.e.
 heavy memorisation. LiRA flags **~11% of true members at a 1% false-positive rate, 4×
 the naive baseline**: per-example calibration is exactly what buys you the low-FPR
 regime that the global threshold can't reach (see the log-log ROC).
 
-**Honest about scale:** this is a *small* LiRA — 16 shadows, a tiny MLP, a single
-target — meant to be correct, readable and CPU-runnable, not to reproduce the paper's
+**Honest about scale:** this is a *small* LiRA - 16 shadows, a tiny MLP, a single
+target - meant to be correct, readable and CPU-runnable, not to reproduce the paper's
 hundreds-of-shadows numbers. The qualitative story (LiRA ≫ global threshold, especially
 at low FPR; leakage tracks the train/test gap) is the same; the absolute numbers would
 climb with more shadows and a larger target. The attack strength is intentionally
-driven by an over-fit target — a well-regularised model leaks far less, which is the
+driven by an over-fit target - a well-regularised model leaks far less, which is the
 defense takeaway.
 
 ## Interview story (3 sentences)
 
-> I implemented online LiRA from scratch — warm-started shadow models plus a
-> per-example Gaussian likelihood-ratio test on logit-scaled confidence — to decide
+> I implemented online LiRA from scratch - warm-started shadow models plus a
+> per-example Gaussian likelihood-ratio test on logit-scaled confidence - to decide
 > whether a given record was in a model's training set. On a self-trained, over-fit
 > model it flags 11% of members at a 1% false-positive rate, roughly 4× a naive
 > confidence threshold, because per-example calibration is what unlocks the low-FPR
@@ -110,7 +110,7 @@ data/ models/   git-ignored (default run needs neither; Fashion-MNIST downloads 
 ## Offline / dependency notes
 
 - **Default path is fully offline** and uses only `torch`, `scikit-learn`, `numpy`,
-  `matplotlib` (no scipy — the Gaussian log-pdf is a 3-line local helper).
+  `matplotlib` (no scipy - the Gaussian log-pdf is a 3-line local helper).
 - **Fashion-MNIST is the only path that needs a download** (and `torchvision`,
   imported lazily). CPU-only throughout; no GPU anywhere.
 
